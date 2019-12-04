@@ -3,5 +3,5 @@ mkdir -p ~/.config
 
 # create symbolic link
 DIR="$PWD/nvim"
-ln -s -f ~/dotfiles/nvim ~/.config/nvim
+ln -s -f $DIR ~/.config/nvim
 
