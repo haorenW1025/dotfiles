@@ -1,0 +1,46 @@
+{
+  "coc.preferences.formatOnSaveFiletypes":["python", "c", "cpp", "javascript"],
+    "explorer.icon.enableNerdfont": true,
+    "explorer.sources": [
+        {"name": "buffer", "expand": true},
+        {"name": "file", "expand": true}
+    ],
+  "explorer.file.column.git.icon.added": "✚",
+  "explorer.file.column.git.icon.deleted": "✖",
+  "explorer.file.column.git.icon.renamed": "➜",
+  "explorer.file.column.git.icon.unmerged": "═",
+  "explorer.file.column.git.icon.untracked": "?",
+  "explorer.file.column.git.icon.modified": "✹",
+  "explorer.file.column.git.icon.ignored": "☒",
+  "explorer.keyMappings": {
+	"<cr>": "expandOrCollapse",
+	"h": "gotoParent",
+	"o": "open",
+	"l": "open",
+	"v": "openInVsplit",
+  },
+  "explorer.openAction.changeDirectory": true,
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "initializationOptions": {
+         "cache": {
+           "directory": "/tmp/ccls"
+         }
+       }
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "golang": {
+      "command": "~/go/bin/gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    }
+  }
+}
