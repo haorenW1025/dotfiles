@@ -7,14 +7,6 @@ call plug#begin('~/.vim/plugged')
     " themes
 	Plug 'dracula/vim', { 'as': 'dracula' }
 
-	" file manager
-	Plug 'mcchrish/nnn.vim'
-		let g:nnn#set_default_mappings = 0
-		nmap <leader>nn :NnnPicker<CR>
-		let g:nnn#layout = { 'left': '~30%' } " or right, up, down
-		let g:nnn#command = 'nnn'
-
-
 
     " commenter
 	Plug 'scrooloose/nerdcommenter'
