@@ -156,10 +156,10 @@ call plug#begin('~/.vim/plugged')
         nmap <silent> gi <Plug>(coc-implementation)
         nmap <silent> gr <Plug>(coc-references)
         nmap <silent> <Leader>d  :CocList diagnostics<cr>
+        nmap <silent> [d <Plug>(coc-diagnostic-prev)
+        nmap <silent> ]d <Plug>(coc-diagnostic-next)
         nmap <silent> <Leader>/ :CocList words<cr>
         nmap <Leader><Leader>f  <Plug>(coc-format-selected)
-        nmap <silent> [c <Plug>(coc-diagnostic-prev)
-        nmap <silent> ]c <Plug>(coc-diagnostic-next)
         nmap <silent> <Leader>m <Plug>(coc-cursors-position)
         nmap <silent> <Leader>wm <Plug>(coc-cursors-word)
         nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -231,7 +231,6 @@ nmap <silent><Leader>l <C-w>l
 nmap <Leader>y "+yy
 xmap <Leader>y "+y
 inoremap jk <Esc>`^
-inoremap kj <Esc>`^
 inoremap JK <Esc>`^
 nmap <Space> za
 nmap <leader>n :noh<CR><Esc>
