@@ -103,7 +103,8 @@ call plug#begin('~/.vim/plugged')
 		nmap <Leader>fw :Clap grep ++ef=fzf<CR><c-r>"
 		nmap <Leader>fc :Clap grep ++ef=fzf ++query=<cword><CR>
 		nmap <Leader>fg :Clap grep ++ef=fzf<CR>
-		nmap <Leader>p :Clap files ++ef=fzf<CR>
+		nmap <Leader>pp :Clap files ++ef=fzf<CR>
+		nmap <Leader>ph yi":Clap files ++ef=fzf<CR><c-r>"
 		nmap <Leader>o :Clap history ++ef=fzf<CR>
 		nmap <Leader>b :Clap buffers ++ef=fzf<CR>
 		nmap <Leader>fj :Clap jumps<CR>
