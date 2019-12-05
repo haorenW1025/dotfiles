@@ -243,7 +243,7 @@ nmap <leader>qj <C-w>j:q<CR>
 nmap <leader>qh <C-w>h:q<CR>
 nmap <leader>qk <C-w>k:q<CR>
 nmap <leader>ql <C-w>l:q<CR>
-nmap :: :<c-f>i
+nmap :: :<c-f>
 
 if has("autocmd")
 " Highlight TODO, FIXME, NOTE, etc.
