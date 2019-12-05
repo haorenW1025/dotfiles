@@ -133,12 +133,11 @@ call plug#begin('~/.vim/plugged')
         let g:coc_global_extensions = [
         \ 'coc-css',
 		\ 'coc-python',
-		\ 'coc-lists',
+		\ 'coc-ultisnips',
         \ 'coc-json',
         \ 'coc-tsserver',
         \ 'coc-pairs',
         \ 'coc-sh',
-        \ 'coc-ultisnips',
         \ 'coc-explorer'
         \ ]
         " use tab for autocomplete
@@ -166,8 +165,6 @@ call plug#begin('~/.vim/plugged')
         nnoremap <silent> K :call <SID>show_documentation()<CR>
         inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
                                                    \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-        let g:coc_snippet_next = 'jl'
-        let g:coc_snippet_next = 'jh'
 
         command! -nargs=0 Format :call CocAction('format')
         command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
@@ -210,8 +207,8 @@ call plug#begin('~/.vim/plugged')
 	" c/c++ specific 
 	" switch to header file
 	Plug 'vim-scripts/a.vim'
-		nmap <leader>sh :A
-		nmap <leader>vh :AV
+		nmap <leader>sh :A<CR>
+		nmap <leader>vh :AV<CR>
 
 call plug#end()
 
@@ -240,6 +237,7 @@ nmap <silent> j gj
 nmap <silent> k gk
 nmap <leader>so :source ~/.config/nvim/init.vim<CR>
 nmap <leader>cof :e ~/.config/nvim/init.vim<CR>
+nmap <leader>es :e ~/.vim/plugged/vim-snippets/UltiSnips/
 nmap <leader>qj <C-w>j:q<CR>
 nmap <leader>qh <C-w>h:q<CR>
 nmap <leader>qk <C-w>k:q<CR>
