@@ -14,6 +14,67 @@ call plug#begin('~/.vim/plugged')
 		let g:NERDTrimTrailingWhitespace = 1
 		let g:NERDCompactSexyComs = 1
 
+	Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+		nmap \ :Defx `expand('%:p:h')` -search=`expand('%:p')` -columns=git:mark:icons:indent:filename:type -winwidth=40 -direction=topleft 
+					\-split=vertical -resume=1 -toggle=1 <CR>
+		autocmd FileType defx call s:defx_my_settings()
+		function! s:defx_my_settings() abort
+			nnoremap <silent><buffer><expr> <CR>
+				\ defx#is_directory() ?
+				\ defx#do_action('open_or_close_tree') :
+				\ defx#do_action('drop',)
+			nmap <silent><buffer><expr> <2-LeftMouse>
+				\ defx#is_directory() ?
+				\ defx#do_action('open_or_close_tree') :
+				\ defx#do_action('drop',)
+			nnoremap <silent><buffer><expr> s defx#do_action('drop', 'split')
+			nnoremap <silent><buffer><expr> v defx#do_action('drop', 'vsplit')
+			nnoremap <silent><buffer><expr> t defx#do_action('drop', 'tabe')
+			nnoremap <silent><buffer><expr> o defx#do_action('open_tree')
+			nnoremap <silent><buffer><expr> l defx#do_action('open_directory')
+			nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
+			nnoremap <silent><buffer><expr> c defx#do_action('copy')
+			nnoremap <silent><buffer><expr> p defx#do_action('paste')
+			nnoremap <silent><buffer><expr> m defx#do_action('rename')
+			nnoremap <silent><buffer><expr> d defx#do_action('remove_trash')
+			nnoremap <silent><buffer><expr> a defx#do_action('new_file')
+			nnoremap <silent><buffer><expr> A defx#do_action('new_directory')
+			nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
+			nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
+			nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
+			nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
+			nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select')
+			nnoremap <silent><buffer><expr> r defx#do_action('redraw')
+			nnoremap <silent><buffer><expr> j  line('.') == line('$') ? 'gg' : 'j'
+		endfunction
+
+		" Defx git
+		Plug 'kristijanhusak/defx-git'
+			let g:defx_git#indicators = {
+				\ 'Modified'  : '✹',
+				\ 'Staged'    : '✚',
+				\ 'Untracked' : '✭',
+				\ 'Renamed'   : '➜',
+				\ 'Unmerged'  : '═',
+				\ 'Ignored'   : '☒',
+				\ 'Deleted'   : '✖',
+				\ 'Unknown'   : '?'
+			\ }
+			let g:defx_git#column_length = 0
+			hi def link Defx_filename_directory NERDTreeDirSlash
+			hi def link Defx_git_Modified Special
+			hi def link Defx_git_Staged Function
+			hi def link Defx_git_Renamed Title
+			hi def link Defx_git_Unmerged Label
+			hi def link Defx_git_Untracked Tag
+			hi def link Defx_git_Ignored Comment
+
+		" Defx icons
+		Plug 'kristijanhusak/defx-icons'
+		" disbale syntax highlighting to prevent performence issue
+			let g:defx_icons_column_length = 2
+			let g:defx_icons_enable_syntax_highlight = 1
+
 
     " syntax highlighting
 	Plug 'sheerun/vim-polyglot'
@@ -31,9 +92,6 @@ call plug#begin('~/.vim/plugged')
             \   'gitbranch': 'fugitive#head',
             \ }
 			\ }
-
-	" Auto pairs
-	Plug 'jiangmiao/auto-pairs'
 
     " mark showing 
     Plug 'kshenoy/vim-signature'
@@ -97,17 +155,19 @@ call plug#begin('~/.vim/plugged')
 		nmap <leader>ghs <Plug>(GitGutterStageHunk)
 
 
+	Plug 'mg979/vim-visual-multi'
+		nmap  <Leader>m  <Plug>(VM-Mouse-Word)  
 
 	Plug 'liuchengxu/vim-clap'
 		nmap <Leader>ff :Clap grep ++ef=fzf<CR>
 		nmap <Leader>fw :Clap grep ++ef=fzf<CR><c-r>"
 		nmap <Leader>fc :Clap grep ++ef=fzf ++query=<cword><CR>
 		nmap <Leader>fg :Clap grep ++ef=fzf<CR>
-		nmap <Leader>pp :Clap files ++ef=fzf<CR>
+		nmap <Leader>fb :Clap buffers ++ef=fzf<CR>
+		nmap <Leader>fj :Clap jumps<CR>
+		nmap <Leader>p :Clap files ++ef=fzf<CR>
 		nmap <Leader>ph yi":Clap files ++ef=fzf<CR><c-r>"
 		nmap <Leader>o :Clap history ++ef=fzf<CR>
-		nmap <Leader>b :Clap buffers ++ef=fzf<CR>
-		nmap <Leader>fj :Clap jumps<CR>
 
 
 	" Async Run
@@ -138,7 +198,6 @@ call plug#begin('~/.vim/plugged')
         \ 'coc-tsserver',
         \ 'coc-pairs',
         \ 'coc-sh',
-        \ 'coc-explorer'
         \ ]
         " use tab for autocomplete
         inoremap <silent><expr> <TAB>
@@ -160,8 +219,7 @@ call plug#begin('~/.vim/plugged')
         nmap <silent> ]d <Plug>(coc-diagnostic-next)
         nmap <silent> <Leader>/ :CocList words<cr>
         nmap <Leader><Leader>f  <Plug>(coc-format-selected)
-        nmap <silent> <Leader>m <Plug>(coc-cursors-position)
-        nmap <silent> <Leader>wm <Plug>(coc-cursors-word)
+		nmap <silent> <Leader>rn :CocCommand document.renameCurrentWord
         nnoremap <silent> K :call <SID>show_documentation()<CR>
         inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
                                                    \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -178,7 +236,6 @@ call plug#begin('~/.vim/plugged')
                 endif
             endfunction
 
-		nmap \ :CocCommand explorer<CR>
 
     " ctags support : show classes, function and more
     Plug 'liuchengxu/vista.vim'
@@ -242,6 +299,7 @@ nmap <leader>qj <C-w>j:q<CR>
 nmap <leader>qh <C-w>h:q<CR>
 nmap <leader>qk <C-w>k:q<CR>
 nmap <leader>ql <C-w>l:q<CR>
+nmap <leader>b :bd<CR>
 nmap :: :<c-f>
 
 if has("autocmd")
