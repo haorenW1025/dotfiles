@@ -256,12 +256,16 @@ call plug#begin('~/.vim/plugged')
 		let g:neoterm_shell = "zsh"
 		let g:neoterm_default_mod="belowright"
 		let g:neoterm_size=20
+		let g:neoterm_autoscroll=1
+
 		nmap <leader>tn :Ttoggle<CR>
-		nmap <leader>tt :T<space>
+		nmap <leader>t<CR> :T<space>
 		nmap <leader>tl :T<UP><CR>
+		nmap <leader>tk :Tkill<CR>
 		nmap <leader>tq :Tclose<CR>
 		nmap <leader>tc :Tclear<CR>
 		nmap <leader>tp :T python %<CR>
+		nmap <leader>tb :T bash %<CR>
 		nmap <leader>tm :T make<CR>
 
 	" c/c++ specific 
