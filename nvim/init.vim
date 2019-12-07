@@ -174,19 +174,6 @@ call plug#begin('~/.vim/plugged')
 		nmap <Leader>o :Clap history ++ef=fzf<CR>
 
 
-	" Async Run
-	Plug 'skywind3000/asyncrun.vim'
-		let g:asyncrun_open = 10
-		nmap <Leader>rr :AsyncRun -cwd=<root> -raw<space>
-		nmap <Leader>rs :AsyncStop<CR>
-		" Inspect  runner
-		nmap <Leader>ri <Leader>j30+
-		nmap <Leader>c :ccl<CR>
-		" Run last command
-		nmap <Leader>rl :AsyncRun<UP><CR>
-		nmap <Leader>rp :AsyncRun -cwd=<root> -raw python3 %<cr>
-
-
 	
     " show indent
     Plug 'Yggdroot/indentLine'
@@ -265,6 +252,18 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for' : 'markdown' }
 
+	Plug 'kassio/neoterm'
+		let g:neoterm_shell = "zsh"
+		let g:neoterm_default_mod="belowright"
+		let g:neoterm_size=20
+		nmap <leader>tn :Ttoggle<CR>
+		nmap <leader>tt :T<space>
+		nmap <leader>tl :T<UP><CR>
+		nmap <leader>tq :Tclose<CR>
+		nmap <leader>tc :Tclear<CR>
+		nmap <leader>tp :T python %<CR>
+		nmap <leader>tm :T make<CR>
+
 	" c/c++ specific 
 	" switch to header file
 	Plug 'vim-scripts/a.vim'
@@ -314,25 +313,20 @@ endif
 
 " Terminal settings
 highlight TermCursor ctermfg=red guifg=red
-set splitbelow
-set splitright
 
 tnoremap jj <C-\><C-n>
 tnoremap kk <C-\><C-n>
 tnoremap <esc> <C-\><C-n>:q<CR>
-tnoremap <c-k> <C-\><C-n><C-w>k
+tnoremap <leader>k <C-\><C-n><C-w>k
 
 augroup neovim_terminal
 	autocmd!
 
-	" Enter Terminal-mode (insert) automatically
-	autocmd TermOpen * startinsert
 
 	" Disables number lines on terminal buffers
 	autocmd TermOpen * :set nonumber norelativenumber
 augroup END
 
-nmap <leader>t :20split +terminal<CR>
 
 
 
