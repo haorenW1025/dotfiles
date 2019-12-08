@@ -187,7 +187,6 @@ call plug#begin('~/.vim/plugged')
 		\ 'coc-ultisnips',
         \ 'coc-json',
         \ 'coc-tsserver',
-        \ 'coc-pairs',
         \ 'coc-sh',
         \ ]
         " use tab for autocomplete
@@ -254,8 +253,9 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'kassio/neoterm'
 		let g:neoterm_shell = "zsh"
-		let g:neoterm_default_mod="belowright"
+		let g:neoterm_default_mod="botright"
 		let g:neoterm_size=20
+		let g:neoterm_fixedsize = '1'
 		let g:neoterm_autoscroll=1
 
 		nmap <leader>tn :Ttoggle<CR>
@@ -267,6 +267,7 @@ call plug#begin('~/.vim/plugged')
 		nmap <leader>tp :T python %<CR>
 		nmap <leader>tb :T bash %<CR>
 		nmap <leader>tm :T make<CR>
+		nmap <leader>ti <leader>j20+
 
 	" c/c++ specific 
 	" switch to header file
