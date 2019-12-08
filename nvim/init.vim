@@ -254,7 +254,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'kassio/neoterm'
 		let g:neoterm_shell = "zsh"
 		let g:neoterm_default_mod="botright"
-		let g:neoterm_size=20
+		let g:neoterm_size=15
 		let g:neoterm_fixedsize = '1'
 		let g:neoterm_autoscroll=1
 
@@ -268,6 +268,26 @@ call plug#begin('~/.vim/plugged')
 		nmap <leader>tb :T bash %<CR>
 		nmap <leader>tm :T make<CR>
 		nmap <leader>ti <leader>j20+
+
+	" bebugger integration
+	Plug 'sakhnik/nvim-gdb'
+    let g:nvimgdb_config = {
+		\ 'key_until':      '<f4>',
+		\ 'key_continue':   '<f5>',
+		\ 'key_next':       '<f10>',
+		\ 'key_step':       '<f11>',
+		\ 'key_finish':     '<f12>',
+		\ 'key_breakpoint': '<f8>',
+		\ 'key_frameup':    '<c-p>',
+		\ 'key_framedown':  '<c-n>',
+		\ 'key_eval':       '<f9>',
+		\ 'set_tkeymaps':   'function("GdbCallAsync", "keymaps.set_t")',
+		\ 'set_keymaps':    'function("GdbCallAsync", "keymaps.set")',
+		\ 'unset_keymaps':  'function("GdbCallAsync", "keymaps.unset")',
+		\ 'sign_current_line': '▶',
+		\ 'sign_breakpoint': [ '●', '●²', '●³', '●⁴', '●⁵', '●⁶', '●⁷', '●⁸', '●⁹', '●ⁿ' ],
+		\ 'split_command': 'split'
+		\ }
 
 	" c/c++ specific 
 	" switch to header file
@@ -357,6 +377,10 @@ set softtabstop=4 " edit as if the tabs are 4 characters wide
 set shiftwidth=4 " number of spaces to use for indent and unindent
 set shiftround " round indent to a multiple of 'shiftwidth'
 set nowrap
+set nolinebreak
+set textwidth=0 
+set wrapmargin=0
+
 
 set noerrorbells
 set visualbell
