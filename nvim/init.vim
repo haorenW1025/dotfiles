@@ -269,25 +269,20 @@ call plug#begin('~/.vim/plugged')
 		nmap <leader>tm :T make<CR>
 		nmap <leader>ti <leader>j20+
 
-	" bebugger integration
-	Plug 'sakhnik/nvim-gdb'
-    let g:nvimgdb_config = {
-		\ 'key_until':      '<f4>',
-		\ 'key_continue':   '<f5>',
-		\ 'key_next':       '<f10>',
-		\ 'key_step':       '<f11>',
-		\ 'key_finish':     '<f12>',
-		\ 'key_breakpoint': '<f8>',
-		\ 'key_frameup':    '<c-p>',
-		\ 'key_framedown':  '<c-n>',
-		\ 'key_eval':       '<f9>',
-		\ 'set_tkeymaps':   'function("GdbCallAsync", "keymaps.set_t")',
-		\ 'set_keymaps':    'function("GdbCallAsync", "keymaps.set")',
-		\ 'unset_keymaps':  'function("GdbCallAsync", "keymaps.unset")',
-		\ 'sign_current_line': '▶',
-		\ 'sign_breakpoint': [ '●', '●²', '●³', '●⁴', '●⁵', '●⁶', '●⁷', '●⁸', '●⁹', '●ⁿ' ],
-		\ 'split_command': 'split'
-		\ }
+	" debugger integration
+	Plug 'sakhnik/nvim-gdb', {'do': ':!./install.sh \| UpdateRemotePlugins' }
+		let g:nvimgdb_config_override = {
+			\ 'key_next': 'n',
+			\ 'key_step': 's',
+			\ 'key_finish': 'f',
+			\ 'key_continue': 'c',
+			\ 'key_until': 'u',
+			\ 'key_breakpoint': 'b',
+			\ 'set_tkeymaps': "NvimGdbNoTKeymaps",
+			\ }
+		nmap <leader>dq :GdbDebugStop<CR>
+		nmap <leader>dc :GdbBreakpointClearAll<CR>
+
 
 	" c/c++ specific 
 	" switch to header file
