@@ -260,7 +260,7 @@ call plug#begin('~/.vim/plugged')
 
 		nmap <leader>tn :Ttoggle<CR>
 		nmap <leader>t<CR> :T<space>
-		nmap <leader>tl :T<UP><CR>
+		nmap <leader>tl <leader>ji<UP><CR><leader>k
 		nmap <leader>tk :Tkill<CR>
 		nmap <leader>tq :Tclose<CR>
 		nmap <leader>tc :Tclear<CR>
@@ -317,7 +317,7 @@ nmap <silent> j gj
 nmap <silent> k gk
 nmap <leader>so :source ~/.config/nvim/init.vim<CR>
 nmap <leader>cof :e ~/.config/nvim/init.vim<CR>
-nmap <leader>es :e ~/.vim/plugged/vim-snippets/UltiSnips/
+nmap <leader>es :vsplit ~/.vim/plugged/vim-snippets/UltiSnips/
 nmap <leader>qj <C-w>j:q<CR>
 nmap <leader>qh <C-w>h:q<CR>
 nmap <leader>qk <C-w>k:q<CR>
