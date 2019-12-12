@@ -162,16 +162,19 @@ call plug#begin('~/.vim/plugged')
 	Plug 'mg979/vim-visual-multi'
 		nmap  <Leader>m  <Plug>(VM-Mouse-Word)  
 
-	Plug 'liuchengxu/vim-clap'
-		nmap <Leader>ff :Clap grep ++ef=fzf<CR>
-		nmap <Leader>fw :Clap grep ++ef=fzf<CR><c-r>"
-		nmap <Leader>fc :Clap grep ++ef=fzf ++query=<cword><CR>
-		nmap <Leader>fg :Clap grep ++ef=fzf<CR>
-		nmap <Leader>fb :Clap buffers ++ef=fzf<CR>
-		nmap <Leader>fj :Clap jumps<CR>
-		nmap <Leader>p :Clap files ++ef=fzf<CR>
-		nmap <Leader>ph yi":Clap files ++ef=fzf<CR><c-r>"
-		nmap <Leader>o :Clap history ++ef=fzf<CR>
+	Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+		let g:Lf_WindowPosition = 'popup'
+		let g:Lf_PreviewInPopup = 1
+		let g:Lf_ShortcutF="<leader>ff"
+		noremap <leader>fb :<C-U><C-R>=printf("Leaderf! buffer %s", "")<CR><CR>
+		noremap <leader>fm :<C-U><C-R>=printf("Leaderf! mru %s", "")<CR><CR>
+		noremap <leader>fl :<C-U><C-R>=printf("Leaderf! line %s", "")<CR><CR>
+		noremap <leader>sc :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
+		xnoremap <leader>sv :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
+		noremap <leader>sl :<C-U>Leaderf! rg --recall<CR>
+		nmap <leader>ss :Leaderf rg -S<CR>
+	
+
 
 
 	
@@ -188,7 +191,10 @@ call plug#begin('~/.vim/plugged')
         \ 'coc-json',
         \ 'coc-tsserver',
         \ 'coc-sh',
+		\ 'coc-highlight'
         \ ]
+
+
         " use tab for autocomplete
         inoremap <silent><expr> <TAB>
               \ pumvisible() ? "\<C-n>" :
@@ -243,11 +249,13 @@ call plug#begin('~/.vim/plugged')
     " snippets setup
     Plug 'SirVer/ultisnips'
     Plug 'whz861025/vim-snippets'
+		let g:UltiSnipsSnippetDirectories = ["~/.vim/plugged/vim-snippets/UltiSnips/"]
         let g:UltiSnipsEditSplit="vertical"
         let g:UltiSnipsExpandTrigger="<c-n>"
         let g:ultisnips_python_style="google"
 		let g:UltiSnipsJumpForwardTrigger="jl"
 		let g:ultisnipsjumpbackwardtrigger="jh"
+		nmap <leader>es :UltiSnipsEdit<CR>
 
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for' : 'markdown' }
 
@@ -317,7 +325,6 @@ nmap <silent> j gj
 nmap <silent> k gk
 nmap <leader>so :source ~/.config/nvim/init.vim<CR>
 nmap <leader>cof :e ~/.config/nvim/init.vim<CR>
-nmap <leader>es :vsplit ~/.vim/plugged/vim-snippets/UltiSnips/
 nmap <leader>qj <C-w>j:q<CR>
 nmap <leader>qh <C-w>h:q<CR>
 nmap <leader>qk <C-w>k:q<CR>

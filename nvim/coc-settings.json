@@ -1,25 +1,6 @@
 {
-  "coc.preferences.formatOnSaveFiletypes":["python", "c", "cpp", "javascript"],
-    "explorer.icon.enableNerdfont": true,
-    "explorer.sources": [
-        {"name": "buffer", "expand": true},
-        {"name": "file", "expand": true}
-    ],
-  "explorer.file.column.git.icon.added": "✚",
-  "explorer.file.column.git.icon.deleted": "✖",
-  "explorer.file.column.git.icon.renamed": "➜",
-  "explorer.file.column.git.icon.unmerged": "═",
-  "explorer.file.column.git.icon.untracked": "?",
-  "explorer.file.column.git.icon.modified": "✹",
-  "explorer.file.column.git.icon.ignored": "☒",
-  "explorer.keyMappings": {
-	"<cr>": "expandOrCollapse",
-	"h": "gotoParent",
-	"o": "open",
-	"l": "open",
-	"v": "openInVsplit",
-  },
-  "explorer.openAction.changeDirectory": true,
+  "coc.preferences.formatOnSaveFiletypes":["python", "javascript"],
+  "coc.preferences.colorSupport":true,
   "languageserver": {
     "ccls": {
       "command": "ccls",
