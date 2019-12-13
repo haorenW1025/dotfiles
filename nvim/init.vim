@@ -173,8 +173,10 @@ call plug#begin('~/.vim/plugged')
 		xnoremap <leader>sv :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
 		noremap <leader>sl :<C-U>Leaderf! rg --recall<CR>
 		nmap <leader>ss :Leaderf rg -S<CR>
-	
-
+		let g:Lf_GtagsAutoGenerate = 1
+		let g:Lf_Gtagslabel = 'native-pygments'
+		noremap <leader>td :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+		noremap <leader>tr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 
 
 	
@@ -279,17 +281,17 @@ call plug#begin('~/.vim/plugged')
 
 	" debugger integration
 	Plug 'sakhnik/nvim-gdb', {'do': ':!./install.sh \| UpdateRemotePlugins' }
-		let g:nvimgdb_config_override = {
-			\ 'key_next': 'n',
-			\ 'key_step': 's',
-			\ 'key_finish': 'f',
-			\ 'key_continue': 'c',
-			\ 'key_until': 'u',
-			\ 'key_breakpoint': 'b',
-			\ 'set_tkeymaps': "NvimGdbNoTKeymaps",
-			\ }
+		nmap <leader>dr <leader>jirun<CR>kk<leader>k
+		nmap <leader>dt :GdbBreakpointToggle<CR>
+		nmap <leader>dn :GdbNext<CR>
+		nmap <leader>ds :GdbStep<CR>
+		nmap <leader>df :GdbFinish<CR>
+		nmap <leader>du :GdbUntil<CR>
 		nmap <leader>dq :GdbDebugStop<CR>
 		nmap <leader>dc :GdbBreakpointClearAll<CR>
+		nmap <leader>dd :GdbStart gdb -q<space> 
+		nmap <leader>dp :GdbStartPDB python -m pdb<space>
+		nmap <leader>db :GdbStartBashDB bashdb<space>
 
 
 	" c/c++ specific 
@@ -329,7 +331,7 @@ nmap <leader>qj <C-w>j:q<CR>
 nmap <leader>qh <C-w>h:q<CR>
 nmap <leader>qk <C-w>k:q<CR>
 nmap <leader>ql <C-w>l:q<CR>
-nmap <leader>b :bd<CR>
+nmap <leader>bc :bd<CR>
 nmap :: :<c-f>
 
 if has("autocmd")
