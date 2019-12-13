@@ -270,7 +270,7 @@ call plug#begin('~/.vim/plugged')
 
 		nmap <leader>tn :Ttoggle<CR>
 		nmap <leader>t<CR> :T<space>
-		nmap <leader>tl <leader>ji<UP><CR><leader>k
+		nmap <leader>tl :<c-u>exec printf("%sTexec !! \<lt>cr>", v:count)<cr>
 		nmap <leader>tk :Tkill<CR>
 		nmap <leader>tq :Tclose<CR>
 		nmap <leader>tc :Tclear<CR>
