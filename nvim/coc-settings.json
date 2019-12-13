@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes":["python", "javascript"],
+  "coc.preferences.formatOnSaveFiletypes":["python", "c", "cpp", "javascript"],
   "coc.preferences.colorSupport":true,
   "languageserver": {
     "ccls": {
