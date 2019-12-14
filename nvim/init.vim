@@ -110,7 +110,7 @@ call plug#begin('~/.vim/plugged')
         let g:rainbow_active = 1
         let g:rainbow_conf = {
         \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-        \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+        \	'ctermfgs': ['red', 'yellow', 'lightcyan', 'blue', 'darkgray'],
         \	'guis': [''],
         \	'cterms': [''],
         \	'operators': '_,_',
@@ -278,6 +278,12 @@ call plug#begin('~/.vim/plugged')
 		nmap <leader>tb :T bash %<CR>
 		nmap <leader>tm :T make<CR>
 		nmap <leader>ti <leader>j20+
+		
+		" REPL support
+		nmap <leader>rl :TREPLSendLine<CR>
+		vmap <leader>rs :TREPLSendSelection<CR>
+		nmap <leader>rq :T exit()<CR>
+		
 
 	" debugger integration
 	Plug 'sakhnik/nvim-gdb', {'do': ':!./install.sh \| UpdateRemotePlugins' }
