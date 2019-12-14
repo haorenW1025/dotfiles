@@ -3,7 +3,7 @@ syntax on
 set nocompatible
 set number
 call plug#begin('~/.vim/plugged') 
-    let mapleader = ","
+    let mapleader = " "
     " themes
 	Plug 'dracula/vim', { 'as': 'dracula' }
 
@@ -105,6 +105,9 @@ call plug#begin('~/.vim/plugged')
         " how to align : gaip+what you want to align
         nmap ga <Plug>(EasyAlign)
 
+	Plug 'junegunn/vim-slash'
+		nmap <plug>(slash-after) zz
+
 	" different color for parentheses
     Plug 'luochen1990/rainbow' 
         let g:rainbow_active = 1
@@ -175,10 +178,11 @@ call plug#begin('~/.vim/plugged')
 		nmap <leader>ss :Leaderf rg -S<CR>
 		let g:Lf_GtagsAutoGenerate = 1
 		let g:Lf_Gtagslabel = 'native-pygments'
-		noremap <leader>td :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-		noremap <leader>tr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+		noremap td :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+		noremap tr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 
 
+	Plug 'michaeljsmith/vim-indent-object'
 	
     " show indent
     Plug 'Yggdroot/indentLine'
@@ -314,8 +318,8 @@ nmap <C-l> <C-w>>
 nmap <C-h> <C-w><
 nmap S :%s//g<left><left>
 nmap <Leader>q :q<CR>
-nmap <Leader>+ 10+ 
-nmap <Leader>- 10- 
+nmap <Leader>+ 20+ 
+nmap <Leader>- 20- 
 nmap <Leader>L 5<C-w>>
 nmap <Leader>H 5<C-w><
 nmap <silent><Leader>h <C-w>h
@@ -326,7 +330,7 @@ nmap <Leader>y "+yy
 xmap <Leader>y "+y
 inoremap jk <Esc>`^
 inoremap JK <Esc>`^
-nmap <Space> za
+nmap "," za
 nmap <leader>n :noh<CR><Esc>
 nmap x "_dl
 nmap <silent> j gj
@@ -338,6 +342,7 @@ nmap <leader>qh <C-w>h:q<CR>
 nmap <leader>qk <C-w>k:q<CR>
 nmap <leader>ql <C-w>l:q<CR>
 nmap <leader>bc :bd<CR>
+nmap <leader>w :w<CR>
 nmap :: :<c-f>
 
 if has("autocmd")
