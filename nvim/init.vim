@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
     let mapleader = " "
     " themes
 	Plug 'dracula/vim', { 'as': 'dracula' }
+	Plug 'junegunn/seoul256.vim'
 
 
     " commenter
@@ -251,7 +252,6 @@ call plug#begin('~/.vim/plugged')
         nmap <silent> ; :Vista!!<CR>
 		autocmd BufEnter * if winnr("$") == 1 && vista#sidebar#IsVisible() | execute "normal! :q!\<CR>" | endif
 
-	Plug 'tmux-plugins/vim-tmux-focus-events'
     " snippets setup
     Plug 'SirVer/ultisnips'
     Plug 'whz861025/vim-snippets'
@@ -423,7 +423,8 @@ set mouse=v
 set t_Co=256
 set ai
 set si
-colorscheme dracula 
+let g:seoul256_background = 235
+colorscheme seoul256
 hi Folded ctermbg=240 ctermfg=250 term=NONE cterm=bold
 hi Visual ctermbg=245
 hi Comment ctermfg=189 cterm=bolditalic term=bolditalic gui=bolditalic
