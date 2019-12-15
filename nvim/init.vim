@@ -113,7 +113,7 @@ call plug#begin('~/.vim/plugged')
         let g:rainbow_active = 1
         let g:rainbow_conf = {
         \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-        \	'ctermfgs': ['red', 'yellow', 'lightcyan', 'blue', 'darkgray'],
+        \	'ctermfgs': ['white', 'red', 'yellow', 'lightcyan', 'blue', 'darkgray'],
         \	'guis': [''],
         \	'cterms': [''],
         \	'operators': '_,_',
