@@ -16,9 +16,9 @@ call plug#begin('~/.vim/plugged')
 		let g:NERDCompactSexyComs = 1
 
 	Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-		nmap \ :Defx -columns=git:mark:icons:indent:filename:type -winwidth=40 -direction=topleft 
+		nmap \ :Defx -columns=git:mark:indent:icons:filename:type -winwidth=40 -direction=topleft 
 					\-split=vertical -resume=1 -toggle=1 <CR>
-		nmap <leader>\ :Defx `expand('%:p:h')` -search=`expand('%:p')` -columns=git:mark:icons:indent:filename:type -winwidth=40 -direction=topleft 
+		nmap <leader>\ :Defx `expand('%:p:h')` -search=`expand('%:p')` -columns=git:mark:indent:icons:filename:type -winwidth=40 -direction=topleft 
 					\-split=vertical -toggle=1 <CR>
 		autocmd FileType defx call s:defx_my_settings()
 		function! s:defx_my_settings() abort
@@ -156,6 +156,8 @@ call plug#begin('~/.vim/plugged')
         nmap <leader>ge :Gedit<cr>
         nmap <silent><leader>gr :Gread<cr>
         nmap <silent><leader>gb :Gblame<cr>
+		nmap <leader>gph :Gpush<CR>
+		nmap <leader>gpl :Gpull<CR>
 		nmap ]h <Plug>(GitGutterNextHunk)
 		nmap [h <Plug>(GitGutterPrevHunk)
 		nmap <leader>ghp <Plug>(GitGutterPreviewHunk)
