@@ -423,9 +423,10 @@ set mouse=v
 set t_Co=256
 set ai
 set si
-let g:seoul256_background = 235
+let g:seoul256_background = 236
 colorscheme seoul256
 hi Folded ctermbg=240 ctermfg=250 term=NONE cterm=bold
 hi Visual ctermbg=245
 hi Comment ctermfg=189 cterm=bolditalic term=bolditalic gui=bolditalic
 hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
+hi Pmenu guifg=blue ctermbg=239 ctermfg=lightgrey
