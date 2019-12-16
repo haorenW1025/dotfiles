@@ -308,7 +308,7 @@ call plug#begin('~/.vim/plugged')
 
 	" c/c++ specific 
 	" switch to header file
-	Plug 'vim-scripts/a.vim'
+	Plug 'whz861025/a.vim'
 		nmap <leader>sh :A<CR>
 		nmap <leader>vh :AV<CR>
 
