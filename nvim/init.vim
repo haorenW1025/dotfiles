@@ -215,10 +215,10 @@ call plug#begin('~/.vim/plugged')
           return !col || getline('.')[col - 1]  =~# '\s'
         endfunction
         " mapping for goto function
-        nmap <silent> gd <Plug>(coc-definition)
-        nmap <silent> gy <Plug>(coc-type-definition)
-        nmap <silent> gi <Plug>(coc-implementation)
-        nmap <silent> gr <Plug>(coc-references)
+        nmap <silent><leader>gd <Plug>(coc-definition)
+        nmap <silent><leader>gy <Plug>(coc-type-definition)
+        nmap <silent><leader>gi <Plug>(coc-implementation)
+        nmap <silent><leader>gr <Plug>(coc-references)
         nmap <silent> <Leader>d  :CocList diagnostics<cr>
         nmap <silent> [d <Plug>(coc-diagnostic-prev)
         nmap <silent> ]d <Plug>(coc-diagnostic-next)
@@ -311,6 +311,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'whz861025/a.vim'
 		nmap <leader>sh :A<CR>
 		nmap <leader>vh :AV<CR>
+		iunmap <leader>ihn
+		iunmap <leader>is
+		iunmap <leader>ih
 
 call plug#end()
 
