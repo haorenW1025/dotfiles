@@ -311,6 +311,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-scripts/a.vim'
 		nmap <leader>sh :A<CR>
 		nmap <leader>vh :AV<CR>
+		iunmap <leader>ihn
+		iunmap <leader>is
+		iunmap <leader>ih
 
 call plug#end()
 
