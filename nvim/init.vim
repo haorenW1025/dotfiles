@@ -251,7 +251,7 @@ call plug#begin('~/.vim/plugged')
 		let g:vista_sidebar_width = 40
         let g:vista#renderer#enable_icon = 1
 		let g:vista_echo_cursor_strategy = 'floating_win'
-        nmap <silent> ; :Vista!!<CR>
+        nmap <silent> , :Vista!!<CR>
 		autocmd BufEnter * if winnr("$") == 1 && vista#sidebar#IsVisible() | execute "normal! :q!\<CR>" | endif
 
     " snippets setup
@@ -359,7 +359,6 @@ highlight TermCursor ctermfg=red guifg=red
 tnoremap jj <C-\><C-n>
 tnoremap kk <C-\><C-n>
 tnoremap <esc> <C-\><C-n>:q<CR>
-tnoremap <leader>k <C-\><C-n><C-w>k
 
 augroup neovim_terminal
 	autocmd!
