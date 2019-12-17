@@ -399,6 +399,7 @@ set textwidth=0
 set wrapmargin=0
 
 
+set termguicolors
 set noerrorbells
 set visualbell
 set t_vb=
@@ -425,10 +426,11 @@ set mouse=v
 set t_Co=256
 set ai
 set si
-let g:seoul256_background = 236
+let g:seoul256_background = 234
 colorscheme seoul256
 hi Folded ctermbg=240 ctermfg=250 term=NONE cterm=bold
 hi Visual ctermbg=245
 hi Comment ctermfg=189 cterm=bolditalic term=bolditalic gui=bolditalic
 hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
 hi Pmenu guifg=blue ctermbg=239 ctermfg=lightgrey
+hi Normal guibg=NONE ctermbg=None
