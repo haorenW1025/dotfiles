@@ -408,11 +408,8 @@ set backspace=indent,eol,start
 set shellpipe=>
 set ruler
 set history=100
-set shiftwidth=4
-set tw=80
 set wildmode=list:longest
 set splitbelow splitright
-set updatetime=300
 set wildmenu
 set ignorecase
 set cursorline
