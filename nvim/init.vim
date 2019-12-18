@@ -167,6 +167,7 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'mg979/vim-visual-multi'
 		nmap  <Leader>m  <Plug>(VM-Mouse-Word)  
+		let g:VM_leader = ';'
 
 	Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 		let g:Lf_WindowPosition = 'popup'
