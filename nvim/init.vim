@@ -359,7 +359,6 @@ highlight TermCursor ctermfg=red guifg=red
 
 tnoremap jj <C-\><C-n>
 tnoremap kk <C-\><C-n>
-tnoremap <esc> <C-\><C-n>:q<CR>
 
 augroup neovim_terminal
 	autocmd!
@@ -399,6 +398,10 @@ set textwidth=0
 set wrapmargin=0
 
 
+set re=1
+set ttyfast
+set lazyredraw
+:set cul!
 set noerrorbells
 set visualbell
 set t_vb=
@@ -426,7 +429,7 @@ let g:seoul256_background = 235
 colorscheme seoul256
 hi Folded ctermbg=240 ctermfg=250 term=NONE cterm=bold
 hi Visual ctermbg=245
-hi Comment ctermfg=189 cterm=bolditalic term=bolditalic gui=bolditalic
+hi Comment cterm=bolditalic term=bolditalic gui=bolditalic
 hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
 hi Pmenu guifg=blue ctermbg=239 ctermfg=lightgrey
 hi Normal guibg=NONE ctermbg=None
