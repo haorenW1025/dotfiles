@@ -8,6 +8,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'dracula/vim', { 'as': 'dracula' }
 	Plug 'junegunn/seoul256.vim'
 
+	Plug 'blindFS/vim-taskwarrior'
+	Plug 'jceb/vim-orgmode'
+	Plug 'dhruvasagar/vim-table-mode'
 
     " commenter
 	Plug 'scrooloose/nerdcommenter'
@@ -21,6 +24,9 @@ call plug#begin('~/.vim/plugged')
 		nmap <leader>\ :Defx `expand('%:p:h')` -search=`expand('%:p')` -columns=git:mark:indent:icons:filename:type -winwidth=40 -direction=topleft 
 					\-split=vertical -toggle=1 <CR>
 		autocmd FileType defx call s:defx_my_settings()
+
+		autocmd BufEnter * if winnr('$') == 1  && &filetype ==# 'defx' | execute "normal! :q!\<CR>" | endif
+
 		function! s:defx_my_settings() abort
 			nnoremap <silent><buffer><expr> <CR>
 				\ defx#is_directory() ?
@@ -30,7 +36,7 @@ call plug#begin('~/.vim/plugged')
 				\ defx#is_directory() ?
 				\ defx#do_action('open_or_close_tree') :
 				\ defx#do_action('drop',)
-			nnoremap <silent><buffer><expr> s defx#do_action('drop', 'split')
+			nnoremap <silent><buffer><expr> x defx#do_action('drop', 'split')
 			nnoremap <silent><buffer><expr> v defx#do_action('drop', 'vsplit')
 			nnoremap <silent><buffer><expr> t defx#do_action('drop', 'tabe')
 			nnoremap <silent><buffer><expr> o defx#do_action('open_tree')
@@ -46,9 +52,10 @@ call plug#begin('~/.vim/plugged')
 			nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
 			nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
 			nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
-			nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select')
+			nnoremap <silent><buffer><expr> s defx#do_action('toggle_select')
 			nnoremap <silent><buffer><expr> r defx#do_action('redraw')
 			nnoremap <silent><buffer><expr> j  line('.') == line('$') ? 'gg' : 'j'
+			nnoremap <silent><buffer><expr> q defx#do_action('quit')
 		endfunction
 
 		" Defx git
@@ -88,7 +95,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'itchyny/lightline.vim'
         set showtabline=2
         let g:lightline = {
-            \ 'colorscheme': 'dracula',
+            \ 'colorscheme': 'seoul256',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [  'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -220,12 +227,12 @@ call plug#begin('~/.vim/plugged')
         nmap <silent><leader>gy <Plug>(coc-type-definition)
         nmap <silent><leader>gi <Plug>(coc-implementation)
         nmap <silent><leader>gr <Plug>(coc-references)
-        nmap <silent> <Leader>d  :CocList diagnostics<cr>
+        nmap <silent> <leader>d  :CocList diagnostics<cr>
         nmap <silent> [d <Plug>(coc-diagnostic-prev)
         nmap <silent> ]d <Plug>(coc-diagnostic-next)
-        nmap <silent> <Leader>/ :CocList words<cr>
-        nmap <Leader><Leader>f  <Plug>(coc-format-selected)
-		nmap <silent> <Leader>rn :CocCommand document.renameCurrentWord
+        nmap <silent> <leader>/ :CocList words<cr>
+        nmap <leader><leader>f  <Plug>(coc-format-selected)
+		nmap <silent> <leader>rn :CocCommand document.renameCurrentWord
         nnoremap <silent> K :call <SID>show_documentation()<CR>
         inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
                                                    \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
@@ -283,14 +290,11 @@ call plug#begin('~/.vim/plugged')
 		nmap <leader>tc :Tclear<CR>
 		nmap <leader>tp :T python %<CR>
 		nmap <leader>tb :T bash %<CR>
-		nmap <leader>tm :T make<CR>
 		nmap <leader>ti <leader>j20+
-		
 		" REPL support
 		nmap <leader>rl :TREPLSendLine<CR>
 		vmap <leader>rs :TREPLSendSelection<CR>
 		nmap <leader>rq :T exit()<CR>
-		
 
 	" debugger integration
 	Plug 'sakhnik/nvim-gdb', {'do': ':!./install.sh \| UpdateRemotePlugins' }
@@ -330,7 +334,8 @@ nmap <silent><Leader>j <C-w>j
 nmap <silent><Leader>k <C-w>k
 nmap <silent><Leader>l <C-w>l
 nmap <Leader>y "+yy
-xmap <Leader>y "+y
+vmap <Leader>y "+y
+
 inoremap jk <Esc>`^
 inoremap JK <Esc>`^
 nmap "," za
@@ -401,7 +406,7 @@ set wrapmargin=0
 set re=1
 set ttyfast
 set lazyredraw
-:set cul!
+set cul!
 set noerrorbells
 set visualbell
 set t_vb=
