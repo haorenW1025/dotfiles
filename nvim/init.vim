@@ -4,11 +4,10 @@ set nocompatible
 set number
 call plug#begin('~/.vim/plugged') 
     let mapleader = " "
+	let maplocalleader = ";"
     " themes
-	Plug 'dracula/vim', { 'as': 'dracula' }
 	Plug 'junegunn/seoul256.vim'
 
-	Plug 'blindFS/vim-taskwarrior'
 	Plug 'jceb/vim-orgmode'
 	Plug 'dhruvasagar/vim-table-mode'
 
@@ -19,10 +18,8 @@ call plug#begin('~/.vim/plugged')
 		let g:NERDCompactSexyComs = 1
 
 	Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-		nmap \ :Defx -columns=git:mark:indent:icons:filename:type -winwidth=40 -direction=topleft 
-					\-split=vertical -resume=1 -toggle=1 <CR>
-		nmap <leader>\ :Defx `expand('%:p:h')` -search=`expand('%:p')` -columns=git:mark:indent:icons:filename:type -winwidth=40 -direction=topleft 
-					\-split=vertical -toggle=1 <CR>
+		nmap \ :Defx<CR>
+		nmap <leader>\ :Defx `expand('%:p:h')` -search=`expand('%:p')`<CR>
 		autocmd FileType defx call s:defx_my_settings()
 
 		autocmd BufEnter * if winnr('$') == 1  && &filetype ==# 'defx' | execute "normal! :q!\<CR>" | endif
@@ -36,9 +33,9 @@ call plug#begin('~/.vim/plugged')
 				\ defx#is_directory() ?
 				\ defx#do_action('open_or_close_tree') :
 				\ defx#do_action('drop',)
-			nnoremap <silent><buffer><expr> x defx#do_action('drop', 'split')
-			nnoremap <silent><buffer><expr> v defx#do_action('drop', 'vsplit')
-			nnoremap <silent><buffer><expr> t defx#do_action('drop', 'tabe')
+			nnoremap <silent><buffer><expr> s defx#do_action('multi', [['drop', 'split'], 'quit'])
+			nnoremap <silent><buffer><expr> v defx#do_action('multi', [['drop', 'vsplit'], 'quit'])
+			nnoremap <silent><buffer><expr> t defx#do_action('multi', [['drop', 'tabnew'], 'quit'])
 			nnoremap <silent><buffer><expr> o defx#do_action('open_tree')
 			nnoremap <silent><buffer><expr> l defx#do_action('open_directory')
 			nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
@@ -52,7 +49,7 @@ call plug#begin('~/.vim/plugged')
 			nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
 			nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
 			nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
-			nnoremap <silent><buffer><expr> s defx#do_action('toggle_select')
+			nnoremap <silent><buffer><expr> <space> defx#do_action('toggle_select')
 			nnoremap <silent><buffer><expr> r defx#do_action('redraw')
 			nnoremap <silent><buffer><expr> j  line('.') == line('$') ? 'gg' : 'j'
 			nnoremap <silent><buffer><expr> q defx#do_action('quit')
@@ -90,6 +87,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'sheerun/vim-polyglot'
 
 	Plug 'jiangmiao/auto-pairs'
+		let g:AutoPairsShortcutFastWrap="jw"
 
     " status line
 	Plug 'itchyny/lightline.vim'
@@ -153,6 +151,7 @@ call plug#begin('~/.vim/plugged')
     " surround & repeat 
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
+	Plug 'tpope/vim-abolish'
 
     " git wrapper
     Plug 'tpope/vim-fugitive'
@@ -180,7 +179,11 @@ call plug#begin('~/.vim/plugged')
 		let g:Lf_WindowPosition = 'popup'
 		let g:Lf_PreviewInPopup = 1
 		let g:Lf_ShortcutF="<leader>ff"
-		noremap <leader>fb :<C-U><C-R>=printf("Leaderf! buffer %s", "")<CR><CR>
+		let g:Lf_WildIgnore = {
+				\ 'dir': ['.svn','.git','.hg', 'node_modules', 'dist'],
+				\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', 'package.json']
+				\}
+			noremap <leader>fb :<C-U><C-R>=printf("Leaderf! buffer %s", "")<CR><CR>
 		noremap <leader>fm :<C-U><C-R>=printf("Leaderf! mru %s", "")<CR><CR>
 		noremap <leader>fl :<C-U><C-R>=printf("Leaderf! line %s", "")<CR><CR>
 		noremap <leader>sc :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
@@ -189,8 +192,8 @@ call plug#begin('~/.vim/plugged')
 		nmap <leader>ss :Leaderf rg -S<CR>
 		let g:Lf_GtagsAutoGenerate = 1
 		let g:Lf_Gtagslabel = 'native-pygments'
-		noremap td :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-		noremap tr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+		noremap <leader>gtd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+		noremap <leader>gtr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 
 
 	Plug 'michaeljsmith/vim-indent-object'
@@ -208,9 +211,7 @@ call plug#begin('~/.vim/plugged')
         \ 'coc-json',
         \ 'coc-tsserver',
         \ 'coc-sh',
-		\ 'coc-highlight'
         \ ]
-
 
         " use tab for autocomplete
         inoremap <silent><expr> <TAB>
@@ -319,6 +320,20 @@ call plug#begin('~/.vim/plugged')
 
 call plug#end()
 
+call defx#custom#option('_', {
+		\ 'columns': 'indent:git:icons:filename',
+		\ })
+
+call defx#custom#option('_', {
+      \ 'winwidth': 40,
+      \ 'split': 'vertical',
+      \ 'direction': 'topleft',
+      \ 'show_ignored_files': 0,
+      \ 'buffer_name': '',
+      \ 'toggle': 1,
+      \ 'resume': 1
+      \ })
+
 nmap + <C-w>+
 nmap - <C-w>-
 nmap <C-l> <C-w>>
@@ -327,8 +342,8 @@ nmap S :%s//g<left><left>
 nmap <Leader>q :q<CR>
 nmap <Leader>+ 20+ 
 nmap <Leader>- 20- 
-nmap <Leader>L 5<C-w>>
-nmap <Leader>H 5<C-w><
+nmap <left> <C-w>>
+nmap <right> <C-w><
 nmap <silent><Leader>h <C-w>h
 nmap <silent><Leader>j <C-w>j
 nmap <silent><Leader>k <C-w>k
@@ -338,11 +353,10 @@ vmap <Leader>y "+y
 
 inoremap jk <Esc>`^
 inoremap JK <Esc>`^
+vnoremap jk <Esc>`^
 nmap "," za
 nmap <leader>n :noh<CR><Esc>
 nmap x "_dl
-nmap <silent> j gj
-nmap <silent> k gk
 nmap <leader>so :source ~/.config/nvim/init.vim<CR>
 nmap <leader>cof :e ~/.config/nvim/init.vim<CR>
 nmap <leader>qj <C-w>j:q<CR>
@@ -380,6 +394,7 @@ augroup END
 " folding
 set foldmethod=indent
 set foldlevelstart=99
+set foldlevel=99
 autocmd BufWrite * mkview
 autocmd BufRead * silent! loadview
 
@@ -403,9 +418,19 @@ set textwidth=0
 set wrapmargin=0
 
 
-set re=1
+autocmd InsertLeave,WinEnter * set cursorline
+autocmd InsertEnter,WinLeave * set nocursorline
+xnoremap <  <gv
+xnoremap >  >gv
+cnoremap <c-n> <down>
+cnoremap <c-p> <up>
+
+nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
+nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
+
 set ttyfast
 set lazyredraw
+set synmaxcol=200
 set cul!
 set noerrorbells
 set visualbell
