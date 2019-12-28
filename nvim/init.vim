@@ -11,7 +11,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'jceb/vim-orgmode'
 	Plug 'dhruvasagar/vim-table-mode'
 
-    " commenter
 	Plug 'scrooloose/nerdcommenter'
 		let g:NERDSpaceDelims = 1
 		let g:NERDTrimTrailingWhitespace = 1
@@ -183,7 +182,7 @@ call plug#begin('~/.vim/plugged')
 				\ 'dir': ['.svn','.git','.hg', 'node_modules', 'dist'],
 				\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', 'package.json']
 				\}
-			noremap <leader>fb :<C-U><C-R>=printf("Leaderf! buffer %s", "")<CR><CR>
+		noremap <leader>fb :<C-U><C-R>=printf("Leaderf! buffer %s", "")<CR><CR>
 		noremap <leader>fm :<C-U><C-R>=printf("Leaderf! mru %s", "")<CR><CR>
 		noremap <leader>fl :<C-U><C-R>=printf("Leaderf! line %s", "")<CR><CR>
 		noremap <leader>sc :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
@@ -196,7 +195,6 @@ call plug#begin('~/.vim/plugged')
 		noremap <leader>gtr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 
 
-	Plug 'michaeljsmith/vim-indent-object'
 	
     " show indent
     Plug 'Yggdroot/indentLine'
@@ -314,9 +312,13 @@ call plug#begin('~/.vim/plugged')
 
 	" c/c++ specific 
 	" switch to header file
-	Plug 'whz861025/a.vim'
+	Plug 'whz861025/a.vim', {'for' : ['c', 'cpp']}
 		nmap <leader>sh :A<CR>
 		nmap <leader>vh :AV<CR>
+
+	Plug 'kana/vim-textobj-user'
+	Plug 'kana/vim-textobj-indent'
+	Plug 'Julian/vim-textobj-variable-segment'
 
 call plug#end()
 
@@ -428,6 +430,7 @@ cnoremap <c-p> <up>
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
 nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
 
+set encoding=utf8
 set ttyfast
 set lazyredraw
 set synmaxcol=200
