@@ -80,6 +80,11 @@ call plug#begin('~/.vim/plugged')
 		" disbale syntax highlighting to prevent performence issue
 			let g:defx_icons_column_length = 2
 			let g:defx_icons_enable_syntax_highlight = 1
+			let g:defx_icons_directory_icon=''
+			let g:defx_icons_parent_icon=''
+			let g:defx_icons_root_opened_tree_icon=''
+			let g:defx_icons_nested_opened_tree_icon=''
+			let g:defx_icons_nested_closed_tree_icon=''
 
 
     " syntax highlighting
@@ -323,7 +328,7 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 call defx#custom#option('_', {
-		\ 'columns': 'indent:git:icons:filename',
+		\ 'columns': 'indent:icon:git:icons:filename',
 		\ })
 
 call defx#custom#option('_', {
@@ -336,6 +341,11 @@ call defx#custom#option('_', {
       \ 'resume': 1
       \ })
 
+call defx#custom#column('icon', {
+		\ 'directory_icon': '▸',
+		\ 'opened_icon': '▾',
+		\ 'root_icon': ' ',
+		\ })
 nmap + <C-w>+
 nmap - <C-w>-
 nmap <C-l> <C-w>>
@@ -462,7 +472,10 @@ let g:seoul256_background = 235
 colorscheme seoul256
 hi Folded ctermbg=240 ctermfg=250 term=NONE cterm=bold
 hi Visual ctermbg=245
-hi Comment cterm=bolditalic term=bolditalic gui=bolditalic
+hi Comment cterm=italic term=italic
 hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
 hi Pmenu guifg=blue ctermbg=239 ctermfg=lightgrey
-hi Normal guibg=NONE ctermbg=None
+hi Normal guibg=NONE ctermbg=None ctermfg=230
+hi Directory ctermfg=red
+hi DefxIconsDirectory ctermfg=115 cterm=bold
+hi Defx_filename_4_py ctermfg=136
