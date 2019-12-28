@@ -475,7 +475,6 @@ hi Visual ctermbg=245
 hi Comment cterm=italic term=italic
 hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
 hi Pmenu guifg=blue ctermbg=239 ctermfg=lightgrey
-hi Normal guibg=NONE ctermbg=None ctermfg=230
+hi Normal guibg=NONE ctermbg=None
 hi Directory ctermfg=red
 hi DefxIconsDirectory ctermfg=115 cterm=bold
-hi Defx_filename_4_py ctermfg=136
