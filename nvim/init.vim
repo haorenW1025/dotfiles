@@ -4,7 +4,7 @@ set nocompatible
 set number
 call plug#begin('~/.vim/plugged') 
     let mapleader = " "
-	let maplocalleader = ";"
+	let maplocalleader = "="
     " themes
 	Plug 'junegunn/seoul256.vim'
 
@@ -76,7 +76,7 @@ call plug#begin('~/.vim/plugged')
 			hi def link Defx_git_Ignored Comment
 
 		" Defx icons
-		Plug 'kristijanhusak/defx-icons'
+		Plug 'whz861025/defx-icons'
 		" disbale syntax highlighting to prevent performence issue
 			let g:defx_icons_column_length = 2
 			let g:defx_icons_enable_syntax_highlight = 1
@@ -85,6 +85,12 @@ call plug#begin('~/.vim/plugged')
 			let g:defx_icons_root_opened_tree_icon=''
 			let g:defx_icons_nested_opened_tree_icon=''
 			let g:defx_icons_nested_closed_tree_icon=''
+			let g:defx_icons_term_colors = {
+				\ 'yellow': 148,
+				\ 'white' : 248,
+				\ 'darkBlue' : 74,
+				\ 'blue' : 81
+				\ }
 
 
     " syntax highlighting
@@ -109,11 +115,6 @@ call plug#begin('~/.vim/plugged')
 
     " mark showing 
     Plug 'kshenoy/vim-signature'
-
-    " auto align
-    Plug 'junegunn/vim-easy-align'
-        " how to align : gaip+what you want to align
-        nmap ga <Plug>(EasyAlign)
 
 	Plug 'junegunn/vim-slash'
 		nmap <plug>(slash-after) zz
@@ -177,7 +178,11 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'mg979/vim-visual-multi'
 		nmap  <Leader>m  <Plug>(VM-Mouse-Word)  
-		let g:VM_leader = ';'
+		let g:VM_maps = {}
+		let g:VM_leader = "="
+		let g:VM_maps["Select Cursor Down"] = '<Down>'      " start selecting down
+		let g:VM_maps["Select Cursor Up"]   = '<Up>'        " start selecting up
+
 
 	Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 		let g:Lf_WindowPosition = 'popup'
@@ -228,6 +233,7 @@ call plug#begin('~/.vim/plugged')
         endfunction
         " mapping for goto function
         nmap <silent><leader>gd <Plug>(coc-definition)
+		nmap <silent><leader>tgd call CocAction('jumpDefinition', 'tabe')
         nmap <silent><leader>gy <Plug>(coc-type-definition)
         nmap <silent><leader>gi <Plug>(coc-implementation)
         nmap <silent><leader>gr <Plug>(coc-references)
@@ -360,12 +366,15 @@ nmap <silent><Leader>h <C-w>h
 nmap <silent><Leader>j <C-w>j
 nmap <silent><Leader>k <C-w>k
 nmap <silent><Leader>l <C-w>l
+nmap ; :
 nmap <Leader>y "+yy
 vmap <Leader>y "+y
+nmap ` '
+nmap H ^
+nmap L $
 
 inoremap jk <Esc>`^
 inoremap JK <Esc>`^
-vnoremap jk <Esc>`^
 nmap "," za
 nmap <leader>n :noh<CR><Esc>
 nmap x "_dl
@@ -394,7 +403,6 @@ tnoremap kk <C-\><C-n>
 augroup neovim_terminal
 	autocmd!
 
-
 	" Disables number lines on terminal buffers
 	autocmd TermOpen * :set nonumber norelativenumber
 augroup END
@@ -415,7 +423,7 @@ set nobackup
 set nowritebackup
 set cmdheight=2
 set updatetime=300
-set shortmess+=c
+set shortmess=atI
 set signcolumn=yes
 
 " tab
