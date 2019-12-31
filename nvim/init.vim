@@ -48,10 +48,11 @@ call plug#begin('~/.vim/plugged')
 			nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
 			nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
 			nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
-			nnoremap <silent><buffer><expr> <space> defx#do_action('toggle_select')
+			nnoremap <silent><buffer><expr> ; defx#do_action('toggle_select')
 			nnoremap <silent><buffer><expr> r defx#do_action('redraw')
 			nnoremap <silent><buffer><expr> j  line('.') == line('$') ? 'gg' : 'j'
 			nnoremap <silent><buffer><expr> q defx#do_action('quit')
+			nnoremap <silent><buffer><expr> cd defx#do_action('change_vim_cwd')
 		endfunction
 
 		" Defx git
@@ -86,7 +87,7 @@ call plug#begin('~/.vim/plugged')
 			let g:defx_icons_nested_opened_tree_icon=''
 			let g:defx_icons_nested_closed_tree_icon=''
 			let g:defx_icons_term_colors = {
-				\ 'yellow': 148,
+				\ 'yellow': 178	,
 				\ 'white' : 248,
 				\ 'darkBlue' : 74,
 				\ 'blue' : 81
@@ -380,10 +381,7 @@ nmap <leader>n :noh<CR><Esc>
 nmap x "_dl
 nmap <leader>so :source ~/.config/nvim/init.vim<CR>
 nmap <leader>cof :e ~/.config/nvim/init.vim<CR>
-nmap <leader>qj <C-w>j:q<CR>
-nmap <leader>qh <C-w>h:q<CR>
-nmap <leader>qk <C-w>k:q<CR>
-nmap <leader>ql <C-w>l:q<CR>
+nmap <leader>wo <C-w>o
 nmap <leader>bc :bd<CR>
 nmap <leader>w :w<CR>
 nmap :: :<c-f>
@@ -448,6 +446,7 @@ cnoremap <c-p> <up>
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
 nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
 
+set complete=.,w,b,u,t,kspell
 set encoding=utf8
 set ttyfast
 set lazyredraw
