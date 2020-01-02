@@ -8,7 +8,6 @@ call plug#begin('~/.vim/plugged')
     " themes
 	Plug 'junegunn/seoul256.vim'
 
-	Plug 'jceb/vim-orgmode'
 	Plug 'dhruvasagar/vim-table-mode'
 
 	Plug 'scrooloose/nerdcommenter'
@@ -284,7 +283,7 @@ call plug#begin('~/.vim/plugged')
 		let g:ultisnipsjumpbackwardtrigger="jh"
 		nmap <leader>es :UltiSnipsEdit<CR>
 
-	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for' : 'markdown' }
+	Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for' : 'markdown' }
 
 	Plug 'kassio/neoterm'
 		let g:neoterm_shell = "zsh"
@@ -330,6 +329,7 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'kana/vim-textobj-user'
 	Plug 'kana/vim-textobj-indent'
+	Plug 'kana/vim-textobj-line'
 	Plug 'Julian/vim-textobj-variable-segment'
 
 call plug#end()
@@ -385,6 +385,7 @@ nmap <leader>wo <C-w>o
 nmap <leader>bc :bd<CR>
 nmap <leader>w :w<CR>
 nmap :: :<c-f>
+nmap Y y$
 
 if has("autocmd")
 " Highlight TODO, FIXME, NOTE, etc.
