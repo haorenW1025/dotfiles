@@ -91,6 +91,11 @@ call plug#begin('~/.vim/plugged')
 				\ 'darkBlue' : 74,
 				\ 'blue' : 81
 				\ }
+			let g:defx_icons_gui_colors = {
+				\ 'blue' : '5fd7ff',
+				\ 'yellow' : 'd7af00',
+				\ 'darkBlue' : '5fafd7'
+			  \ }
 
 
     " syntax highlighting
@@ -123,7 +128,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'luochen1990/rainbow' 
         let g:rainbow_active = 1
         let g:rainbow_conf = {
-        \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+        \	'guifgs': ['white', 'yellow', 'lightcyan', 'red', 'blue', 'darkgray'],
         \	'ctermfgs': ['white', 'yellow', 'lightcyan', 'red', 'blue', 'darkgray'],
         \	'guis': [''],
         \	'cterms': [''],
@@ -450,6 +455,7 @@ cnoremap <c-p> <up>
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
 nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
 
+set termguicolors
 set complete=.,w,b,u,t,kspell
 set encoding=utf8
 set ttyfast
@@ -479,13 +485,13 @@ set mouse=v
 set t_Co=256
 set ai
 set si
-let g:seoul256_background = 235
+let g:seoul256_background = 234
 colorscheme seoul256
 hi Folded ctermbg=240 ctermfg=250 term=NONE cterm=bold
 hi Visual ctermbg=245
 hi Comment cterm=italic term=italic
 hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
-hi Pmenu guifg=blue ctermbg=239 ctermfg=lightgrey
+hi Pmenu guifg=lightgrey guibg=#4e4e4e ctermbg=239 ctermfg=lightgrey
 hi Normal guibg=NONE ctermbg=None
 hi Directory ctermfg=red
 hi DefxIconsDirectory ctermfg=115 cterm=bold
