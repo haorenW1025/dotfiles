@@ -188,21 +188,23 @@ call plug#begin('~/.vim/plugged')
 		let g:Lf_WindowPosition = 'popup'
 		let g:Lf_PreviewInPopup = 1
 		let g:Lf_ShortcutF="<leader>ff"
+		let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
 		let g:Lf_WildIgnore = {
 				\ 'dir': ['.svn','.git','.hg', 'node_modules', 'dist'],
 				\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', 'package.json']
 				\}
-		noremap <leader>fb :<C-U><C-R>=printf("Leaderf! buffer %s", "")<CR><CR>
-		noremap <leader>fm :<C-U><C-R>=printf("Leaderf! mru %s", "")<CR><CR>
-		noremap <leader>fl :<C-U><C-R>=printf("Leaderf! line %s", "")<CR><CR>
-		noremap <leader>sc :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
+		nmap <leader>fb :<C-U><C-R>=printf("Leaderf! buffer %s", "")<CR><CR>
+		nmap <leader>fm :<C-U><C-R>=printf("Leaderf! mru --cwd %s", "")<CR><CR>
+		nmap <leader>fl :<C-U><C-R>=printf("Leaderf! line %s", "")<CR><CR>
+		nmap <leader>sc :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
 		xnoremap <leader>sv :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
-		noremap <leader>sl :<C-U>Leaderf! rg --recall<CR>
+		nmap <leader>sl :<C-U>Leaderf! rg --recall<CR>
 		nmap <leader>ss :Leaderf rg -S<CR>
 		let g:Lf_GtagsAutoGenerate = 1
 		let g:Lf_Gtagslabel = 'native-pygments'
-		noremap <leader>gtd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-		noremap <leader>gtr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+		nmap <leader>gtg :Leaderf gtags --update<CR>
+		nmap <leader>gtd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+		nmap <leader>gtr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 
 
 	
@@ -416,6 +418,7 @@ set foldlevelstart=99
 set foldlevel=99
 autocmd BufWrite * mkview
 autocmd BufRead * silent! loadview
+set formatoptions-=cro
 
 set hidden
 set nobackup
@@ -462,7 +465,7 @@ set backspace=indent,eol,start
 set shellpipe=>
 set ruler
 set history=100
-set wildmode=list:longest
+set wildmode=list:longest:full
 set splitbelow splitright
 set wildmenu
 set ignorecase
