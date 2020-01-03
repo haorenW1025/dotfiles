@@ -128,7 +128,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'luochen1990/rainbow' 
         let g:rainbow_active = 1
         let g:rainbow_conf = {
-        \	'guifgs': ['white', 'yellow', 'lightcyan', 'red', 'blue', 'darkgray'],
+        \	'guifgs': ['white', 'lightcyan', 'lightred', 'red', 'blue', 'darkgray'],
         \	'ctermfgs': ['white', 'yellow', 'lightcyan', 'red', 'blue', 'darkgray'],
         \	'guis': [''],
         \	'cterms': [''],
@@ -447,8 +447,6 @@ set wrapmargin=0
 
 autocmd InsertLeave,WinEnter * set cursorline
 autocmd InsertEnter,WinLeave * set nocursorline
-xnoremap <  <gv
-xnoremap >  >gv
 cnoremap <c-n> <down>
 cnoremap <c-p> <up>
 
@@ -487,11 +485,11 @@ set ai
 set si
 let g:seoul256_background = 234
 colorscheme seoul256
-hi Folded ctermbg=240 ctermfg=250 term=NONE cterm=bold
+hi Folded ctermbg=240 ctermfg=250 term=NONE cterm=bold gui=bold
 hi Visual ctermbg=245
-hi Comment cterm=italic term=italic
+hi Comment cterm=italic term=italic gui=italic
 hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
 hi Pmenu guifg=lightgrey guibg=#4e4e4e ctermbg=239 ctermfg=lightgrey
 hi Normal guibg=NONE ctermbg=None
 hi Directory ctermfg=red
-hi DefxIconsDirectory ctermfg=115 cterm=bold
+hi DefxIconsDirectory ctermfg=115 cterm=bold gui=bold
