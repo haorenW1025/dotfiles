@@ -256,6 +256,7 @@ call plug#begin('~/.vim/plugged')
 
         command! -nargs=0 Format :call CocAction('format')
         command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+		nmap <leader>for :Format<CR>
 
 
             function! s:show_documentation()
