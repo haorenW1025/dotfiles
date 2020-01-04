@@ -378,8 +378,9 @@ nmap ; :
 nmap <Leader>y "+yy
 vmap <Leader>y "+y
 nmap ` '
-nmap H ^
-nmap L $
+nmap <c-s> <c-a>
+set pumblend=20
+
 
 inoremap jk <Esc>`^
 inoremap JK <Esc>`^
