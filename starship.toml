@@ -33,7 +33,7 @@ prompt_order = [
 
 [username]
 show_always=true
-style_user="bold fg:#3477eb"
+style_user="bold fg:#34ebe5"
 style_root="bold yellow"
 
 [hostname]
