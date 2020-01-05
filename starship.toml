@@ -33,18 +33,21 @@ prompt_order = [
 
 [username]
 show_always=true
-style_user="bold blue"
+style_user="bold fg:#3477eb"
 style_root="bold yellow"
 
+[hostname]
+style="fg:#34d3eb"
+
 [directory]
-style="green"
+style="fg:#34eb80"
 truncation_length = 3
 
 [git_branch]
-style="bold yellow"
+style="bold fg:#ebd334"
 
 [git_status]
-style="bold purple"
+style="bold fg:e07798"
 
 [character]
 symbol = "$"
@@ -53,7 +56,7 @@ style_failure="bold red"
 
 [time]
 disabled = false
-style="bold cyan"
+style="bold fg:#34ebdc"
 
 [jobs]
 symbol = "+ "
