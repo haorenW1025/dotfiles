@@ -121,9 +121,6 @@ call plug#begin('~/.vim/plugged')
     " mark showing 
     Plug 'kshenoy/vim-signature'
 
-	Plug 'junegunn/vim-slash'
-		nmap <plug>(slash-after) zz
-
 	" different color for parentheses
     Plug 'luochen1990/rainbow' 
         let g:rainbow_active = 1
@@ -207,9 +204,9 @@ call plug#begin('~/.vim/plugged')
 		nmap <leader>ss :Leaderf rg -S<CR>
 		let g:Lf_GtagsAutoGenerate = 1
 		let g:Lf_Gtagslabel = 'native-pygments'
-		nmap <leader>gtg :Leaderf gtags --update<CR>
-		nmap <leader>gtd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-		nmap <leader>gtr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+		nmap gtg :Leaderf gtags --update<CR>
+		nmap gtd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+		nmap gtr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 
 
 	
@@ -239,11 +236,11 @@ call plug#begin('~/.vim/plugged')
           return !col || getline('.')[col - 1]  =~# '\s'
         endfunction
         " mapping for goto function
-        nmap <silent><leader>gd <Plug>(coc-definition)
-		nmap <silent><leader>tgd call CocAction('jumpDefinition', 'tabe')
-        nmap <silent><leader>gy <Plug>(coc-type-definition)
-        nmap <silent><leader>gi <Plug>(coc-implementation)
-        nmap <silent><leader>gr <Plug>(coc-references)
+        nmap <silent>gd <Plug>(coc-definition)
+		nmap <silent>tgd call CocAction('jumpDefinition', 'tab')
+        nmap <silent>gy <Plug>(coc-type-definition)
+        nmap <silent>gi <Plug>(coc-implementation)
+        nmap <silent>gr <Plug>(coc-references)
         nmap <silent> <leader>d  :CocList diagnostics<cr>
         nmap <silent> [d <Plug>(coc-diagnostic-prev)
         nmap <silent> ]d <Plug>(coc-diagnostic-next)
