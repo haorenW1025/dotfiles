@@ -10,6 +10,35 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'dhruvasagar/vim-table-mode'
 
+	Plug 'junegunn/fzf.vim'
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+		nmap <silent> <leader>ff :Files<cr>
+		nmap <leader>fm :History<CR>
+		nmap <leader>sn :Snippets<CR>
+        nmap <leader><tab> <plug>(fzf-maps-n)
+        xmap <leader><tab> <plug>(fzf-maps-x)
+        omap <leader><tab> <plug>(fzf-maps-o)
+		nmap <leader>ss :Rg<CR>
+		nmap <leader>sc :Rg <c-r>=expand("<cword>")<CR><CR>
+
+		autocmd FileType fzf tmap <tab> <down>
+		autocmd FileType fzf tmap <s-tab> <up>
+
+		command! -bang -nargs=? -complete=dir Files
+			\ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:70%'), <bang>0)
+
+		command! -bang -nargs=? -complete=dir History
+			\ call fzf#vim#history(fzf#vim#with_preview('right:70%'), <bang>0)
+
+		command! -bang -nargs=* Rg
+		\ call fzf#vim#grep(
+		\   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+		\   fzf#vim#with_preview('right:61%'), <bang>0)
+
+		autocmd BufWinEnter,WinEnter term://* startinsert
+
+
+
 	Plug 'scrooloose/nerdcommenter'
 		let g:NERDSpaceDelims = 1
 		let g:NERDTrimTrailingWhitespace = 1
@@ -185,31 +214,6 @@ call plug#begin('~/.vim/plugged')
 		let g:VM_maps["Select Cursor Down"] = '<Down>'      " start selecting down
 		let g:VM_maps["Select Cursor Up"]   = '<Up>'        " start selecting up
 
-
-	Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-		let g:Lf_WindowPosition = 'popup'
-		let g:Lf_PreviewInPopup = 1
-		let g:Lf_ShortcutF="<leader>ff"
-		let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2"}
-		let g:Lf_WildIgnore = {
-				\ 'dir': ['.svn','.git','.hg', 'node_modules', 'dist'],
-				\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]', 'package.json']
-				\}
-		nmap <leader>fb :<C-U><C-R>=printf("Leaderf! buffer %s", "")<CR><CR>
-		nmap <leader>fm :<C-U><C-R>=printf("Leaderf! mru --cwd %s", "")<CR><CR>
-		nmap <leader>fl :<C-U><C-R>=printf("Leaderf! line %s", "")<CR><CR>
-		nmap <leader>sc :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
-		xnoremap <leader>sv :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
-		nmap <leader>sl :<C-U>Leaderf! rg --recall<CR>
-		nmap <leader>ss :Leaderf rg -S<CR>
-		let g:Lf_GtagsAutoGenerate = 1
-		let g:Lf_Gtagslabel = 'native-pygments'
-		nmap gtg :Leaderf gtags --update<CR>
-		nmap gtd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-		nmap gtr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-
-
-	
     " show indent
     Plug 'Yggdroot/indentLine'
 	
@@ -269,12 +273,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'liuchengxu/vista.vim'
         let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 		let g:vista_default_executive = 'ctags'
-        let g:vista_fzf_preview = ['right:30%']
+        let g:vista_fzf_preview = ['right:70%']
 		let g:vista_ignore_kinds = ['variable']
 		let g:vista_sidebar_width = 40
         let g:vista#renderer#enable_icon = 1
 		let g:vista_echo_cursor_strategy = 'floating_win'
         nmap <silent> , :Vista!!<CR>
+		nmap <leader>st :Vista finder<CR>
 		autocmd BufEnter * if winnr("$") == 1 && vista#sidebar#IsVisible() | execute "normal! :q!\<CR>" | endif
 
     " snippets setup
@@ -297,7 +302,7 @@ call plug#begin('~/.vim/plugged')
 		let g:neoterm_fixedsize = '1'
 		let g:neoterm_autoscroll=1
 
-		nmap <leader>tn :Ttoggle<CR>
+		nmap <leader>tn :Ttoggle<CR>jk
 		nmap <leader>t<CR> :T<space>
 		nmap <leader>tl :<c-u>exec printf("%sTexec !! \<lt>cr>", v:count)<cr>
 		nmap <leader>tk :Tkill<CR>
@@ -358,6 +363,44 @@ call defx#custom#column('icon', {
 		\ 'opened_icon': '▾',
 		\ 'root_icon': ' ',
 		\ })
+
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+let $FZF_DEFAULT_OPTS = "--layout=reverse --color fg:230,bg:238,hl:65,fg+:15,bg+:234,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168"
+'
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+function! FloatingFZF()
+  let height = float2nr(40)
+  let width = float2nr(160)
+  let horizontal = float2nr((&columns - width) / 2)
+  let vertical = 1
+
+  let opts = {
+        \ 'relative': 'editor',
+        \ 'row': vertical,
+        \ 'col': horizontal,
+        \ 'width': width,
+        \ 'height': height,
+        \ 'style': 'minimal'
+        \ }
+
+  let buf = nvim_create_buf(v:false, v:true)
+  let win = nvim_open_win(buf, v:true, opts)
+
+  call setwinvar(win, '&winhl', 'Normal:Pmenu')
+
+  setlocal
+        \ buftype=nofile
+        \ nobuflisted
+        \ bufhidden=hide
+        \ nonumber
+        \ norelativenumber
+        \ signcolumn=no
+endfunction
+
+autocmd TermOpen,BufEnter term://* startinsert
+
 nmap + <C-w>+
 nmap - <C-w>-
 nmap <C-l> <C-w>>
