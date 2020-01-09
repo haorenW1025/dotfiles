@@ -23,8 +23,6 @@ call plug#begin('~/.vim/plugged')
 		nmap <leader>ss :Rg<CR>
 		nmap <leader>sc :Rg <c-r>=expand("<cword>")<CR><CR>
 
-		autocmd FileType fzf tmap <tab> <down>
-		autocmd FileType fzf tmap <s-tab> <up>
 
 		command! -bang -nargs=? -complete=dir Files
 			\ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:70%'), <bang>0)
@@ -413,7 +411,6 @@ function! CreateCenteredFloatingWindow()
     let opts.width -= 4
     call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
     autocmd BufWipeout <buffer> call CleanupBuffer(s:buf)
-    tnoremap <buffer> <silent> <Esc> <C-\><C-n><CR>:call DeleteUnlistedBuffers()<CR>
 endfunction
 
 function! CleanupBuffer(buf)
@@ -516,7 +513,6 @@ endif
 highlight TermCursor ctermfg=red guifg=red
 
 tnoremap <C-c> <C-\><C-n>
-tnoremap <C-k> <C-\><C-n><C-w>k
 
 augroup neovim_terminal
 	autocmd!
