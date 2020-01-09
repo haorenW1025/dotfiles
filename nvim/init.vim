@@ -12,8 +12,10 @@ call plug#begin('~/.vim/plugged')
 
 	Plug 'junegunn/fzf.vim'
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-		nmap <silent> <leader>ff :Files<cr>
+		nmap <leader>ff :Files<CR>
+		nmap <leader>fg :Gfiles<CR>
 		nmap <leader>fm :History<CR>
+		nmap <leader>fb :BD<CR>
 		nmap <leader>sn :Snippets<CR>
         nmap <leader><tab> <plug>(fzf-maps-n)
         xmap <leader><tab> <plug>(fzf-maps-x)
@@ -27,15 +29,36 @@ call plug#begin('~/.vim/plugged')
 		command! -bang -nargs=? -complete=dir Files
 			\ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:70%'), <bang>0)
 
+		command! -bang -nargs=? -complete=dir GFiles
+			\ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:70%'), <bang>0)
+
 		command! -bang -nargs=? -complete=dir History
 			\ call fzf#vim#history(fzf#vim#with_preview('right:70%'), <bang>0)
 
 		command! -bang -nargs=* Rg
 		\ call fzf#vim#grep(
-		\   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-		\   fzf#vim#with_preview('right:61%'), <bang>0)
+		\   'rg --max-columns=80 --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 2,
+		\   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:60%'),  <bang>0)
 
 		autocmd BufWinEnter,WinEnter term://* startinsert
+
+		let $FZF_DEFAULT_OPTS = "--layout=reverse --color fg:230,bg:238,hl:65,fg+:15,bg+:234,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168"
+		'
+		let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
+
+		function! Bufs()
+			redir => list
+			silent ls
+			redir END
+			return split(list, "\n")
+		endfunction
+
+		command! BD call fzf#run(fzf#wrap({
+		\ 'source': Bufs(),
+		\ 'sink*': { lines -> execute('bwipeout '.join(map(lines, {_, line -> split(line)[0]}))) },
+		\ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+		\ }))
+
 
 
 
@@ -344,6 +367,7 @@ call plug#begin('~/.vim/plugged')
 
 call plug#end()
 
+" defx
 call defx#custom#option('_', {
 		\ 'columns': 'indent:icon:git:icons:filename',
 		\ })
@@ -364,42 +388,82 @@ call defx#custom#column('icon', {
 		\ 'root_icon': ' ',
 		\ })
 
+" floating window
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_OPTS = "--layout=reverse --color fg:230,bg:238,hl:65,fg+:15,bg+:234,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168"
-'
-let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
-function! FloatingFZF()
-  let height = float2nr(40)
-  let width = float2nr(160)
-  let horizontal = float2nr((&columns - width) / 2)
-  let vertical = 1
+function! CreateCenteredFloatingWindow()
+    let width = float2nr(&columns * 0.8)
+    let height = float2nr(&lines * 0.8)
+    let top = ((&lines - height) / 2) - 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
 
-  let opts = {
-        \ 'relative': 'editor',
-        \ 'row': vertical,
-        \ 'col': horizontal,
-        \ 'width': width,
-        \ 'height': height,
-        \ 'style': 'minimal'
-        \ }
+    let top = "╭" . repeat("─", width - 2) . "╮"
+    let mid = "│" . repeat(" ", width - 2) . "│"
+    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let lines = [top] + repeat([mid], height - 2) + [bot]
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+    call nvim_open_win(s:buf, v:true, opts)
+    set winhl=Normal:Floating
+    let opts.row += 1
+    let opts.height -= 2
+    let opts.col += 2
+    let opts.width -= 4
+    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    autocmd BufWipeout <buffer> call CleanupBuffer(s:buf)
+    tnoremap <buffer> <silent> <Esc> <C-\><C-n><CR>:call DeleteUnlistedBuffers()<CR>
+endfunction
 
-  let buf = nvim_create_buf(v:false, v:true)
-  let win = nvim_open_win(buf, v:true, opts)
+function! CleanupBuffer(buf)
+    if bufexists(a:buf)
+        silent execute 'bwipeout! '.a:buf
+    endif
+endfunction
 
-  call setwinvar(win, '&winhl', 'Normal:Pmenu')
-
-  setlocal
-        \ buftype=nofile
-        \ nobuflisted
-        \ bufhidden=hide
-        \ nonumber
-        \ norelativenumber
-        \ signcolumn=no
+function! DeleteUnlistedBuffers()
+    for n in nvim_list_bufs()
+        if ! buflisted(n)
+            let name = bufname(n)
+            if name == '[Scratch]' ||
+              \ matchend(name, ":lazygit") ||
+              \ matchend(name, ":ranger") ||
+              \ matchend(name, ":tmuxinator-fzf-start.sh")
+                call CleanupBuffer(n)
+            endif
+        endif
+    endfor
 endfunction
 
 autocmd TermOpen,BufEnter term://* startinsert
+
+function! ToggleTerm(cmd)
+    if empty(bufname(a:cmd))
+        call CreateCenteredFloatingWindow()
+        call termopen(a:cmd, { 'on_exit': function('OnTermExit') })
+    else
+        call DeleteUnlistedBuffers()
+    endif
+endfunction
+
+" lazygit
+nnoremap <silent> <Leader>gt :call ToggleLazyGit()<CR>
+function! ToggleLazyGit()
+    call ToggleTerm('lazygit')
+endfunction
+
+nnoremap <silent> <Leader>rt :call ToggleRanger()<CR>
+function! ToggleRanger()
+    call ToggleTerm('ranger')
+endfunction
+
+function! OnTermExit(job_id, code, event) dict
+    if a:code == 0
+        call DeleteUnlistedBuffers()
+    endif
+endfunction
+
 
 nmap + <C-w>+
 nmap - <C-w>-
@@ -451,8 +515,8 @@ endif
 " Terminal settings
 highlight TermCursor ctermfg=red guifg=red
 
-tnoremap jj <C-\><C-n>
-tnoremap kk <C-\><C-n>
+tnoremap <C-c> <C-\><C-n>
+tnoremap <C-k> <C-\><C-n><C-w>k
 
 augroup neovim_terminal
 	autocmd!
@@ -461,9 +525,23 @@ augroup neovim_terminal
 	autocmd TermOpen * :set nonumber norelativenumber
 augroup END
 
-
-
-
+" set terminal colors
+let g:terminal_color_0  = '#333333'
+let g:terminal_color_1  = '#df9a98'
+let g:terminal_color_2  = '#3cc786'
+let g:terminal_color_3  = '#e0bb71'
+let g:terminal_color_4  = '#96bbdc'
+let g:terminal_color_5  = '#dfbdbc'
+let g:terminal_color_6  = '#97bcbc'
+let g:terminal_color_7  = '#d8d8d8'
+let g:terminal_color_8  = '#68727c'
+let g:terminal_color_9  = '#e07798'
+let g:terminal_color_10 = '#97bb98'
+let g:terminal_color_11 = '#ffdd98'
+let g:terminal_color_12 = '#badcfb'
+let g:terminal_color_13 = '#ffbebc'
+let g:terminal_color_14 = '#96ddde'
+let g:terminal_color_15 = '#e9e9e9'
 
 " folding
 set foldmethod=indent

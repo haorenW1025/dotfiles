@@ -7,3 +7,4 @@ ln -s -f $DIR ~/.config/nvim
 
 DIR="$PWD/starship.toml"
 ln -s -f $DIR ~/.config/starship.toml
+
