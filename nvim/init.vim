@@ -423,7 +423,8 @@ nmap <leader>qj <C-w>j:q<CR>
 nmap <leader>qh <C-w>h:q<CR>
 nmap <leader>qk <C-w>k:q<CR>
 nmap <leader>ql <C-w>l:q<CR>
-nmap <leader>tt :Tnew<CR>
+nmap <leader>tt :tabnew<CR>
+nmap <leader>= <c-w>=
 nmap <c-s> <c-a>
 set pumblend=20
 
