@@ -7,8 +7,10 @@ call plug#begin('~/.vim/plugged')
 	let maplocalleader = "="
     " themes
 	Plug 'junegunn/seoul256.vim'
+	Plug 'mhartington/oceanic-next'
 
 	Plug 'dhruvasagar/vim-table-mode'
+	Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 	Plug 'junegunn/fzf.vim'
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -560,6 +562,9 @@ set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=4 " the visible width of tabs
 set softtabstop=4 " edit as if the tabs are 4 characters wide
 set shiftwidth=4 " number of spaces to use for indent and unindent
+au BufNewFile,BufRead *.html,*.js,*.vue set tabstop=2
+au BufNewFile,BufRead *.html,*.js,*.vue set softtabstop=2
+au BufNewFile,BufRead *.html,*.js,*.vue set shiftwidth=2
 set shiftround " round indent to a multiple of 'shiftwidth'
 set nowrap
 set nolinebreak
@@ -606,12 +611,18 @@ set t_Co=256
 set ai
 set si
 let g:seoul256_background = 234
-colorscheme seoul256
+colorscheme OceanicNext
 hi Folded ctermbg=240 ctermfg=250 term=NONE cterm=bold gui=bold
 hi Visual ctermbg=245
 hi Comment cterm=italic term=italic gui=italic
 hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
 hi Pmenu guifg=lightgrey guibg=#4e4e4e ctermbg=239 ctermfg=lightgrey
+hi LineNr guifg=#71a9cc guibg=None
 hi Normal guibg=NONE ctermbg=None
+hi GitGutterAdd guibg=None
+hi GitGutterChange guibg=None
+hi GitGutterDelete guibg=None
+hi GitGutterChangeDelete guibg=None
 hi Directory ctermfg=red
 hi DefxIconsDirectory ctermfg=115 cterm=bold gui=bold
+hi EndOfBuffer guibg=None ctermbg=None
