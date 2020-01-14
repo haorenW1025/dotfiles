@@ -44,8 +44,6 @@ call plug#begin('~/.vim/plugged')
 		\   'rg --max-columns=80 --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 2,
 		\   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:60%'),  <bang>0)
 
-		autocmd BufWinEnter,WinEnter term://* startinsert
-
 		let $FZF_DEFAULT_OPTS = "--layout=reverse --color fg:230,bg:238,hl:65,fg+:15,bg+:234,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168"
 		'
 		let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
