@@ -6,8 +6,9 @@ call plug#begin('~/.vim/plugged')
     let mapleader = " "
 	let maplocalleader = "="
     " themes
-	Plug 'junegunn/seoul256.vim'
-	Plug 'mhartington/oceanic-next'
+	" Plug 'junegunn/seoul256.vim'
+	" Plug 'mhartington/oceanic-next'
+    Plug 'rakr/vim-one'
 
 	Plug 'dhruvasagar/vim-table-mode'
 	Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
@@ -24,8 +25,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'kristijanhusak/defx-git'
     " Defx icons
     Plug 'whz861025/defx-icons'
-    " syntax highlighting
 
+    " syntax highlighting
 	Plug 'sheerun/vim-polyglot'
 
 	Plug 'jiangmiao/auto-pairs'
@@ -64,25 +65,29 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-repeat'
 	Plug 'tpope/vim-abolish'
+    Plug 'tpope/vim-dispatch'
 
     " git wrapper
     Plug 'APZelos/blamer.nvim'
     Plug 'airblade/vim-gitgutter'
         let g:blamer_delay = 500
 
+    Plug 'lervag/vimtex'
+        let g:tex_flavor='latex'
+        let g:vimtex_view_method='zathura'
+        let g:vimtex_quickfix_mode=0
+        set conceallevel=1
+        let g:tex_conceal='abdmg'
 
-	Plug 'mg979/vim-visual-multi'
 
-    " show indent
-    Plug 'Yggdroot/indentLine'
-	
+
+    Plug 'dstein64/vim-startuptime'
 
     " language server : autocomplete, snippets support, goto action
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     " ctags support : show classes, function and more
     Plug 'liuchengxu/vista.vim'
-        let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 		let g:vista_default_executive = 'ctags'
         let g:vista_fzf_preview = ['right:70%']
 		let g:vista_ignore_kinds = ['variable']
@@ -100,6 +105,8 @@ call plug#begin('~/.vim/plugged')
         let g:ultisnips_python_style="google"
 		let g:UltiSnipsJumpForwardTrigger="jl"
 		let g:ultisnipsjumpbackwardtrigger="jh"
+
+    Plug 'psliwka/vim-smoothie'
 
 	Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for' : 'markdown' }
 
