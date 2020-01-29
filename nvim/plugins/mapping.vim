@@ -24,7 +24,7 @@ nmap <leader>ghu <Plug>(GitGutterUndoHunk)
 nmap <leader>ghs <Plug>(GitGutterStageHunk)
 
 " visual multi
-nmap  <Leader>m  <Plug>(VM-Mouse-Word)  
+nmap  <Leader>mw  <Plug>(VM-Mouse-Word)  
 let g:VM_maps = {}
 let g:VM_leader = "="
 let g:VM_maps["Select Cursor Down"] = '<Down>'      " start selecting down

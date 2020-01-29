@@ -34,8 +34,8 @@ function! DeleteUnlistedBuffers()
             let name = bufname(n)
             if name == '[Scratch]' ||
               \ matchend(name, ":lazygit") ||
-              \ matchend(name, ":ranger") ||
-              \ matchend(name, ":tmuxinator-fzf-start.sh")
+              \ matchend(name, ":lf") ||
+              \ matchend(name, ":zsh")
                 call CleanupBuffer(n)
             endif
         endif
@@ -59,9 +59,9 @@ function! ToggleLazyGit()
     call ToggleTerm('lazygit')
 endfunction
 
-nnoremap <silent> <Leader>rt :call ToggleRanger()<CR>
+nnoremap <silent> <Leader>lt :call ToggleRanger()<CR>
 function! ToggleRanger()
-    call ToggleTerm('ranger')
+    call ToggleTerm('lf')
 endfunction
 
 function! OnTermExit(job_id, code, event) dict

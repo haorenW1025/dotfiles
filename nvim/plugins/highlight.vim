@@ -1,5 +1,7 @@
 let g:seoul256_background = 234
-colorscheme OceanicNext
+let g:one_allow_italics = 1
+colorscheme one
+set background=dark
 hi Folded ctermbg=240 ctermfg=250 term=NONE cterm=bold gui=bold
 hi Visual ctermbg=245
 hi Comment cterm=italic term=italic gui=italic
@@ -8,7 +10,7 @@ hi TermCursor guifg=lightgrey
 hi TermCursorNC guifg=lightgrey
 hi NormalNC guifg=lightgrey
 hi Pmenu guifg=lightgrey guibg=#4e4e4e ctermbg=239 ctermfg=lightgrey
-hi LineNr guifg=#71a9cc guibg=None
+" hi LineNr guifg=#696969 guibg=None
 hi Normal guibg=NONE ctermbg=None
 hi GitGutterAdd guibg=None
 hi GitGutterChange guibg=None

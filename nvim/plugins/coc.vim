@@ -20,7 +20,6 @@ function! s:check_back_space() abort
 endfunction
 " mapping for goto function
 nmap <silent>gd <Plug>(coc-definition)
-nmap <silent>tgd call CocAction('jumpDefinition', 'tab')
 nmap <silent>gy <Plug>(coc-type-definition)
 nmap <silent>gi <Plug>(coc-implementation)
 nmap <silent>gr <Plug>(coc-references)
@@ -29,7 +28,7 @@ nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>/ :CocList words<cr>
 nmap <leader><leader>f  <Plug>(coc-format-selected)
-nmap <silent> <leader>rn :CocCommand document.renameCurrentWord
+nmap <silent> <leader>rn :CocCommand document.renameCurrentWord<CR>
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
                                             \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"

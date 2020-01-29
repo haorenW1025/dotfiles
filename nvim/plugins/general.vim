@@ -10,8 +10,6 @@ autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
 endif
 
 " Terminal settings
-highlight TermCursor ctermfg=red guifg=red
-
 tnoremap <C-c> <C-\><C-n>
 
 augroup neovim_terminal
@@ -59,6 +57,7 @@ cnoremap <c-p> <up>
 
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
 nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
+set conceallevel=0
 set termguicolors
 set complete=.,w,b,u,t,kspell
 set encoding=utf8
