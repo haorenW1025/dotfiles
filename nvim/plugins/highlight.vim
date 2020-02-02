@@ -1,4 +1,4 @@
-let g:seoul256_background = 234
+" let g:seoul256_background = 234
 let g:one_allow_italics = 1
 colorscheme one
 set background=dark
@@ -11,6 +11,7 @@ hi TermCursorNC guifg=lightgrey
 hi NormalNC guifg=lightgrey
 hi Pmenu guifg=lightgrey guibg=#4e4e4e ctermbg=239 ctermfg=lightgrey
 " hi LineNr guifg=#696969 guibg=None
+hi CursorColumn guibg=#495663
 hi Normal guibg=NONE ctermbg=None
 hi GitGutterAdd guibg=None
 hi GitGutterChange guibg=None
@@ -19,6 +20,7 @@ hi GitGutterChangeDelete guibg=None
 hi Directory ctermfg=red
 hi DefxIconsDirectory ctermfg=115 cterm=bold gui=bold
 hi EndOfBuffer guibg=None ctermbg=None
+hi StartifyHeader guifg=#3cb371
 " set terminal colors
 let g:terminal_color_0  = '#333333'
 let g:terminal_color_1  = '#df9a98'

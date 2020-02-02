@@ -1,5 +1,6 @@
 " coc config
 let g:coc_global_extensions = [
+\ 'coc-rls',
 \ 'coc-css',
 \ 'coc-python',
 \ 'coc-ultisnips',
@@ -26,7 +27,7 @@ nmap <silent>gr <Plug>(coc-references)
 nmap <silent> <leader>d  :CocList diagnostics<cr>
 nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>/ :CocList words<cr>
+nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader><leader>f  <Plug>(coc-format-selected)
 nmap <silent> <leader>rn :CocCommand document.renameCurrentWord<CR>
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -35,14 +36,16 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
 
 command! -nargs=0 Format :call CocAction('format')
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 nmap <leader>for :Format<CR>
 
 
-    function! s:show_documentation()
-        if (index(['vim','help'], &filetype) >= 0)
-            execute 'h '.expand('<cword>')
-        else
-            call CocAction('doHover')
-        endif
-    endfunction
+
+function! s:show_documentation()
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
+endfunction
 

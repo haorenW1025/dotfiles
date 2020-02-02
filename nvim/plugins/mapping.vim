@@ -1,8 +1,8 @@
 " fzf
 nmap <leader>ff :Files<CR>
-nmap <leader>fg :Gfiles<CR>
+nmap <leader>fg :GFiles<CR>
 nmap <leader>fm :History<CR>
-nmap <leader>fb :BD<CR>
+nmap <leader>fb :Buffer<CR>
 nmap <leader>sn :Snippets<CR>
 nmap <leader>ch :Chistory<CR>
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -23,12 +23,6 @@ nmap <leader>ghp <Plug>(GitGutterPreviewHunk)
 nmap <leader>ghu <Plug>(GitGutterUndoHunk)
 nmap <leader>ghs <Plug>(GitGutterStageHunk)
 
-" visual multi
-nmap  <Leader>mw  <Plug>(VM-Mouse-Word)  
-let g:VM_maps = {}
-let g:VM_leader = "="
-let g:VM_maps["Select Cursor Down"] = '<Down>'      " start selecting down
-let g:VM_maps["Select Cursor Up"]   = '<Up>'        " start selecting up
 
 " vista
 nmap <silent> , :Vista!!<CR>
@@ -62,10 +56,10 @@ nmap <leader>dc :GdbBreakpointClearAll<CR>
 nmap <leader>dd :GdbStart gdb -q<space> 
 nmap <leader>dp :GdbStartPDB python -m pdb<space>
 nmap <leader>db :GdbStartBashDB bashdb<space>
-
-nmap <leader>sh :A<CR>
-nmap <leader>vh :AV<CR>
-
+nmap [e  :<c-u>execute 'move -1-'. v:count1<cr>
+nmap ]e  :<c-u>execute 'move +'. v:count1<cr>
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
 nmap + <C-w>+
 nmap - <C-w>-
 nmap <C-l> <C-w>>
@@ -88,9 +82,13 @@ nmap <leader>qj <C-w>j:q<CR>
 nmap <leader>qh <C-w>h:q<CR>
 nmap <leader>qk <C-w>k:q<CR>
 nmap <leader>ql <C-w>l:q<CR>
-nmap <leader>tt :tabnew<CR>
 nmap <leader>= <c-w>=
 nmap <c-s> <c-a>
+
+nmap ]b :next
+nmap [b :bprevious
+nmap ]q :cnext
+nmap [q :cprevious
 
 
 inoremap jk <Esc>`^

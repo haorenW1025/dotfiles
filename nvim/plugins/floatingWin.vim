@@ -1,14 +1,14 @@
 
 function! CreateCenteredFloatingWindow()
-    let width = float2nr(&columns * 0.8)
-    let height = float2nr(&lines * 0.8)
+    let width = float2nr(&columns * 0.9)
+    let height = float2nr(&lines * 0.9)
     let top = ((&lines - height) / 2) - 1
     let left = (&columns - width) / 2
     let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
 
-    let top = "╭" . repeat("─", width - 2) . "╮"
+    let top = "┌" . repeat("─", width - 2) . "┐"
     let mid = "│" . repeat(" ", width - 2) . "│"
-    let bot = "╰" . repeat("─", width - 2) . "╯"
+    let bot = "└" . repeat("─", width - 2) . "┘"
     let lines = [top] + repeat([mid], height - 2) + [bot]
     let s:buf = nvim_create_buf(v:false, v:true)
     call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
@@ -54,14 +54,23 @@ function! ToggleTerm(cmd)
 endfunction
 
 " lazygit
-nnoremap <silent> <Leader>gt :call ToggleLazyGit()<CR>
+nnoremap <silent> <Leader>tg :call ToggleLazyGit()<CR>
 function! ToggleLazyGit()
     call ToggleTerm('lazygit')
 endfunction
 
-nnoremap <silent> <Leader>lt :call ToggleRanger()<CR>
-function! ToggleRanger()
+nnoremap <silent> <Leader>tt :call ToggleGotop()<CR>
+function! ToggleGotop()
+    call ToggleTerm('gotop')
+endfunction
+
+nnoremap <silent> <Leader>tl :call ToggleLf()<CR>
+function! ToggleLf()
     call ToggleTerm('lf')
+endfunction
+
+function! ToggleZsh()
+    call ToggleTerm('zsh')
 endfunction
 
 function! OnTermExit(job_id, code, event) dict

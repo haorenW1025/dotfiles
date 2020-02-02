@@ -6,3 +6,5 @@ autocmd Filetype markdown nnoremap  <leader>bmr :Dispatch! pandoc -t beamer --pd
 " c, cpp
 autocmd Filetype cpp nnoremap <leader>mk :Dispatch make<CR>
 autocmd Filetype c nnoremap <leader>mk :Dispatch make<CR>
+
+autocmd Filetype rust nnoremap <leader>rc :Dispatch cargo check<CR>

@@ -10,20 +10,19 @@ call plug#begin('~/.vim/plugged')
 	" Plug 'mhartington/oceanic-next'
     Plug 'rakr/vim-one'
 
-	Plug 'dhruvasagar/vim-table-mode'
 	Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 	Plug 'junegunn/fzf.vim'
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
 	Plug 'scrooloose/nerdcommenter'
 		let g:NERDSpaceDelims = 1
 		let g:NERDTrimTrailingWhitespace = 1
 		let g:NERDCompactSexyComs = 1
 
+    " Defx
 	Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-    " Defx git
     Plug 'kristijanhusak/defx-git'
-    " Defx icons
     Plug 'whz861025/defx-icons'
 
     " syntax highlighting
@@ -34,16 +33,20 @@ call plug#begin('~/.vim/plugged')
 
     " status line
 	Plug 'itchyny/lightline.vim'
+        function! CocCurrentFunction()
+            return get(b:, 'coc_current_function', '')
+        endfunction
         set showtabline=2
         let g:lightline = {
-            \ 'colorscheme': 'seoul256',
+            \ 'colorscheme': 'one',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [  'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
             \ },
             \ 'component_function': {
-            \   'gitbranch': 'fugitive#head',
-            \ }
+            \   'cocstatus': 'coc#status',
+            \   'currentfunction': 'CocCurrentFunction'
+            \ },
 			\ }
 
     " mark showing 
@@ -80,9 +83,6 @@ call plug#begin('~/.vim/plugged')
         let g:tex_conceal='abdmg'
 
 
-
-    Plug 'dstein64/vim-startuptime'
-
     " language server : autocomplete, snippets support, goto action
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -106,8 +106,6 @@ call plug#begin('~/.vim/plugged')
 		let g:UltiSnipsJumpForwardTrigger="jl"
 		let g:ultisnipsjumpbackwardtrigger="jh"
 
-    Plug 'psliwka/vim-smoothie'
-
 	Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for' : 'markdown' }
 
 	Plug 'kassio/neoterm'
@@ -120,9 +118,14 @@ call plug#begin('~/.vim/plugged')
 	" debugger integration
 	Plug 'sakhnik/nvim-gdb', {'do': ':!./install.sh \| UpdateRemotePlugins' }
 
-	" c/c++ specific 
-	" switch to header file
-	Plug 'whz861025/a.vim', {'for' : ['c', 'cpp']}
+    Plug 'psliwka/vim-smoothie'
+        let g:smoothie_base_speed = 20
+
+    Plug 'godlygeek/tabular'
+
+    Plug 'mhinz/vim-startify'
+
+    Plug 'enomsg/vim-haskellConcealPlus'
 
 	Plug 'kana/vim-textobj-user'
 	Plug 'kana/vim-textobj-indent'

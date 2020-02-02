@@ -1,3 +1,17 @@
+let g:fzf_colors =
+\ { 'fg':      ['bg', 'Normal'],
+\ 'bg':      ['bg', 'Normal'],
+\ 'hl':      ['fg', 'Comment'],
+\ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+\ 'bg+':     ['fg', 'CursorLine', 'CursorColumn'],
+\ 'hl+':     ['fg', 'Statement'],
+\ 'info':    ['fg', 'PreProc'],
+\ 'border':  ['fg', 'Ignore'],
+\ 'prompt':  ['fg', 'Conditional'],
+\ 'pointer': ['fg', 'Exception'],
+\ 'marker':  ['fg', 'Keyword'],
+\ 'spinner': ['fg', 'Label'],
+\ 'header':  ['fg', 'Comment']}
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:70%'), <bang>0)
@@ -16,20 +30,8 @@ command! -bang -nargs=* Rg
 \   'rg --max-columns=80 --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 2,
 \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:60%'),  <bang>0)
 
-let $FZF_DEFAULT_OPTS = "--layout=reverse --color fg:230,bg:238,hl:65,fg+:15,bg+:234,hl+:108 --color info:108,prompt:109,spinner:108,pointer:168,marker:168"
+let $FZF_DEFAULT_OPTS = "--layout=reverse"
 '
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 
-function! Bufs()
-    redir => list
-    silent ls
-    redir END
-    return split(list, "\n")
-endfunction
-
-command! BD call fzf#run(fzf#wrap({
-\ 'source': Bufs(),
-\ 'sink*': { lines -> execute('bwipeout '.join(map(lines, {_, line -> split(line)[0]}))) },
-\ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
-\ }))
 

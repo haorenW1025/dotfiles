@@ -19,6 +19,13 @@ augroup neovim_terminal
 	autocmd TermOpen * :set nonumber norelativenumber
 augroup END
 
+autocmd FileType text,markdown setlocal spell
+let g:tex_conceal = ""
+set dir^=$HOME/.config/nvim//storage/swaps//
+set undodir^=$HOME/.config/nvim/storage/undos//
+set backupdir^=$HOME/.config/nvim//storage/backups//
+
+
 
 " folding
 set foldmethod=indent
@@ -35,6 +42,7 @@ set cmdheight=2
 set updatetime=300
 set shortmess=atI
 set signcolumn=yes
+
 
 " tab
 set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
@@ -55,8 +63,6 @@ autocmd InsertEnter,WinLeave * set nocursorline
 cnoremap <c-n> <down>
 cnoremap <c-p> <up>
 
-nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
-nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
 set conceallevel=0
 set termguicolors
 set complete=.,w,b,u,t,kspell

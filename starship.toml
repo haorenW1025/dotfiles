@@ -33,8 +33,8 @@ prompt_order = [
 
 [username]
 show_always=true
-style_user="bold fg:#34ebe5"
-style_root="bold yellow"
+style_user="fg:#34ebe5"
+style_root="yellow"
 
 [hostname]
 style="fg:#34d3eb"
@@ -44,10 +44,10 @@ style="fg:#34eb80"
 truncation_length = 3
 
 [git_branch]
-style="bold fg:#ebd334"
+style="fg:#ebd334"
 
 [git_status]
-style="bold fg:e07798"
+style="fg:e07798"
 
 [character]
 symbol = "$"
@@ -56,7 +56,7 @@ style_failure="bold red"
 
 [time]
 disabled = false
-style="bold fg:#34ebdc"
+style="fg:#34ebdc"
 
 [jobs]
 symbol = "+ "
@@ -70,4 +70,26 @@ style = "bold red"
 threshold = 30
 style = "bold yellow"
 
+[python]
+disabled = true
 
+[package]
+disabled = true
+
+[ruby]
+disabled = true
+
+[rust]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[java]
+disabled = true
+
+[golang]
+disabled = true
+
+[aws]
+disabled = true
