@@ -21,6 +21,8 @@ hi Directory ctermfg=red
 hi DefxIconsDirectory ctermfg=115 cterm=bold gui=bold
 hi EndOfBuffer guibg=None ctermbg=None
 hi StartifyHeader guifg=#3cb371
+hi LightlineRight_active_0 guibg=#262626
+
 " set terminal colors
 let g:terminal_color_0  = '#333333'
 let g:terminal_color_1  = '#df9a98'

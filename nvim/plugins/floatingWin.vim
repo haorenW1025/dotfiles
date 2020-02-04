@@ -64,7 +64,7 @@ function! ToggleGotop()
     call ToggleTerm('gotop')
 endfunction
 
-nnoremap <silent> <Leader>tl :call ToggleLf()<CR>
+nnoremap <silent> <Leader>tf :call ToggleLf()<CR>
 function! ToggleLf()
     call ToggleTerm('lf')
 endfunction

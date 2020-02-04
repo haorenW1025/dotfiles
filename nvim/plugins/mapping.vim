@@ -23,15 +23,61 @@ nmap <leader>ghp <Plug>(GitGutterPreviewHunk)
 nmap <leader>ghu <Plug>(GitGutterUndoHunk)
 nmap <leader>ghs <Plug>(GitGutterStageHunk)
 
+" tabular
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+inoremap <silent> <Bar> <Bar><Esc>:Tabularize /<Bar><CR>a
+
 
 " vista
 nmap <silent> , :Vista!!<CR>
 nmap <leader>st :Vista finder<CR>
 
 nmap <leader>es :UltiSnipsEdit<CR>
+
+" terminal
+nmap <c-a>c :tabnew term://zsh<CR>i
+nmap <c-a>_ :vsplit term://zsh<CR>i
+nmap <c-a>- :split term://zsh<CR>i
+tmap <c-a>c <c-x>:tabnew term://zsh<CR>i
+tmap <c-a>_ <c-x>:vsplit term://zsh<CR>i
+tmap <c-a>- <c-x>:split term://zsh<CR>i
+
+function! ClosingTerminal()
+    let answer = confirm('closing this terminal?', "&Yes\n&No", 1)
+    if answer == 1
+        quit
+    endif
+endfunction
+nmap <c-a>k :call ClosingTerminal()<CR>
+tmap <c-a>k <c-x>:call ClosingTerminal()<CR>
+
+function! ClosingTab()
+    let answer = confirm('closing this tab?', "&Yes\n&No", 1)
+    if answer == 1
+        tabc
+    endif
+endfunction
+nmap <c-a>x :call ClosingTab()<CR>
+tmap <c-a>x <c-x>:call ClosingTab()<CR>
+
+nmap <c-a>1 1gt
+tmap <c-a>1 <c-x>1gt
+nmap <c-a>2 2gt
+tmap <c-a>2 <c-x>2gt
+nmap <c-a>3 3gt
+tmap <c-a>3 <c-x>3gt
+nmap <c-a>4 4gt
+tmap <c-a>4 <c-x>4gt
+nmap <c-a>5 5gt
+tmap <c-a>5 <c-x>5gt
+
+
 " neoterm
 nmap <leader>tn :Ttoggle<CR>jk
-nmap <leader>t<CR> :T<space>
+nmap <leader>t<CR> :Topen<CR>:T<space>
 nmap <leader>tl :<c-u>exec printf("%sTexec !! \<lt>cr>", v:count)<cr>
 nmap <leader>tk :Tkill<CR>
 nmap <leader>tq :Tclose<CR>

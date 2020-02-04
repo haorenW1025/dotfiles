@@ -10,7 +10,7 @@ autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
 endif
 
 " Terminal settings
-tnoremap <C-c> <C-\><C-n>
+tnoremap <C-x> <C-\><C-n>
 
 augroup neovim_terminal
 	autocmd!
@@ -20,6 +20,21 @@ augroup neovim_terminal
 augroup END
 
 autocmd FileType text,markdown setlocal spell
+au TermEnter * setlocal scrolloff=0
+au TermLeave * setlocal scrolloff=10
+autocmd VimEnter * if !empty($NVIM_LISTEN_ADDRESS) && $NVIM_LISTEN_ADDRESS !=# v:servername
+    \ |let g:r=jobstart(['nc', '-U', $NVIM_LISTEN_ADDRESS],{'rpc':v:true})
+    \ |let g:f=fnameescape(expand('%:p'))
+    \ |noau bwipe
+    \ |call rpcrequest(g:r, "nvim_command", "edit ".g:f)
+    \ |call rpcrequest(g:r, "nvim_command", "call lib#SetNumberDisplay()")
+    \ |qa
+    \ |endif
+autocmd FileType text,markdown
+    \ setlocal spell  |
+    \ set spelllang=en_gb |
+    \ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u |
+
 let g:tex_conceal = ""
 set dir^=$HOME/.config/nvim//storage/swaps//
 set undodir^=$HOME/.config/nvim/storage/undos//

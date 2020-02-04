@@ -125,8 +125,6 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'mhinz/vim-startify'
 
-    Plug 'enomsg/vim-haskellConcealPlus'
-
 	Plug 'kana/vim-textobj-user'
 	Plug 'kana/vim-textobj-indent'
 	Plug 'kana/vim-textobj-line'
