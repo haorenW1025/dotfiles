@@ -83,7 +83,7 @@ call defx#custom#option('_', {
 		\ })
 
 call defx#custom#option('_', {
-      \ 'winwidth': 40,
+      \ 'winwidth': 25,
       \ 'split': 'vertical',
       \ 'direction': 'topleft',
       \ 'show_ignored_files': 0,

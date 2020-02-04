@@ -28,7 +28,8 @@ nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
-inoremap <silent> <Bar> <Bar><Esc>:Tabularize /<Bar><CR>a
+nmap <Leader>a<bar> :Tabularize /<bar><CR>
+vmap <Leader>a<bar> :Tabularize /<bar><CR>
 
 
 " vista
@@ -38,21 +39,23 @@ nmap <leader>st :Vista finder<CR>
 nmap <leader>es :UltiSnipsEdit<CR>
 
 " terminal
+tnoremap <c-a>; <C-\><C-n>
+
 nmap <c-a>c :tabnew term://zsh<CR>i
 nmap <c-a>_ :vsplit term://zsh<CR>i
 nmap <c-a>- :split term://zsh<CR>i
-tmap <c-a>c <c-x>:tabnew term://zsh<CR>i
-tmap <c-a>_ <c-x>:vsplit term://zsh<CR>i
-tmap <c-a>- <c-x>:split term://zsh<CR>i
+tmap <c-a>c <c-a>;:tabnew term://zsh<CR>i
+tmap <c-a>_ <c-a>;:vsplit term://zsh<CR>i
+tmap <c-a>- <c-a>;:split term://zsh<CR>i
 
 function! ClosingTerminal()
     let answer = confirm('closing this terminal?', "&Yes\n&No", 1)
     if answer == 1
-        quit
+        bwipeout!
     endif
 endfunction
 nmap <c-a>k :call ClosingTerminal()<CR>
-tmap <c-a>k <c-x>:call ClosingTerminal()<CR>
+tmap <c-a>k <c-a>;:call ClosingTerminal()<CR>
 
 function! ClosingTab()
     let answer = confirm('closing this tab?', "&Yes\n&No", 1)
@@ -61,18 +64,18 @@ function! ClosingTab()
     endif
 endfunction
 nmap <c-a>x :call ClosingTab()<CR>
-tmap <c-a>x <c-x>:call ClosingTab()<CR>
+tmap <c-a>x <c-a>;:call ClosingTab()<CR>
 
 nmap <c-a>1 1gt
-tmap <c-a>1 <c-x>1gt
+tmap <c-a>1 <c-a>;1gt
 nmap <c-a>2 2gt
-tmap <c-a>2 <c-x>2gt
+tmap <c-a>2 <c-a>;2gt
 nmap <c-a>3 3gt
-tmap <c-a>3 <c-x>3gt
+tmap <c-a>3 <c-a>;3gt
 nmap <c-a>4 4gt
-tmap <c-a>4 <c-x>4gt
+tmap <c-a>4 <c-a>;4gt
 nmap <c-a>5 5gt
-tmap <c-a>5 <c-x>5gt
+tmap <c-a>5 <c-a>;5gt
 
 
 " neoterm
