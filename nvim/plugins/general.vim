@@ -10,7 +10,6 @@ autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
 endif
 
 " Terminal settings
-tnoremap <C-x> <C-\><C-n>
 
 augroup neovim_terminal
 	autocmd!
@@ -19,9 +18,9 @@ augroup neovim_terminal
 	autocmd TermOpen * :set nonumber norelativenumber
 augroup END
 
-autocmd FileType text,markdown setlocal spell
 au TermEnter * setlocal scrolloff=0
 au TermLeave * setlocal scrolloff=10
+
 autocmd VimEnter * if !empty($NVIM_LISTEN_ADDRESS) && $NVIM_LISTEN_ADDRESS !=# v:servername
     \ |let g:r=jobstart(['nc', '-U', $NVIM_LISTEN_ADDRESS],{'rpc':v:true})
     \ |let g:f=fnameescape(expand('%:p'))
@@ -33,6 +32,7 @@ autocmd VimEnter * if !empty($NVIM_LISTEN_ADDRESS) && $NVIM_LISTEN_ADDRESS !=# v
 autocmd FileType text,markdown
     \ setlocal spell  |
     \ set spelllang=en_gb |
+    \ setl noai nocin nosi inde= |
     \ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u |
 
 let g:tex_conceal = ""
