@@ -1,5 +1,13 @@
+#!/bin/sh
 # create config directory
 mkdir -p ~/.config
+
+if [[ -f "~/.config/zsh" ]]; then
+	git clone https://github.com/zdharma/fast-syntax-highlighting \
+		~/.config/zsh/fast-syntax-highlighting
+	git clone https://github.com/zsh-users/zsh-autosuggestions\
+		~/.config/zsh/zsh-autosuggestions
+fi
 
 # create symbolic link
 DIR="${PWD}/nvim"
