@@ -14,6 +14,7 @@ call plug#begin('~/.vim/plugged')
     " themes
 	" Plug 'junegunn/seoul256.vim'
 	" Plug 'mhartington/oceanic-next'
+    " Plug 'arcticicestudio/nord-vim'
     Plug 'rakr/vim-one'
 
 	Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
@@ -26,19 +27,11 @@ call plug#begin('~/.vim/plugged')
 		let g:NERDTrimTrailingWhitespace = 1
 		let g:NERDCompactSexyComs = 1
 
-    " Defx
-	Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'kristijanhusak/defx-git'
-    Plug 'whz861025/defx-icons'
-
     " syntax highlighting
 	Plug 'sheerun/vim-polyglot'
 
 	Plug 'jiangmiao/auto-pairs'
 		let g:AutoPairsShortcutFastWrap="jw"
-
-    " status line
-	Plug 'itchyny/lightline.vim'
 
 	" different color for parentheses
     Plug 'luochen1990/rainbow' 
@@ -48,7 +41,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-repeat'
 	Plug 'tpope/vim-abolish'
     Plug 'tpope/vim-dispatch'
-    Plug 'tpope/vim-speeddating', {'for': 'org'}
 
     " git wrapper
     Plug 'APZelos/blamer.nvim'
@@ -89,9 +81,7 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'rizzatti/dash.vim'
 
+    Plug 'haorenW1025/floatLf-nvim'
+
 call plug#end()
 
-
-for f in split(glob('~/.config/nvim/config/*.vim'), '\n')
-    exe 'source' f
-endfor
