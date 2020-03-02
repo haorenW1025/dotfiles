@@ -15,24 +15,16 @@ augroup neovim_terminal
 	autocmd!
 
 	" Disables number lines on terminal buffers
-	autocmd TermOpen * :set nonumber norelativenumber
+	autocmd TermOpen * :setl nonumber norelativenumber
 augroup END
 
 au TermEnter * setlocal scrolloff=0
-au TermLeave * setlocal scrolloff=10
+au TermLeave * setlocal scrolloff=5
 
-autocmd VimEnter * if !empty($NVIM_LISTEN_ADDRESS) && $NVIM_LISTEN_ADDRESS !=# v:servername
-    \ |let g:r=jobstart(['nc', '-U', $NVIM_LISTEN_ADDRESS],{'rpc':v:true})
-    \ |let g:f=fnameescape(expand('%:p'))
-    \ |noau bwipe
-    \ |call rpcrequest(g:r, "nvim_command", "edit ".g:f)
-    \ |call rpcrequest(g:r, "nvim_command", "call lib#SetNumberDisplay()")
-    \ |qa
-    \ |endif
 
 
 function! Osc52Yank()
-    let buffer=system('base64', @0)
+    let buffer=system('base64 -w0', @0)
     let buffer=substitute(buffer, "\n$", "", "")
     let buffer='\e]52;c;'.buffer.'\x07'
     silent exe "!echo -ne ".shellescape(buffer)." > ".shellescape($NVIM_TTY)
@@ -62,6 +54,7 @@ set backupdir^=$HOME/.config/nvim//storage/backups//
 set foldmethod=indent
 set foldlevelstart=99
 set foldlevel=99
+set nofoldenable
 autocmd BufWrite * mkview
 autocmd BufRead * silent! loadview
 
@@ -82,8 +75,7 @@ set tabstop=4 " the visible width of tabs
 set softtabstop=4 " edit as if the tabs are 4 characters wide
 set shiftwidth=4 " number of spaces to use for indent and unindent
 set expandtab
-autocmd filetype javascript,vue setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
-autocmd filetype lua setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+autocmd filetype lua,javascript,vue setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 set shiftround " round indent to a multiple of 'shiftwidth'
 set nowrap
 set nolinebreak

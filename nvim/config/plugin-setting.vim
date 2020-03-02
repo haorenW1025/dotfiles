@@ -1,57 +1,70 @@
-" coc config
-let g:coc_global_extensions = [
-\ 'coc-rls',
-\ 'coc-css',
-\ 'coc-python',
-\ 'coc-ultisnips',
-\ 'coc-json',
-\ 'coc-tsserver',
-\ 'coc-sh',
-\ ]
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+let g:asyncomplete_auto_popup = 1
+" lua << EOF
+  " do
+    " local default_callback = vim.lsp.callbacks["textDocument/publishDiagnostics"]
+    " local err, method, params, client_id
 
-" use tab for autocomplete
-inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-" mapping for goto function
-nmap <silent>gd <Plug>(coc-definition)
-nmap <silent>gy <Plug>(coc-type-definition)
-nmap <silent>gi <Plug>(coc-implementation)
-nmap <silent>gr <Plug>(coc-references)
-nmap <silent> <leader>d  :CocList diagnostics<cr>
-nmap <silent> [d <Plug>(coc-diagnostic-prev)
-nmap <silent> ]d <Plug>(coc-diagnostic-next)
-nmap <leader>ac  <Plug>(coc-codeaction)
-nmap <leader><leader>f  <Plug>(coc-format-selected)
-nmap <silent> <leader>rn :CocCommand document.renameCurrentWord<CR>
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : 
-                                            \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+    " vim.lsp.callbacks["textDocument/publishDiagnostics"] = function(...)
+      " err, method, params, client_id = ...
+      " if vim.api.nvim_get_mode().mode ~= "i" and vim.api.nvim_get_mode().mode ~= "ic" then
+        " publish_diagnostics()
+      " end
+    " end
 
-command! -nargs=0 Format :call CocAction('format')
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-nmap <leader>for :Format<CR>
+    " function publish_diagnostics()
+      " default_callback(err, method, params, client_id)
+    " end
+  " end
 
+  " local on_attach = function(_, bufnr)
+    " vim.api.nvim_command [[autocmd InsertLeave,BufEnter <buffer> lua publish_diagnostics()]]
+  " end
+" EOF
+
+lua require'nvim_lsp'.ccls.setup{on_attach=require'diagnostic'.on_attach}
+au Filetype c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
+lua require'nvim_lsp'.pyls.setup{on_attach=require'diagnostic'.on_attach}
+au Filetype python setl omnifunc=v:lua.vim.lsp.omnifunc
+lua require'nvim_lsp'.rust_analyzer.setup{on_attach=require'diagnostic'.on_attach}
+au Filetype rust setl omnifunc=v:lua.vim.lsp.omnifunc
+" lua require'nvim_lsp'.sumneko_lua.setup{on_attach=require'diagnostic'.on_attach}
+" au Filetype lua setl omnifunc=v:lua.vim.lsp.omnifunc
+lua require'nvim_lsp'.vimls.setup{on_attach=require'diagnostic'.on_attach}
+au Filetype vim setl omnifunc=v:lua.vim.lsp.omnifunc
+
+" autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()
+" autocmd CursorMoved * lua vim.lsp.util.show_line_diagnostics()
 
 
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:ale_python_pyls_executable = "/home/vagrant/.local/bin/pyls"
+let g:ale_lua_luac_executable = "/bin/luac"
 
 
-" dispatch
-let g:dispatch_no_maps = 1
+call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+    \   'name': 'omni',
+    \   'whitelist': ['python', 'c', 'cpp', 'rust', 'vim', 'lua'],
+    \   'completor': function('asyncomplete#sources#omni#completor'),
+    \ }))
+
+" call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+    " \ 'name': 'ultisnips',
+    " \ 'whitelist': ['*'],
+    " \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+    " \ }))
+
+" let g:asyncomplete_auto_completeopt=0
+set completeopt=menuone,noinsert,noselect
+
+
+" ALE
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
+
 
 " firenvim 
 " let fc['.*'] = { 'cmdline' : 'firenvim' }
@@ -102,7 +115,7 @@ command! -bang -nargs=* Rg
 
 let $FZF_DEFAULT_OPTS = "--layout=reverse"
 '
-let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
+let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow(0)' }
 
 " startify
 let g:startify_lists = [
@@ -144,38 +157,27 @@ if filereadable(expand('~/.cache/startify_bookmarks'))
     source ~/.cache/startify_bookmarks
 endif
 
-
-" status line
-set showtabline=2
-let g:lightline = {
-    \ 'colorscheme': 'one',
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
-    \ },
-    \ 'component_function': {
-    \   'cocstatus': 'coc#status',
-    \ },
-    \ }
-
+" NerdCommentor
+let g:NERDSpaceDelims = 1
+let g:NERDTrimTrailingWhitespace = 0
+let g:NERDCompactSexyComs = 1
 
 " polyglot
 " let g:polyglot_disabled = ['markdown']
+
+" autopair
+let g:AutoPairsShortcutFastWrap="jw"
+
+" Smoothie
+let g:smoothie_base_speed = 20
 
 " ultisnips
 let g:UltiSnipsSnippetDirectories = ["~/.vim/plugged/vim-snippets/UltiSnips/"]
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsExpandTrigger="<c-n>"
 let g:ultisnips_python_style="google"
-let g:UltiSnipsJumpForwardTrigger="<c-l>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-
-" neoterm
-let g:neoterm_shell = "zsh"
-let g:neoterm_default_mod="botright"
-let g:neoterm_size=15
-let g:neoterm_fixedsize = '1'
-let g:neoterm_autoscroll=1
+let g:UltiSnipsJumpForwardTrigger="<c-f>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 
 " vista
 let g:vista_default_executive = 'ctags'
@@ -188,13 +190,6 @@ let g:vista_ignore_kinds = ['variable', 'unknown']
       \ 'rust': 'coc',
       \ }
 autocmd BufEnter * if winnr('$') == 1  && &filetype ==# 'vista' | execute "normal! :q!\<CR>" | endif
-
-" vimtex
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
 
 " blamer
 let g:blamer_delay = 500
@@ -209,3 +204,9 @@ let g:rainbow_conf = {
 \	'operators': '_,_',
 \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
 \}
+
+" lens
+let g:lens#height_resize_max = 40
+let g:lens#height_resize_min = 10
+let g:lens#width_resize_max = 80
+let g:lens#width_resize_min = 20

@@ -5,10 +5,10 @@ prompt_order = [
     "directory",
     "time",
     "git_branch",
-    "git_commit",
-    "git_state",
-    "git_status",
-    "hg_branch",
+    # "git_commit",
+    # "git_state",
+    # "git_status",
+    # "hg_branch",
     "package",
     "dotnet",
     "golang",
@@ -37,10 +37,10 @@ style_user="fg:#34ebe5"
 style_root="yellow"
 
 [hostname]
-style="fg:#34d3eb"
+style="red"
 
 [directory]
-style="fg:#34eb80"
+style="green"
 truncation_length = 3
 
 [git_branch]
@@ -56,7 +56,7 @@ style_failure="bold red"
 
 [time]
 disabled = false
-style="fg:#34ebdc"
+style="fg:#ae81ff"
 
 [jobs]
 symbol = "+ "

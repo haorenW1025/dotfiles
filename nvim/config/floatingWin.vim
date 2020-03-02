@@ -1,5 +1,5 @@
 
-function! CreateCenteredFloatingWindow()
+function! CreateCenteredFloatingWindow(border)
     let width = float2nr(&columns * 0.9)
     let height = float2nr(&lines * 0.9)
     let top = ((&lines - height) / 2) - 1
@@ -11,14 +11,17 @@ function! CreateCenteredFloatingWindow()
     let bot = "╚" . repeat("═", width - 2) . "╝"
     let lines = [top] + repeat([mid], height - 2) + [bot]
     let s:buf = nvim_create_buf(v:false, v:true)
-    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
-    call nvim_open_win(s:buf, v:true, opts)
-    set winhl=Normal:Floating
+    if a:border == 0
+        call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
+        call nvim_open_win(s:buf, v:true, opts)
+        set winhl=Normal:Floating
+    endif
     let opts.row += 1
     let opts.height -= 2
     let opts.col += 2
     let opts.width -= 4
     call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    set winhl=Normal:Floating
     autocmd BufWipeout <buffer> call CleanupBuffer(s:buf)
 endfunction
 
@@ -44,9 +47,9 @@ function! DeleteUnlistedBuffers()
 endfunction
 
 
-function! ToggleTerm(cmd)
+function! ToggleBorderTerm(cmd)
     if empty(bufname(a:cmd))
-        call CreateCenteredFloatingWindow()
+        call CreateCenteredFloatingWindow(0)
         startinsert
         call termopen(a:cmd, { 'on_exit': function('OnTermExit') })
     else
@@ -54,30 +57,50 @@ function! ToggleTerm(cmd)
     endif
 endfunction
 
-" lazygit
+function! ToggleNoBorderTerm(cmd)
+    if empty(bufname(a:cmd))
+        call CreateCenteredFloatingWindow(1)
+        startinsert
+        call termopen(a:cmd, { 'on_exit': function('OnTermExit')})
+    else
+        call DeleteUnlistedBuffers()
+    endif
+endfunction
 
-nnoremap <silent> <Leader>tg :call ToggleLazyGit()<CR>
+" lazygit
+nnoremap <silent> <leader>tg :call ToggleLazyGit()<CR>
 function! ToggleLazyGit()
-    call ToggleTerm('lazygit')
+    call ToggleBorderTerm('lazygit')
 endfunction
 
 nnoremap <silent> <Leader>tt :call ToggleGotop()<CR>
 function! ToggleGotop()
-    call ToggleTerm('gotop')
+    call ToggleNoBorderTerm('gotop')
 endfunction
 
-nnoremap <silent> <Leader>tf :call ToggleLf()<CR>
+nnoremap <silent> <leader>tf :call ToggleLf()<CR>
+nnoremap <silent> <leader>cf :call ToggleLfCurrentFile()<CR>
+
+function! ToggleLfCurrentFile()
+    call ToggleNoBorderTerm('cd '.expand('%:p:h').' && lf')
+endfunction
+
 function! ToggleLf()
-    call ToggleTerm('lf')
+    call ToggleNoBorderTerm('lf')
 endfunction
 
 nnoremap <silent> <Leader>ts :call ToggleZsh()<CR>
 function! ToggleZsh()
-    call ToggleTerm('zsh')
+    call ToggleBorderTerm('zsh')
 endfunction
 
 function! OnTermExit(job_id, code, event) dict
     if a:code == 0
         call DeleteUnlistedBuffers()
     endif
+endfunction
+
+function! RefocusFloatingWin()
+    wincmd p
+    startinsert
 endfunction
