@@ -24,7 +24,7 @@ au TermLeave * setlocal scrolloff=5
 
 
 function! Osc52Yank()
-    let buffer=system('base64 -w0', @0)
+    let buffer=system('base64 ', @0)
     let buffer=substitute(buffer, "\n$", "", "")
     let buffer='\e]52;c;'.buffer.'\x07'
     silent exe "!echo -ne ".shellescape(buffer)." > ".shellescape($NVIM_TTY)

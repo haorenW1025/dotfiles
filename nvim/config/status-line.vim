@@ -3,13 +3,12 @@ set showtabline=2
 " Statusline colors
 hi Base guibg=None guifg=#212333
 hi Git guibg=#292d3e guifg=#929dcb
-hi Path guifg=#94b3a8 guibg=#242323 gui=bold
-hi PathSep guifg=#242323
-hi Filetype guibg=None guifg=#cccccc  gui=bold
-hi TotalLine guibg=None guifg=#89a19d gui=bold
-hi LineCol guibg=None guifg=#929dcb gui=bold
-hi TabLineSelSep gui=bold guifg=#c678dd
-hi TabLineSep guifg=#3e4452
+hi Path guifg=#e6e6e6 guibg=#4d4d4d gui=bold
+hi PathSep guifg=#4d4d4d
+hi Filetype guibg=None guifg=#8be9fd gui=bold
+hi LineCol guibg=None guifg=#e6e6e6 gui=bold
+hi TabLineSelSep gui=bold guifg=#ff92d0
+hi TabLineSep guifg=#4d4d4d
 " Get current mode
 let g:currentmode={
       \'n' : 'Normal ',
@@ -36,26 +35,26 @@ let g:currentmode={
 function! RedrawModeColors(mode)
   " Normal mode
   if a:mode == 'n'
-    hi Mode guibg=#98c379 guifg=#282c34 gui=bold
-    hi ModeSep guibg=None guifg=#98c379  gui=bold
+    hi Mode guibg=#50fa7b guifg=#282c34 gui=bold
+    hi ModeSep guibg=None guifg=#50fa7b gui=bold
   " Insert mode
   elseif a:mode == 'i'
-    hi Mode guibg=#61afef guifg=#282c34 gui=bold
-    hi ModeSep guibg=None guifg=#61afef   gui=bold
+    hi Mode guibg=#8be9fd guifg=#282c34 gui=bold
+    hi ModeSep guibg=None guifg=#8be9fd  gui=bold
   " Replace mode
   elseif a:mode == 'R'
   " Visual mode
   elseif a:mode == 'v' || a:mode == 'V' || a:mode == '^V'
-    hi Mode guibg=#c678dd guifg=#282c34 gui=bold
-    hi ModeSep guibg=None guifg=#c678dd    gui=bold
+    hi Mode guibg=#bd93f9 guifg=#282c34 gui=bold
+    hi ModeSep guibg=None guifg=#bd93f9   gui=bold
   " Command mode
   elseif a:mode == 'c'
-    hi Mode guibg=#d19a66 guifg=#282c34 gui=bold
-    hi ModeSep guibg=None guifg=#d19a66    gui=bold
+    hi Mode guibg=#f1fa8c guifg=#282c34 gui=bold
+    hi ModeSep guibg=None guifg=#f1fa8c   gui=bold
   " Terminal mode
   elseif a:mode == 't'
-    hi Mode guibg=#e06c75 guifg=#283c34 gui=bold
-    hi ModeSep guibg=None guifg=#e06c75    gui=bold
+    hi Mode guibg=#ff5555 guifg=#283c34 gui=bold
+    hi ModeSep guibg=None guifg=#ff5555   gui=bold
   endif
   " Return empty string so as not to display anything in the statusline
   return ''
@@ -81,16 +80,16 @@ endfunction
 " Check modified status
 function! CheckMod(modi)
   if a:modi == 1
-    hi Modi guifg=#d6d6d6  guibg=#424242
-    hi ModiSep guifg=#424242
+    hi Modi guifg=#282c34 guibg=#ff79c6 gui=bold
+    hi ModiSep guifg=#ff79c6
     hi Filename guifg=#8da189  guibg=#000000
     if expand('%:t') == ""
         return "No Name"
     endif
     return expand('%:t').'*'
   else
-    hi Modi guifg=#d6d6d6 guibg=#424242
-    hi ModiSep guifg=#424242
+    hi Modi guifg=#282c34 guibg=#ff79c6 gui=bold
+    hi ModiSep guifg=#ff79c6
     hi Filename guifg=#8da189 guibg=#000000
     if expand('%:t') == ""
         return "No Name"
@@ -106,6 +105,17 @@ function! WorkingDir()
     return fnamemodify(getcwd(), ":~:.")
 endfunction
 
+function! LspStatus() abort
+    if luaeval('vim.lsp.buf.server_ready()')
+        let l:error = luaeval("require'util'.buf_diagnostics_count(\"Error\")")
+        " echo "test"
+        let l:warning = luaeval("require'util'.buf_diagnostics_count(\"Warning\")")
+        return '%#LspDiagnosticsError# :'.l:error.' %#LspDiagnosticsWarning#⚡:'.l:warning
+    else
+        return ''
+    endif
+endfunction
+
 " Set active statusline
 function! ActiveLine()
   " Set empty statusline and colors
@@ -119,6 +129,11 @@ function! ActiveLine()
   let statusline .= "%#Mode# %{ModeCurrent()}"
   let statusline .= "%#ModeSep#"
 
+  let statusline .= " "
+  let statusline .= "%#PathSep#"
+  let statusline .= "%#Path# %{WorkingDir()} "
+  let statusline .= "%#PathSep#"
+
   " Current modified status and filename
   let statusline .= " "
   let statusline .= "%#ModiSep#"
@@ -126,10 +141,7 @@ function! ActiveLine()
   let statusline .= "%#ModiSep#"
 
   let statusline .= " "
-  let statusline .= "%#PathSep#"
-  let statusline .= "%#Path# %{WorkingDir()} "
-  let statusline .= "%#PathSep#"
-
+  let statusline .= '%#LineCol# '.LspStatus()
   let statusline .= "%#Base#"
 
   " Align items to right

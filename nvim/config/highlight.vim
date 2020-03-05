@@ -1,5 +1,5 @@
 " let g:seoul256_background = 234
-let g:one_allow_italics = 1
+" let g:one_allow_italics = 1
 set background=dark
 
 function! SelfDefinedHighlight() abort
@@ -26,29 +26,33 @@ function! SelfDefinedHighlight() abort
     hi EndOfBuffer guibg=None ctermbg=None
     hi StartifyHeader guifg=#3cb371
     hi Todo guifg=#00d6f2 guibg=None
-    hi TabLineSel gui=Bold guibg=#c678dd
-    hi TabLine guibg=#3e4452 guifg=#c7c7c7 gui=None
-    hi TabLineFill guibg=None
+    hi TabLineSel gui=Bold guibg=#ff92d0 guifg=#292929
+    hi TabLineSelSep gui=bold guifg=#ff92d0
+    hi TabLineSep guifg=#4d4d4d
+    hi TabLine guibg=#4d4d4d guifg=#c7c7c7 gui=None
+    hi TabLineFill guibg=None gui=None
+    hi LspDiagnosticsError guifg=#ff6c6b
+    hi LspDiagnosticsWarning guifg=#FF8C00
 endf
 
 autocmd ColorScheme * call SelfDefinedHighlight()
 
-colorscheme one
+colorscheme dracula
 
 " set terminal colors
-let g:terminal_color_0   = '#282c34'
-let g:terminal_color_1   = '#ff6c6b'
-let g:terminal_color_2   = '#98be65'
-let g:terminal_color_3   = '#ecbe7b'
-let g:terminal_color_4   = '#51afef'
-let g:terminal_color_5   = '#c678dd'
-let g:terminal_color_6   = '#46d9ff'
-let g:terminal_color_7   = '#bbc2cf'
-let g:terminal_color_8   = '#7c8f8f'
-let g:terminal_color_9   = '#ff5874'
-let g:terminal_color_10  = '#21c7a8'
-let g:terminal_color_11  = '#ecc48d'
-let g:terminal_color_12  = '#82aaff'
-let g:terminal_color_13  = '#ae81ff'
-let g:terminal_color_14  = '#7fdbca'
-let g:terminal_color_15  = '#d6deeb'
+let g:terminal_color_0   = '#000000'
+let g:terminal_color_1   = '#ff5555'
+let g:terminal_color_2   = '#50fa7b'
+let g:terminal_color_3   = '#f1fa8c'
+let g:terminal_color_4   = '#bd93f9'
+let g:terminal_color_5   = '#ff79c6'
+let g:terminal_color_6   = '#8be9fd'
+let g:terminal_color_7   = '#bfbfbf'
+let g:terminal_color_8   = '#4d4d4d'
+let g:terminal_color_9   = '#ff6e67'
+let g:terminal_color_10  = '#5af78e'
+let g:terminal_color_11  = '#f4f99d'
+let g:terminal_color_12  = '#caa9fa'
+let g:terminal_color_13  = '#ff92d0'
+let g:terminal_color_14  = '#9aedfe'
+let g:terminal_color_15  = '#e6e6e6'

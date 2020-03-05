@@ -8,7 +8,8 @@ call plug#begin('~/.vim/plugged')
     " themes
 	" Plug 'junegunn/seoul256.vim'
 	" Plug 'mhartington/oceanic-next'
-    Plug 'rakr/vim-one'
+	" Plug 'rakr/vim-one'
+	Plug 'dracula/vim', { 'as': 'dracula' }
 
     Plug 'junegunn/fzf.vim'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -63,6 +64,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'haorenW1025/term-nvim'
     Plug 'haorenW1025/floatLf-nvim'
     Plug 'haorenW1025/diagnostic-nvim'
+
+	Plug 'aklt/plantuml-syntax', {'for': 'plantuml'}
 call plug#end()
 
 for f in split(glob('~/.config/nvim/config/*.vim'), '\n')
