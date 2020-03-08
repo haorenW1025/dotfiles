@@ -26,11 +26,6 @@ function! SelfDefinedHighlight() abort
     hi EndOfBuffer guibg=None ctermbg=None
     hi StartifyHeader guifg=#3cb371
     hi Todo guifg=#00d6f2 guibg=None
-    hi TabLineSel gui=Bold guibg=#ff92d0 guifg=#292929
-    hi TabLineSelSep gui=bold guifg=#ff92d0
-    hi TabLineSep guifg=#4d4d4d
-    hi TabLine guibg=#4d4d4d guifg=#c7c7c7 gui=None
-    hi TabLineFill guibg=None gui=None
     hi LspDiagnosticsError guifg=#ff6c6b
     hi LspDiagnosticsWarning guifg=#FF8C00
 endf
@@ -56,3 +51,4 @@ let g:terminal_color_12  = '#caa9fa'
 let g:terminal_color_13  = '#ff92d0'
 let g:terminal_color_14  = '#9aedfe'
 let g:terminal_color_15  = '#e6e6e6'
+

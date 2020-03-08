@@ -2,51 +2,41 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 let g:asyncomplete_auto_popup = 1
-" lua << EOF
-  " do
-    " local default_callback = vim.lsp.callbacks["textDocument/publishDiagnostics"]
-    " local err, method, params, client_id
-
-    " vim.lsp.callbacks["textDocument/publishDiagnostics"] = function(...)
-      " err, method, params, client_id = ...
-      " if vim.api.nvim_get_mode().mode ~= "i" and vim.api.nvim_get_mode().mode ~= "ic" then
-        " publish_diagnostics()
-      " end
-    " end
-
-    " function publish_diagnostics()
-      " default_callback(err, method, params, client_id)
-    " end
-  " end
-
-  " local on_attach = function(_, bufnr)
-    " vim.api.nvim_command [[autocmd InsertLeave,BufEnter <buffer> lua publish_diagnostics()]]
-  " end
-" EOF
-
 lua require'nvim_lsp'.ccls.setup{on_attach=require'diagnostic'.on_attach}
 au Filetype c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
-lua require'nvim_lsp'.pyls.setup{on_attach=require'diagnostic'.on_attach}
+lua require'nvim_lsp'.pyls_ms.setup{on_attach=require'diagnostic'.on_attach}
 au Filetype python setl omnifunc=v:lua.vim.lsp.omnifunc
 lua require'nvim_lsp'.rust_analyzer.setup{on_attach=require'diagnostic'.on_attach}
 au Filetype rust setl omnifunc=v:lua.vim.lsp.omnifunc
-" lua require'nvim_lsp'.sumneko_lua.setup{on_attach=require'diagnostic'.on_attach}
-" au Filetype lua setl omnifunc=v:lua.vim.lsp.omnifunc
+lua <<EOF
+require'nvim_lsp'.sumneko_lua.setup{
+    on_attach=require'diagnostic'.on_attach;
+    log_level = vim.lsp.protocol.MessageType.Error;
+    settings = {
+        Lua = {
+            completion = {
+                keywordSnippet = "Disable";
+            };
+            runtime = {
+                version = "LuaJIT";
+            };
+        };
+    };
+}
+EOF
+au Filetype lua setl omnifunc=v:lua.vim.lsp.omnifunc
 lua require'nvim_lsp'.vimls.setup{on_attach=require'diagnostic'.on_attach}
 au Filetype vim setl omnifunc=v:lua.vim.lsp.omnifunc
 
 " autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()
 " autocmd CursorMoved * lua vim.lsp.util.show_line_diagnostics()
 
-
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-let g:ale_python_pyls_executable = "/home/vagrant/.local/bin/pyls"
-let g:ale_lua_luac_executable = "/bin/luac"
-
 
 call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
     \   'name': 'omni',
-    \   'whitelist': ['python', 'c', 'cpp', 'rust', 'vim', 'lua'],
+    \ 'whitelist': ['*'],
+    \ 'blacklist': ['c', 'cpp', 'html'],
     \   'completor': function('asyncomplete#sources#omni#completor'),
     \ }))
 
@@ -61,10 +51,20 @@ set completeopt=menuone,noinsert,noselect
 
 
 " ALE
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '⚡'
+" let g:ale_sign_column_always = 1
+" let g:ale_sign_error = '✗'
+" let g:ale_sign_warning = '⚡'
+let g:LspDiagnosticsErrorSign = ' '
+let g:LspDiagnosticsWarningSign = '⚡'
+let g:LspDiagnosticsInformationSign = 'I'
+let g:LspDiagnosticsHintSign = 'H'
 
+" diagnostic-nvim
+let g:diagnostic_enable_virtual_text = 0
+let g:diagnostic_virtual_text_prefix = ' '
+let g:diagnostic_trimmed_virtual_text = 30
+let g:space_before_virtual_text = 5
+let g:diagnostic_insert_delay = 1
 
 " firenvim 
 " let fc['.*'] = { 'cmdline' : 'firenvim' }
@@ -205,8 +205,15 @@ let g:rainbow_conf = {
 \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
 \}
 
+" FloatLf
+let g:floatLf_border = 1
+
+" colorizer
+" lua require'colorizer'.setup()
+
 " lens
 let g:lens#height_resize_max = 40
 let g:lens#height_resize_min = 10
 let g:lens#width_resize_max = 80
 let g:lens#width_resize_min = 20
+

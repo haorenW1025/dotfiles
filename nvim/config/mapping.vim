@@ -66,8 +66,6 @@ autocmd Filetype rust nnoremap <leader>rc :Dispatch cargo check<CR>
 tnoremap <c-a><CR> <C-\><C-n>
 
 nmap <c-n> :tabnew term://zsh<CR>
-nmap <c-v> :vnew<CR>
-nmap <c-x> :new<CR>
 " tmap <c-n> <c-a><CR>:tabnew term://zsh<CR>i
 tmap <c-a>v <c-a><CR>:vsplit term://zsh<CR>i
 tmap <c-a>x <c-a><CR>:split term://zsh<CR>i
