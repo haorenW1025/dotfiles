@@ -73,6 +73,11 @@ function! ToggleLazyGit()
     call ToggleBorderTerm('lazygit')
 endfunction
 
+nnoremap <silent> <leader>tc :call ToggleCalcurse()<CR>
+function! ToggleCalcurse()
+    call ToggleBorderTerm('calcurse')
+endfunction
+
 nnoremap <silent> <Leader>tt :call ToggleGotop()<CR>
 function! ToggleGotop()
     call ToggleNoBorderTerm('gotop')

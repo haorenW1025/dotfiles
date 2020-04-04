@@ -33,7 +33,7 @@ prompt_order = [
 
 [username]
 show_always=true
-style_user="fg:#34ebe5"
+style_user="yellow"
 style_root="yellow"
 
 [hostname]
@@ -56,7 +56,7 @@ style_failure="bold red"
 
 [time]
 disabled = false
-style="fg:#ae81ff"
+style="purple"
 
 [jobs]
 symbol = "+ "

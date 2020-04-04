@@ -53,9 +53,10 @@ nmap <leader>es :UltiSnipsEdit<CR>
 
 " Dispatch
 " pandoc
-autocmd Filetype markdown nnoremap  <leader>pdf :Dispatch pandoc -s -o %<.pdf % --pdf-engine=xelatex
-            \ --template eisvogel --listings --toc --number-sections<CR>
-autocmd Filetype markdown nnoremap  <leader>bmr :Dispatch pandoc -t beamer --pdf-engine=xelatex -o %<.pdf % <CR>
+autocmd Filetype markdown nnoremap  <leader>pdf <cmd>lua require'markdown'.convertFile()<CR>
+" autocmd Filetype markdown nnoremap  <leader>pdf :Dispatch pandoc -s -o %<.pdf % --pdf-engine=xelatex
+            " \ --template eisvogel --listings --toc --number-sections<CR>
+" autocmd Filetype markdown nnoremap  <leader>bmr :Dispatch pandoc -t beamer --pdf-engine=xelatex -o %<.pdf % <CR>
 
 " c, cpp
 autocmd Filetype cpp nnoremap <leader>mk :Dispatch make<CR>
@@ -173,6 +174,7 @@ nmap ]q :cnext<CR>
 nmap [q :cprevious<CR>
 
 
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 inoremap jk <Esc>`^
 inoremap JK <Esc>`^
 nmap <leader>n :noh<CR><Esc>

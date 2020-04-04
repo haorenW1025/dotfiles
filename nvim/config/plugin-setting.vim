@@ -1,16 +1,16 @@
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
-let g:asyncomplete_auto_popup = 1
-lua require'nvim_lsp'.ccls.setup{on_attach=require'diagnostic'.on_attach}
+luafile ~/.config/nvim/lua/callback.lua
+lua require'nvim_lsp'.clangd.setup{on_attach=require'on_attach'.on_attach}
 au Filetype c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
-lua require'nvim_lsp'.pyls_ms.setup{on_attach=require'diagnostic'.on_attach}
+lua require'nvim_lsp'.pyls_ms.setup{on_attach=require'on_attach'.on_attach}
 au Filetype python setl omnifunc=v:lua.vim.lsp.omnifunc
-lua require'nvim_lsp'.rust_analyzer.setup{on_attach=require'diagnostic'.on_attach}
+lua require'nvim_lsp'.rust_analyzer.setup{on_attach=require'on_attach'.on_attach}
 au Filetype rust setl omnifunc=v:lua.vim.lsp.omnifunc
 lua <<EOF
 require'nvim_lsp'.sumneko_lua.setup{
-    on_attach=require'diagnostic'.on_attach;
+    on_attach= require'on_attach'.on_attach;
     log_level = vim.lsp.protocol.MessageType.Error;
     settings = {
         Lua = {
@@ -22,38 +22,16 @@ require'nvim_lsp'.sumneko_lua.setup{
             };
         };
     };
-}
 EOF
 au Filetype lua setl omnifunc=v:lua.vim.lsp.omnifunc
-lua require'nvim_lsp'.vimls.setup{on_attach=require'diagnostic'.on_attach}
+lua require'nvim_lsp'.vimls.setup{on_attach=require'on_attach'.on_attach}
 au Filetype vim setl omnifunc=v:lua.vim.lsp.omnifunc
 
 " autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()
 " autocmd CursorMoved * lua vim.lsp.util.show_line_diagnostics()
 
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-    \   'name': 'omni',
-    \ 'whitelist': ['*'],
-    \ 'blacklist': ['c', 'cpp', 'html'],
-    \   'completor': function('asyncomplete#sources#omni#completor'),
-    \ }))
-
-" call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-    " \ 'name': 'ultisnips',
-    " \ 'whitelist': ['*'],
-    " \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-    " \ }))
-
-" let g:asyncomplete_auto_completeopt=0
 set completeopt=menuone,noinsert,noselect
 
-
-" ALE
-" let g:ale_sign_column_always = 1
-" let g:ale_sign_error = '✗'
-" let g:ale_sign_warning = '⚡'
 let g:LspDiagnosticsErrorSign = ' '
 let g:LspDiagnosticsWarningSign = '⚡'
 let g:LspDiagnosticsInformationSign = 'I'
@@ -66,19 +44,50 @@ let g:diagnostic_trimmed_virtual_text = 30
 let g:space_before_virtual_text = 5
 let g:diagnostic_insert_delay = 1
 
+" completion-nvim
+let g:completion_enable_snippet = 'UltiSnips'
+let g:completion_max_items = 10
+imap <c-j> <cmd>lua require'source'.prevCompletion()<CR>
+imap <c-k> <cmd>lua require'source'.nextCompletion()<CR>
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ completion#trigger_completion()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 " firenvim 
 " let fc['.*'] = { 'cmdline' : 'firenvim' }
-au BufEnter www.*.txt colorscheme one
 au BufEnter www.firecode.*.txt set filetype=cpp
-            \ | colorscheme one
+au BufEnter github.com_*.txt set filetype=markdown
 if exists('g:started_by_firenvim') && g:started_by_firenvim
     " general options
-    set laststatus=0
+    setl laststatus=0
+    setl showtabline=0
+    colorscheme nord
 endif
+function! s:IsFirenvimActive(event) abort
+  if !exists('*nvim_get_chan_info')
+    return 0
+  endif
+  let l:ui = nvim_get_chan_info(a:event.chan)
+  return has_key(l:ui, 'client') && has_key(l:ui.client, "name") &&
+      \ l:ui.client.name is# "Firenvim"
+endfunction
+
+function! OnUIEnter(event) abort
+  if s:IsFirenvimActive(a:event)
+    set laststatus=0
+  endif
+endfunction
+autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
 nnoremap <Esc><Esc> :call firenvim#focus_page()<CR>
 nnoremap <C-z> :call firenvim#hide_frame()<CR>
-
-
 
 " fzf
 let g:fzf_colors =
@@ -117,59 +126,16 @@ let $FZF_DEFAULT_OPTS = "--layout=reverse"
 '
 let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow(0)' }
 
-" startify
-let g:startify_lists = [
-        \ { 'type': 'files',     'header': ['   Most Recently Use']            },
-        \ { 'type': 'dir',       'header': ['   Most Recently Use in '. getcwd()] },
-        \ { 'type': 'sessions',  'header': ['   Sessions']       },
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ { 'type': 'commands',  'header': ['   Commands']       },
-        \ ]
-let g:startify_files_number = 5
-let g:startify_change_to_vcs_root = 1
-let g:startify_padding_left = 5
-let g:startify_session_autoload = 1
-
-
-let g:ascii = [
-\ 'MMMMMMMM               MMMMMMMMYYYYYYY       YYYYYYYVVVVVVVV           VVVVVVVVIIIIIIIIIIMMMMMMMM               MMMMMMMM',
-\ 'M:::::::M             M:::::::MY:::::Y       Y:::::YV::::::V           V::::::VI::::::::IM:::::::M             M:::::::M',
-\ 'M::::::::M           M::::::::MY:::::Y       Y:::::YV::::::V           V::::::VI::::::::IM::::::::M           M::::::::M',
-\ 'M:::::::::M         M:::::::::MY::::::Y     Y::::::YV::::::V           V::::::VII::::::IIM:::::::::M         M:::::::::M',
-\ 'M::::::::::M       M::::::::::MYYY:::::Y   Y:::::YYY V:::::V           V:::::V   I::::I  M::::::::::M       M::::::::::M',
-\ 'M:::::::::::M     M:::::::::::M   Y:::::Y Y:::::Y     V:::::V         V:::::V    I::::I  M:::::::::::M     M:::::::::::M',
-\ 'M:::::::M::::M   M::::M:::::::M    Y:::::Y:::::Y       V:::::V       V:::::V     I::::I  M:::::::M::::M   M::::M:::::::M',
-\ 'M::::::M M::::M M::::M M::::::M     Y:::::::::Y         V:::::V     V:::::V      I::::I  M::::::M M::::M M::::M M::::::M',
-\ 'M::::::M  M::::M::::M  M::::::M      Y:::::::Y           V:::::V   V:::::V       I::::I  M::::::M  M::::M::::M  M::::::M',
-\ 'M::::::M   M:::::::M   M::::::M       Y:::::Y             V:::::V V:::::V        I::::I  M::::::M   M:::::::M   M::::::M',
-\ 'M::::::M    M:::::M    M::::::M       Y:::::Y              V:::::V:::::V         I::::I  M::::::M    M:::::M    M::::::M',
-\ 'M::::::M     MMMMM     M::::::M       Y:::::Y               V:::::::::V          I::::I  M::::::M     MMMMM     M::::::M',
-\ 'M::::::M               M::::::M       Y:::::Y                V:::::::V         II::::::IIM::::::M               M::::::M',
-\ 'M::::::M               M::::::M    YYYY:::::YYYY              V:::::V          I::::::::IM::::::M               M::::::M',
-\ 'M::::::M               M::::::M    Y:::::::::::Y               V:::V           I::::::::IM::::::M               M::::::M',
-\ 'MMMMMMMM               MMMMMMMM    YYYYYYYYYYYYY                VVV            IIIIIIIIIIMMMMMMMM               MMMMMMMM',
-\ '', 
-\ '',
-\]
-let g:startify_custom_header = 'startify#center(g:ascii)'
-
-if filereadable(expand('~/.cache/startify_bookmarks'))
-    source ~/.cache/startify_bookmarks
-endif
-
 " NerdCommentor
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 0
 let g:NERDCompactSexyComs = 1
 
 " polyglot
-" let g:polyglot_disabled = ['markdown']
+let g:polyglot_disabled = ['v']
 
 " autopair
 let g:AutoPairsShortcutFastWrap="jw"
-
-" Smoothie
-let g:smoothie_base_speed = 20
 
 " ultisnips
 let g:UltiSnipsSnippetDirectories = ["~/.vim/plugged/vim-snippets/UltiSnips/"]
@@ -186,9 +152,6 @@ let g:vista_sidebar_width = 40
 let g:vista#renderer#enable_icon = 1
 let g:vista_echo_cursor_strategy = 'floating_win'
 let g:vista_ignore_kinds = ['variable', 'unknown']
-  let g:vista_executive_for = {
-      \ 'rust': 'coc',
-      \ }
 autocmd BufEnter * if winnr('$') == 1  && &filetype ==# 'vista' | execute "normal! :q!\<CR>" | endif
 
 " blamer
@@ -208,12 +171,9 @@ let g:rainbow_conf = {
 " FloatLf
 let g:floatLf_border = 1
 
-" colorizer
-" lua require'colorizer'.setup()
+let g:vim_markdown_conceal = 0
 
-" lens
-let g:lens#height_resize_max = 40
-let g:lens#height_resize_min = 10
-let g:lens#width_resize_max = 80
-let g:lens#width_resize_min = 20
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+let g:Hexokinase_highlighters = [ 'virtual' ]
 

@@ -1,6 +1,6 @@
 " floating window
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+set wildmode=longest:list,full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__,node_modules
 set pumblend=20
 
 if has("autocmd")
@@ -40,21 +40,17 @@ autocmd FileType text,markdown
     \ set spelllang=en_gb |
     \ setl noai nocin nosi inde= |
     \ setl smartindent |
+    \ setl conceallevel=0 |
     \ inoremap <C-c> <c-g>u<Esc>[s1z=`]a<c-g>u |
-    \ let b:coc_suggest_disable = 1
 
-let g:tex_conceal = ""
 set dir^=$HOME/.config/nvim//storage/swaps//
 set undodir^=$HOME/.config/nvim/storage/undos//
 set backupdir^=$HOME/.config/nvim//storage/backups//
-
-
 
 " folding
 set foldmethod=indent
 set foldlevelstart=99
 set foldlevel=99
-set nofoldenable
 autocmd BufWrite * mkview
 autocmd BufRead * silent! loadview
 
@@ -88,6 +84,8 @@ autocmd InsertEnter,WinLeave * set nocursorline
 cnoremap <c-n> <down>
 cnoremap <c-p> <up>
 
+set laststatus=2
+set showtabline=2
 set conceallevel=0
 set termguicolors
 set complete=.,w,b,u,t,kspell
@@ -105,7 +103,6 @@ set backspace=indent,eol,start
 set shellpipe=>
 set ruler
 set history=100
-set wildmode=list:longest:full
 set splitbelow splitright
 set wildmenu
 set ignorecase

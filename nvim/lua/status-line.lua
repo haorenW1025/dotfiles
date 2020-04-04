@@ -3,11 +3,11 @@ local icons = require 'devicon'
 local M = {}
 
 -- Different colors for mode
-local purple = '#bd93f9'
-local blue = '#8be9fd'
-local yellow = '#f1fa8c'
-local green = '#50fa7b'
-local red = '#ff5555'
+local purple = '#B48EAD'
+local blue = '#81A1C1'
+local yellow = '#EBCB8B'
+local green = '#A3BE8C'
+local red = '#BF616A'
 
 -- fg and bg
 local white_fg = '#e6e6e6'
@@ -176,8 +176,8 @@ local getTabLabel = function(n)
   return file_name
 end
 
-api.nvim_command('hi TabLineSel gui=Bold guibg=#ff92d0 guifg=#292929')
-api.nvim_command('hi TabLineSelSeparator gui=bold guifg=#ff92d0')
+api.nvim_command('hi TabLineSel gui=Bold guibg=#BF616A guifg=#292929')
+api.nvim_command('hi TabLineSelSeparator gui=bold guifg=#BF616A')
 api.nvim_command('hi TabLine guibg=#4d4d4d guifg=#c7c7c7 gui=None')
 api.nvim_command('hi TabLineSeparator guifg=#4d4d4d')
 api.nvim_command('hi TabLineFill guibg=None gui=None')
