@@ -8,10 +8,10 @@ lua require'nvim_lsp'.pyls_ms.setup{on_attach=require'on_attach'.on_attach}
 au Filetype python setl omnifunc=v:lua.vim.lsp.omnifunc
 lua require'nvim_lsp'.rust_analyzer.setup{on_attach=require'on_attach'.on_attach}
 au Filetype rust setl omnifunc=v:lua.vim.lsp.omnifunc
-lua <<EOF
+
+lua << EOF
 require'nvim_lsp'.sumneko_lua.setup{
     on_attach= require'on_attach'.on_attach;
-    log_level = vim.lsp.protocol.MessageType.Error;
     settings = {
         Lua = {
             completion = {
@@ -22,6 +22,7 @@ require'nvim_lsp'.sumneko_lua.setup{
             };
         };
     };
+}
 EOF
 au Filetype lua setl omnifunc=v:lua.vim.lsp.omnifunc
 lua require'nvim_lsp'.vimls.setup{on_attach=require'on_attach'.on_attach}
