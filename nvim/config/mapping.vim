@@ -81,8 +81,6 @@ tmap <c-a>K <c-a><CR><c-w>K
 tmap <c-a>H <c-a><CR><c-w>H
 tmap <c-a>L <c-a><CR><c-w>L
 
-nmap <c-a>L :+tabmove<cr>
-nmap <c-a>H :-tabmove<cr>
 
 function! ClosingTerminal()
     let answer = confirm('closing this terminal?', "&Yes\n&No", 1)
