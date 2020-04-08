@@ -70,8 +70,6 @@ nmap <c-n> :tabnew term://zsh<CR>
 " tmap <c-n> <c-a><CR>:tabnew term://zsh<CR>i
 tmap <c-a>v <c-a><CR>:vsplit term://zsh<CR>i
 tmap <c-a>x <c-a><CR>:split term://zsh<CR>i
-nmap <c-a>] :+tabmove<cr>
-nmap <c-a>[ :-tabmove<cr>
 tmap <c-a>] <c-a>:+tabmove<cr>
 tmap <c-a>[ <c-a>:-tabmove<cr>
 tmap ˙ <c-a><CR><c-w>h
@@ -172,6 +170,8 @@ nmap ]b :bnext<CR>
 nmap [b :bprevious<CR>
 nmap ]q :cnext<CR>
 nmap [q :cprevious<CR>
+nmap <leader>qq :ccl<CR>
+nmap <leader>qo :copen<CR>
 
 
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
