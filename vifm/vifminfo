@@ -1,0 +1,415 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'H
+	/home/vagrant/
+	..
+1585638333
+'b
+	/home/vagrant/bin/
+	..
+1585638333
+'h
+	/home/vagrant/
+	..
+1585638333
+
+# Bookmarks:
+
+# TUI:
+al
+q0
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/home/vagrant/.vim/plugged/ultisnips/after
+	..
+0
+d/home/vagrant/.vim/plugged/ultisnips
+	autoload
+2
+d/home/vagrant/.vim/plugged/ultisnips/autoload
+	..
+0
+d/home/vagrant/.vim/plugged/ultisnips
+	test_all.py
+28
+d/home/vagrant/.vim/plugged
+	ultisnips
+16
+d/home/vagrant/.vim/plugged/ultisnips
+	test_all.py
+28
+d/home/vagrant/.vim/plugged
+	ultisnips
+18
+d/home/vagrant/.vim/plugged/ultisnips
+	test
+14
+d/home/vagrant/.vim/plugged
+	ultisnips
+18
+d/home/vagrant/.vim
+	plugged
+4
+d/home/vagrant/.vim/plugged
+	completion-nvim
+3
+d/home/vagrant/.vim/plugged/completion-nvim
+	lua
+5
+d/home/vagrant/.vim/plugged/completion-nvim/lua
+	source.lua
+5
+d/home/vagrant/.vim/plugged/completion-nvim
+	lua
+5
+d/home/vagrant/.vim/plugged
+	completion-nvim
+3
+d/home/vagrant/.vim
+	plugged
+4
+d/home/vagrant
+	workplace
+30
+d/home/vagrant/workplace
+	bin_packing
+3
+d/home/vagrant/workplace/bin_packing
+	src
+7
+d/home/vagrant/workplace/bin_packing/src
+	main.cpp
+1
+d/home/vagrant/workplace/bin_packing
+	src
+7
+d/home/vagrant/workplace/bin_packing/src
+	main.cpp
+1
+d/home/vagrant/workplace/bin_packing
+	src
+7
+d/home/vagrant/workplace
+	bin_packing
+3
+d/home/vagrant
+	.vim
+19
+d/home/vagrant/.vim
+	completion-nvim
+1
+d/home/vagrant/.vim/completion-nvim
+	lua
+3
+d/home/vagrant/.vim/completion-nvim/lua
+	signature_help.lua
+4
+d/home/vagrant/.vim/completion-nvim
+	README.md
+6
+d/home/vagrant/.vim
+	completion-nvim
+1
+d/home/vagrant
+	.vim
+19
+d/home
+	vagrant
+1
+d/home/vagrant
+	.vim
+19
+d/home/vagrant/.vim
+	completion-nvim
+1
+d/home/vagrant
+	workplace
+30
+d/home/vagrant/workplace
+	bin_packing
+3
+d/home/vagrant/workplace/bin_packing
+	.git
+2
+d/home/vagrant/workplace/bin_packing/.git
+	..
+0
+d/home/vagrant/.vim/plugged
+	completion-nvim
+3
+d/home/vagrant/.vim/plugged/completion-nvim
+	lua
+5
+d/home/vagrant/.vim/plugged
+	completion-nvim
+3
+d/home/vagrant/workplace
+	rust
+5
+d/home/vagrant/workplace/rust
+	..
+0
+d/home/vagrant/workplace
+	partition
+4
+d/home/vagrant
+	.local
+10
+d/home/vagrant/.vim/plugged
+	completion-nvim
+3
+d/home/vagrant/.vim/plugged/completion-nvim
+	.luacheckrc
+8
+d/home/vagrant
+	.vim
+19
+d/home/vagrant/.vim
+	completion-nvim
+1
+d/home/vagrant
+	.vim
+19
+d/home/vagrant/.vim
+	completion-nvim
+1
+d/home/vagrant/.vim/completion-nvim
+	plugin
+4
+d/home/vagrant/.vim/completion-nvim/plugin
+	..
+0
+d/home/vagrant/.vim/completion-nvim
+	README.md
+6
+d/home/vagrant/.config
+	vifm
+9
+d/home/vagrant/.config/vifm
+	vifmrc
+6
+d/home/vagrant/workplace/vending-simple/reports
+	hw1.3.pdf
+2
+d/home/vagrant/workplace/vending-simple
+	reports
+3
+d/home/vagrant/workplace/vending-simple/reports
+	plot.vending-aig.png
+3
+d/home/vagrant/workplace/vending-simple
+	debug
+2
+d/home/vagrant/workplace/vending-simple/debug
+	sim-fixed.txt
+2
+d/home/vagrant/workplace/vending-simple
+	reports
+3
+d/home/vagrant/workplace/vending-simple/reports
+	plot.vending-aig.png
+3
+d/home/vagrant/workplace/vending-simple
+	vending.btor
+9
+d/home/vagrant/.vim/plugged/floatLf-nvim/autoload
+	floatLf.vim
+1
+d/home/vagrant/.vim/plugged/floatLf-nvim
+	README.md
+5
+d/home/vagrant/dotfiles/nvim/config
+	mapping.vim
+0
+d/home/vagrant/.vim/plugged/floatLf-nvim/lua
+	lf.lua
+1
+d/home/vagrant/.vim/plugged/floatLf-nvim/autoload
+	floatLf.vim
+1
+d/home/vagrant/.vim/plugged/floatLf-nvim
+	autoload
+2
+d/home/vagrant/.vim/plugged/floatLf-nvim/autoload
+	floatLf.vim
+1
+d/home/vagrant/.vim/plugged/floatLf-nvim
+	README.md
+5
+d/home/vagrant/.vim/plugged/completion-treesitter/lua
+	ts_complete.lua
+1
+d/home/vagrant/.vim/plugged/completion-nvim/lua
+	completion.lua
+2
+d/home/vagrant/.vim/plugged/completion-nvim
+	lua
+5
+d/home/vagrant/.vim/plugged
+	completion-treesitter
+4
+d/home/vagrant/.vim/plugged/completion-treesitter
+	lua
+4
+d/home/vagrant/.vim/plugged/completion-treesitter/lua
+	ts_complete.lua
+1
+d/home/vagrant/.vim/plugged/completion-treesitter
+	plugin
+5
+d/home/vagrant/.vim/plugged/completion-treesitter/plugin
+	..
+0
+d/home/vagrant/.vim/plugged/completion-treesitter
+	lua
+4
+d/home/vagrant/.vim/plugged/completion-treesitter/lua
+	ts_utils.lua
+4
+d/home/vagrant/.vim/plugged/completion-treesitter
+	lua
+4
+d/home/vagrant/.vim/plugged
+	completion-treesitter
+4
+d/home/vagrant/.vim/plugged/completion-treesitter
+	lua
+4
+d/home/vagrant/.vim/plugged
+	floatLf-nvim
+7
+d/home/vagrant/.vim/plugged/floatLf-nvim
+	lua
+3
+d/home/vagrant/.vim/plugged/floatLf-nvim/lua
+	lf.lua
+2
+d/home/vagrant/.vim/plugged/floatLf-nvim
+	autoload
+2
+d/home/vagrant/.vim/plugged/floatLf-nvim/autoload
+	floatLf.vim
+1
+d/home/vagrant/.vim/plugged/floatLf-nvim/lua
+	lf.lua
+2
+d/home/vagrant/.vim/plugged/floatLf-nvim
+	lua
+3
+d/home/vagrant/.vim/plugged
+	floatLf-nvim
+7
+d/home/vagrant/.vim/plugged/floatLf-nvim
+	lua
+3
+d/home/vagrant/.vim/plugged/floatLf-nvim/lua
+	lf.lua
+2
+d/home/vagrant/.vim/plugged/completion-nvim/lua/source
+	path.lua
+4
+d/home/vagrant/.vim/plugged/completion-nvim/lua
+	completion.lua
+2
+d/home/vagrant/.vim/plugged/completion-nvim
+	test.lua
+10
+d/home/vagrant/.vim/plugged/completion-nvim/lua/source
+	snippet.lua
+4
+d/home/vagrant/.vim/plugged/completion-nvim/lua
+	hover.lua
+3
+d
+
+# Right window history (oldest to newest):
+D/home/vagrant/.vim/plugged/completion-nvim
+	..
+0
+D
+
+# Command line history (oldest to newest):
+:cd ../..
+:help vifm-'previewprg'
+:.,$!kj
+:!z comp
+:!_zlua comple
+:cd ..
+:!~/.config/zsh/z.lua/z.lua com
+:!lua ~/.config/zsh/z.lua/z.lua -e com
+:!lua ~/.config/zsh/z.lua/z.lua -e comp
+:cd .vim/
+:Jump work
+:Jump
+:Jump com
+:qall
+:nvr README.md
+:!nvr README.md
+:nvr -p README.md
+:Jump vifm
+:Jump me $(nvr --serverlist) -cc 'LfFocusPrev'  -c 'LfRefocus'  $f 
+:!nvr 
+:nvr -l ts_output.txt
+:!nvr -t ts_output.txt
+:!nvr -p ts_output.txt
+:!nvr  --servername $(nvr --serverlist) -cc 'LfFocusPrev'  -c 'LfRefocus'  $f 
+:!nvr --servername $(nvr --serverlist) -cc 'LfFocusPrev'  -c 'LfRefocus'  -O $f 
+:!nvr --servername $(nvr --serverlist) -cc 'LfFocusPrev'  -c 'LfRefocus'  -p $f 
+:help vifm-%F
+:echo %c
+:help %c
+:help vifm-%C
+:!nvr  --servername $(nvr --serverlist) -cc 'LfFocusPrev'  -c 'LfRefocus'  $c 
+:!nvr -cc 'LfFocusPrev'  -c 'LfRefocus'  $c
+:!nvr -cc 'LfFocusPrev' -c 'LfRefocus'  $c
+:!nvr --servername $(nvr --serverlist) -cc 'LfFocusPrev'  -c 'LfRefocus'  -O $c 
+:!nvr  --servername $(nvr --serverlist) -cc 'LfFocusPrev'  -c 'LfRefocus'  $c
+:!nvr   -c 'LfRefocus'  -l $c 
+:!nvr   -c 'LfRefocus'  -l $c
+:!nvr   -c 'LfRefocus'  -l %c
+:!nvr   -c 'LfRefocus'  -p %c 
+:Jump float
+:!nvr   -c 'LfRefocus'  -O %c 
+:!nvr   -c 'LfRefocus'  -l %c 
+:!nvr --servername $(nvr --serverlist) -cc 'LfFocusPrev'  -c 'LfRefocus'  -O %c 
+:q
+:!nvr  --servername $(nvr --serverlist) -cc 'LfFocusPrev'  -c 'LfRefocus'  %c 
+
+# Search history (oldest to newest):
+/llkkkkkkkkkkkkk
+/wro
+/work
+/completlkkkkkkkkk
+/compl
+/wor
+/.vim
+
+# Prompt history (oldest to newest):
+
+# Local filter history (oldest to newest):
+
+# Registers:
+""/home/vagrant/.local/share/vifm/Trash/000_cat.lua
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+t/home/vagrant/.local/share/vifm/Trash/000_cat.lua
+	/home/vagrant/.vim/plugged/completion-nvim/lua/source/cat.lua
+
+# State:
+f
+i1
+[.0
+[F
+F
+I1
+].1
+]F
+s0
