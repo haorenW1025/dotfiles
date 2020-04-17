@@ -117,7 +117,7 @@ tmap <c-a>5 <c-a><CR>5gt
 " term-nvim
 nmap tt :TermToggle<CR>
 nmap t<CR> :TermSend<Space>
-nmap tl :TermSend !!<CR>
+nmap tl :TermSend !! <CR>
 nmap tk :TermKill<CR>
 nmap tc :TermSend clear<CR>
 autocmd FileType python nmap <buffer> <leader>tr :TermSend python %<CR>
