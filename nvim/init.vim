@@ -64,13 +64,11 @@ call plug#begin('~/.vim/plugged')
 
     " My Plugins
     Plug 'haorenW1025/completion-nvim'
+    Plug 'vigoux/completion-treesitter'
 	Plug 'haorenW1025/term-nvim'
     Plug 'haorenW1025/floatLf-nvim'
     Plug 'haorenW1025/diagnostic-nvim'
-    Plug 'haorenW1025/verilog-syntax'
 call plug#end()
-
-" set runtimepath+=~/.vim/completion-nvim
 
 for f in split(glob('~/.config/nvim/config/*.vim'), '\n')
     exe 'source' f

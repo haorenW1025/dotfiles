@@ -28,6 +28,29 @@ au Filetype lua setl omnifunc=v:lua.vim.lsp.omnifunc
 lua require'nvim_lsp'.vimls.setup{on_attach=require'on_attach'.on_attach}
 au Filetype vim setl omnifunc=v:lua.vim.lsp.omnifunc
 
+let g:completion_chain_complete_list = {
+            \ 'default' : {
+            \   'default': [
+            \       {'complete_items': ['lsp', 'snippet']},
+            \       {'mode': '<c-p>'},
+            \       {'mode': '<c-n>'}],
+            \   'comment': [],
+            \   'string' : [
+            \       {'complete_items': ['path']}]
+            \   },
+            \ 'markdown' : {
+            \   'default': [
+            \       {'mode': 'spel'}],
+            \   'comment': [],
+            \   },
+            \ 'verilog' : {
+            \   'default': [
+            \       {'complete_items': ['ts']},
+            \       {'mode': '<c-p>'},
+            \       {'mode': '<c-n>'}],
+            \   'comment': [],
+            \   }
+            \}
 " autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()
 " autocmd CursorMoved * lua vim.lsp.util.show_line_diagnostics()
 
@@ -48,6 +71,8 @@ let g:diagnostic_insert_delay = 1
 " completion-nvim
 let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_max_items = 10
+let g:completion_enable_auto_paren = 1
+let g:completion_timer_cycle = 200
 imap <c-j> <cmd>lua require'source'.prevCompletion()<CR>
 imap <c-k> <cmd>lua require'source'.nextCompletion()<CR>
 
@@ -133,7 +158,7 @@ let g:NERDTrimTrailingWhitespace = 0
 let g:NERDCompactSexyComs = 1
 
 " polyglot
-let g:polyglot_disabled = ['v']
+let g:polyglot_disabled = ['v', 'vlang']
 
 " autopair
 let g:AutoPairsShortcutFastWrap="jw"
@@ -170,7 +195,8 @@ let g:rainbow_conf = {
 \}
 
 " FloatLf
-let g:floatLf_border = 1
+let g:floatLf_border = 0
+let g:floatLf_exec = 'vifm'
 
 let g:vim_markdown_conceal = 0
 
@@ -178,3 +204,4 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 let g:Hexokinase_highlighters = [ 'virtual' ]
 
+au BufNewFile,BufRead *.v,*.vh,*.sv,*.svh,*.vs	set filetype=verilog

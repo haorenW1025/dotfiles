@@ -11,7 +11,7 @@ function! SelfDefinedHighlight() abort
     hi TermCursor guifg=lightgrey
     hi TermCursorNC guifg=lightgrey
     hi NormalNC guifg=lightgrey
-    hi Pmenu guifg=lightgrey guibg=#4e4e4e ctermbg=239 ctermfg=lightgrey
+    " hi Pmenu guifg=lightgrey guibg=#4e4e4e ctermbg=239 ctermfg=lightgrey
     hi Todo ctermfg=176 ctermbg=16 guifg=#00d6f2 guibg=None gui=bold
     " hi LineNr guifg=#696969 guibg=None
     hi CursorColumn guibg=#495663

@@ -1,12 +1,11 @@
 " lsp
 nnoremap <silent> gc <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> gc <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
-inoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> pd    <cmd>lua vim.lsp.buf.peek_definition()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> ]d :NextDiagnostic<CR>
 nnoremap <silent> [d :PrevDiagnostic<CR>
 nnoremap <silent> <leader>do :OpenDiagnostic<CR>
@@ -15,17 +14,17 @@ nnoremap <leader>dl <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
 " nmap <silent> ]d <Plug>(ale_next_wrap)
 
 " fzf
-nmap <leader>ff :Files<CR>
-nmap <leader>fg :GFiles<CR>
-nmap <leader>fm :History<CR>
-nmap <leader>fb :Buffer<CR>
-nmap <leader>sn :Snippets<CR>
-nmap <leader>ch :Chistory<CR>
+nmap ,f :Files<CR>
+nmap ,g :GFiles<CR>
+nmap ,m :History<CR>
+nmap ,b :Buffer<CR>
+nmap ,s :Snippets<CR>
+nmap ,c :Chistory<CR>
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
-nmap <leader>ss :Rg<CR>
-nmap <leader>sc :Rg <c-r>=expand("<cword>")<CR><CR>
+nmap ,ss :Rg<CR>
+nmap ,sc :Rg <c-r>=expand("<cword>")<CR><CR>
 
 
 " git
@@ -67,6 +66,8 @@ autocmd Filetype rust nnoremap <leader>rc :Dispatch cargo check<CR>
 tnoremap <c-a><CR> <C-\><C-n>
 
 nmap <c-n> :tabnew term://zsh<CR>
+nmap <c-a>v :vsplit term://zsh<CR>i
+nmap <c-a>x :split term://zsh<CR>i
 " tmap <c-n> <c-a><CR>:tabnew term://zsh<CR>i
 tmap <c-a>v <c-a><CR>:vsplit term://zsh<CR>i
 tmap <c-a>x <c-a><CR>:split term://zsh<CR>i
@@ -97,8 +98,6 @@ function! ClosingTab()
         tabc
     endif
 endfunction
-nmap <c-a>x :call ClosingTab()<CR>
-tmap <c-a>x <c-a><CR>:call ClosingTab()<CR>
 
 nmap } gt
 nmap { gT
