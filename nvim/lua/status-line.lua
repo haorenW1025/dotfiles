@@ -1,6 +1,9 @@
 local api = vim.api
 local icons = require 'devicon'
+local session = require 'abduco'
 local M = {}
+
+session.abduco_session()
 
 -- Different colors for mode
 local purple = '#B48EAD'
@@ -198,6 +201,10 @@ function M.TabLine()
       tabline = tabline.."%#TabLine# "..file_name
       tabline = tabline.." %#TabLineSeparator#"..right_separator
     end
+  end
+  tabline = tabline.."%="
+  if session.data ~= nil then
+    tabline = tabline..session.data
   end
   return tabline
 end
