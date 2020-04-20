@@ -30,6 +30,9 @@ function! SelfDefinedHighlight() abort
     hi LineNr guibg=None guifg=#7c8f8f
     hi LspDiagnosticsError guifg=#ff6c6b
     hi LspDiagnosticsWarning guifg=#FF8C00
+    hi QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+    hi QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
 endf
 
 autocmd ColorScheme * call SelfDefinedHighlight()

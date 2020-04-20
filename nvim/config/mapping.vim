@@ -178,7 +178,6 @@ nmap <leader>n :noh<CR><Esc>
 nmap x "_dl
 nmap <leader>so :source ~/.config/nvim/init.vim<CR>
 nmap <leader>cof :e ~/.config/nvim/init.vim<CR>
-nmap <leader>et :e ~/org/todo.org<CR>
 nmap <leader>wo <C-w>o
 nmap <leader>bc :bd<CR>
 nmap <leader>w :w<CR>

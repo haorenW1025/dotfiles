@@ -4,8 +4,8 @@ inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 luafile ~/.config/nvim/lua/callback.lua
 lua require'nvim_lsp'.clangd.setup{on_attach=require'on_attach'.on_attach}
 au Filetype c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
-lua require'nvim_lsp'.pyls_ms.setup{on_attach=require'on_attach'.on_attach}
-au Filetype python setl omnifunc=v:lua.vim.lsp.omnifunc
+" lua require'nvim_lsp'.pyls_ms.setup{on_attach=require'on_attach'.on_attach}
+" au Filetype python setl omnifunc=v:lua.vim.lsp.omnifunc
 lua require'nvim_lsp'.rust_analyzer.setup{on_attach=require'on_attach'.on_attach}
 au Filetype rust setl omnifunc=v:lua.vim.lsp.omnifunc
 
@@ -166,10 +166,10 @@ let g:AutoPairsShortcutFastWrap="jw"
 " ultisnips
 let g:UltiSnipsSnippetDirectories = ["~/.vim/plugged/vim-snippets/UltiSnips/"]
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsExpandTrigger="<c-n>"
+let g:UltiSnipsExpandTrigger="jl"
 let g:ultisnips_python_style="google"
-let g:UltiSnipsJumpForwardTrigger="<c-f>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsJumpForwardTrigger="jl"
+let g:UltiSnipsJumpBackwardTrigger="jh"
 
 " vista
 let g:vista_default_executive = 'ctags'
