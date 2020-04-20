@@ -142,8 +142,7 @@ function M.activeLine()
   -- Component: FileType
   -- Component: row and col
   local line = api.nvim_call_function('line', {"."})
-  local col = api.nvim_call_function('col', {"."})
-  statusline = statusline.."%#Line# Ln "..line.." Col "..col.." "
+  statusline = statusline.."%#Line# Ln "..line
 
   return statusline
 end
@@ -204,7 +203,9 @@ function M.TabLine()
   end
   tabline = tabline.."%="
   if session.data ~= nil then
-    tabline = tabline..session.data
+    tabline = tabline.."%#TabLineSeparator# "..left_separator
+    tabline = tabline.."%#TabLine# session: "..session.data
+    tabline = tabline.." %#TabLineSeparator#"..right_separator
   end
   return tabline
 end

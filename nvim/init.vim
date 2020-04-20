@@ -38,9 +38,6 @@ call plug#begin('~/.vim/plugged')
     " language server : autocomplete, snippets support, goto action, diagnostics
     Plug 'neovim/nvim-lsp'
 
-    " ctags support : show classes, function and more
-    Plug 'liuchengxu/vista.vim'
-
     " snippets setup
     Plug 'SirVer/ultisnips'
     Plug 'haorenW1025/vim-snippets'

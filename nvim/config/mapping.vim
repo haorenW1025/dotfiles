@@ -15,16 +15,18 @@ nnoremap <leader>dl <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
 
 " fzf
 nmap ,f :Files<CR>
+nmap ,h :FZF ~<CR>
 nmap ,g :GFiles<CR>
 nmap ,m :History<CR>
 nmap ,b :Buffer<CR>
-nmap ,s :Snippets<CR>
+nmap ,sn :Snippets<CR>
 nmap ,c :Chistory<CR>
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
-nmap ,ss :Rg<CR>
+nmap ,ss :Rg<space>
 nmap ,sc :Rg <c-r>=expand("<cword>")<CR><CR>
+nmap ,sl :Rg<UP><CR>
 
 
 " git
