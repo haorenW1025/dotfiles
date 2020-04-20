@@ -87,6 +87,10 @@ inoremap <silent><expr> <TAB>
   \ completion#trigger_completion()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+" treesitter-nvim
+set foldexpr=completion_treesitter#foldexpr()
+set foldmethod=expr
+
 " firenvim 
 " let fc['.*'] = { 'cmdline' : 'firenvim' }
 au BufEnter www.firecode.*.txt set filetype=cpp

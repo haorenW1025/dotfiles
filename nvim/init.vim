@@ -12,7 +12,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'arcticicestudio/nord-vim'
 
     Plug 'junegunn/fzf.vim'
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf', { 'dir': '~/packages/fzf', 'do': './install --all' }
 
 	Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 

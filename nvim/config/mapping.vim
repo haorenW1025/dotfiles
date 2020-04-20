@@ -135,6 +135,8 @@ nmap \ :LfToggle<CR>
 nmap <leader>\ :LfToggleCurrentBuf<CR>
 let g:floatLf_lf_close = '\'
 
+" fold
+nmap <leader><leader> za
 
 " leetcode cli
 nmap <localleader>lt :T leetcode test %<CR>
