@@ -5,10 +5,6 @@ set number
 call plug#begin('~/.vim/plugged') 
     let mapleader = " "
     let maplocalleader = ","
-    " themes
-	" Plug 'junegunn/seoul256.vim'
-	" Plug 'mhartington/oceanic-next'
-	" Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'arcticicestudio/nord-vim'
 
     Plug 'junegunn/fzf.vim'
@@ -32,7 +28,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-obsession'
 
     " git wrapper
-    Plug 'APZelos/blamer.nvim'
     Plug 'airblade/vim-gitgutter'
 
     " language server : autocomplete, snippets support, goto action, diagnostics
@@ -42,8 +37,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'SirVer/ultisnips'
     Plug 'haorenW1025/vim-snippets'
 
+    " utility plugins
     Plug 'psliwka/vim-smoothie'
-
     Plug 'Yggdroot/indentLine'
 
     " alignment plugin
@@ -51,17 +46,18 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'kana/vim-textobj-user'
 	Plug 'Julian/vim-textobj-variable-segment'
-    Plug 'jeetsukumaran/vim-indentwise'
+    Plug 'justinmk/vim-sneak'
 
-    Plug 'unblevable/quick-scope'
-    Plug 'machakann/vim-swap'
-
+    Plug 'sgur/vim-editorconfig'
     " colorizer
-    Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+    Plug 'norcalli/nvim-colorizer.lua'
+
+    " tree-sitter
+    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'vigoux/completion-treesitter'
 
     " My Plugins
     Plug 'haorenW1025/completion-nvim'
-    Plug 'vigoux/completion-treesitter'
 	Plug 'haorenW1025/term-nvim'
     Plug 'haorenW1025/floatLf-nvim'
     Plug 'haorenW1025/diagnostic-nvim'
