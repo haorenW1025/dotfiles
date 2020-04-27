@@ -69,6 +69,7 @@ let g:space_before_virtual_text = 5
 let g:diagnostic_insert_delay = 1
 
 " completion-nvim
+let g:completion_auto_change_source = 1
 let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_max_items = 10
 let g:completion_enable_auto_paren = 1
@@ -176,18 +177,6 @@ let g:ultisnips_python_style="google"
 let g:UltiSnipsJumpForwardTrigger="jl"
 let g:UltiSnipsJumpBackwardTrigger="jh"
 
-" vista
-let g:vista_default_executive = 'ctags'
-let g:vista_fzf_preview = ['right:70%']
-let g:vista_sidebar_width = 40
-let g:vista#renderer#enable_icon = 1
-let g:vista_echo_cursor_strategy = 'floating_win'
-let g:vista_ignore_kinds = ['variable', 'unknown']
-autocmd BufEnter * if winnr('$') == 1  && &filetype ==# 'vista' | execute "normal! :q!\<CR>" | endif
-
-" blamer
-let g:blamer_delay = 500
-
 " rainbow
 let g:rainbow_active = 1
 let g:rainbow_conf = {
@@ -199,14 +188,24 @@ let g:rainbow_conf = {
 \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
 \}
 
+" editor config
+let g:editorconfig_blacklist = {
+    \ 'filetype': ['git.*', 'fugitive'],
+    \ 'pattern': ['\.un~$']}
+
 " FloatLf
 let g:floatLf_border = 0
 let g:floatLf_exec = 'vifm'
 
 let g:vim_markdown_conceal = 0
 
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" sneak
+let g:sneak#s_next = 1
+highlight Sneak guifg=black guibg=#81A1C1 ctermfg=black ctermbg=red
+highlight SneakScope guifg=red guibg=green ctermfg=red ctermbg=yellow
 
-let g:Hexokinase_highlighters = [ 'virtual' ]
+
+
+lua require'colorizer'.setup()
 
 au BufNewFile,BufRead *.v,*.vh,*.sv,*.svh,*.vs	set filetype=verilog
