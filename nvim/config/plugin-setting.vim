@@ -73,6 +73,7 @@ let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_max_items = 10
 let g:completion_enable_auto_paren = 1
 let g:completion_timer_cycle = 200
+let g:completion_auto_change_source = 1
 imap <c-j> <cmd>lua require'source'.prevCompletion()<CR>
 imap <c-k> <cmd>lua require'source'.nextCompletion()<CR>
 
