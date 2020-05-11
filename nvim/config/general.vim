@@ -19,12 +19,58 @@ augroup neovim_terminal
 augroup END
 
 au TermEnter * setlocal scrolloff=0
+au TermEnter * setlocal scrollback=1000
 au TermLeave * setlocal scrolloff=5
 
+command! -nargs=+ -complete=dir -bar Grep lua require'grep'.asyncGrep(<q-args>)
+
+function! s:hlyank(operator, regtype, inclusive) abort
+    if a:operator !=# 'y' || a:regtype ==# ''
+        return
+    endif
+
+    let bnr = bufnr('%')
+    let ns = nvim_create_namespace('')
+    call nvim_buf_clear_namespace(bnr, ns, 0, -1)
+
+    let [_, lin1, col1, off1] = getpos("'[")
+    let [lin1, col1] = [lin1 - 1, col1 - 1]
+    let [_, lin2, col2, off2] = getpos("']")
+    let [lin2, col2] = [lin2 - 1, col2 - (a:inclusive ? 0 : 1)]
+    for l in range(lin1, lin1 + (lin2 - lin1))
+        let is_first = (l == lin1)
+        let is_last = (l == lin2)
+        let c1 = is_first || a:regtype[0] ==# "\<C-v>" ? (col1 + off1) : 0
+        let c2 = is_last || a:regtype[0] ==# "\<C-v>" ? (col2 + off2) : -1
+        call nvim_buf_add_highlight(bnr, ns, 'TextYank', l, c1, c2)
+    endfor
+    call timer_start(500, {-> nvim_buf_is_valid(bnr) && nvim_buf_clear_namespace(bnr, ns, 0, -1)})
+endfunc
+
+highlight default link TextYank IncSearch
+autocmd TextYankPost * call s:hlyank(v:event.operator, v:event.regtype, v:event.inclusive)
+
+
+nnoremap  ]z :call NextClosedFold('j')<cr>
+nnoremap  [z :call NextClosedFold('k')<cr>
+
+function! NextClosedFold(dir)
+    let cmd = 'norm!z' . a:dir
+    let view = winsaveview()
+    let [l0, l, open] = [0, view.lnum, 1]
+    while l != l0 && open
+        exe cmd
+        let [l0, l] = [l, line('.')]
+        let open = foldclosed(l) < 0
+    endwhile
+    if open
+        call winrestview(view)
+    endif
+endfunction
 
 
 function! Osc52Yank()
-    let buffer=system('base64 ', @0)
+    let buffer=system('base64 -w0 ', @0)
     let buffer=substitute(buffer, "\n$", "", "")
     let buffer='\e]52;c;'.buffer.'\x07'
     silent exe "!echo -ne ".shellescape(buffer)." > ".shellescape($NVIM_TTY)
@@ -48,9 +94,6 @@ set undodir^=$HOME/.config/nvim/storage/undos//
 set backupdir^=$HOME/.config/nvim//storage/backups//
 
 " folding
-set foldmethod=indent
-set foldlevelstart=99
-set foldlevel=99
 autocmd BufWrite * mkview
 autocmd BufRead * silent! loadview
 
@@ -84,6 +127,7 @@ autocmd InsertEnter,WinLeave * set nocursorline
 cnoremap <c-n> <down>
 cnoremap <c-p> <up>
 
+set nofoldenable
 set laststatus=2
 set showtabline=2
 set conceallevel=0

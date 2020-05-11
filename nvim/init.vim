@@ -2,6 +2,12 @@ syntax enable
 syntax on
 set nocompatible
 set number
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged') 
     let mapleader = " "
     let maplocalleader = ","
@@ -54,14 +60,19 @@ call plug#begin('~/.vim/plugged')
 
     " tree-sitter
     Plug 'nvim-treesitter/nvim-treesitter'
-    Plug 'vigoux/completion-treesitter'
+    " Plug 'vigoux/completion-treesitter'
+    Plug 'mfussenegger/nvim-dap'
 
     " My Plugins
     Plug 'haorenW1025/completion-nvim'
+    Plug 'archseer/snippets.nvim'
 	Plug 'haorenW1025/term-nvim'
     Plug 'haorenW1025/floatLf-nvim'
     Plug 'haorenW1025/diagnostic-nvim'
 call plug#end()
+" set runtimepath+=~/.vim/completion-nvim
+
+luafile ~/.config/nvim/init.lua
 
 for f in split(glob('~/.config/nvim/config/*.vim'), '\n')
     exe 'source' f
