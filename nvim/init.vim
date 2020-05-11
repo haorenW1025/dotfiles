@@ -56,6 +56,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'vigoux/completion-treesitter'
 
+    Plug 'bfredl/nvim-ipy'
+
     " My Plugins
     Plug 'haorenW1025/completion-nvim'
 	Plug 'haorenW1025/term-nvim'

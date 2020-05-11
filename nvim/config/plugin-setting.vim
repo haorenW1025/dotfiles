@@ -4,10 +4,19 @@ inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 luafile ~/.config/nvim/lua/callback.lua
 lua require'nvim_lsp'.clangd.setup{on_attach=require'on_attach'.on_attach}
 au Filetype c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
-" lua require'nvim_lsp'.pyls_ms.setup{on_attach=require'on_attach'.on_attach}
-" au Filetype python setl omnifunc=v:lua.vim.lsp.omnifunc
+" lua require'nvim_lsp'.pyls.setup{on_attach=require'on_attach'.on_attach}
+au Filetype python setl omnifunc=v:lua.vim.lsp.omnifunc
 lua require'nvim_lsp'.rust_analyzer.setup{on_attach=require'on_attach'.on_attach}
 au Filetype rust setl omnifunc=v:lua.vim.lsp.omnifunc
+
+lua << EOF
+local on_attach = function()
+    require'completion'.on_attach()
+    require'diagnostic'.on_attach()
+end
+
+require'nvim_lsp'.pyls.setup{on_attach=on_attach}
+EOF
 
 lua << EOF
 require'nvim_lsp'.sumneko_lua.setup{
@@ -192,6 +201,9 @@ let g:rainbow_conf = {
 let g:editorconfig_blacklist = {
     \ 'filetype': ['git.*', 'fugitive'],
     \ 'pattern': ['\.un~$']}
+" easy align
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 " FloatLf
 let g:floatLf_border = 0
@@ -204,6 +216,14 @@ let g:sneak#s_next = 1
 highlight Sneak guifg=black guibg=#81A1C1 ctermfg=black ctermbg=red
 highlight SneakScope guifg=red guibg=green ctermfg=red ctermbg=yellow
 
+command! -nargs=0 RunQtConsole call jobstart("jupyter qtconsole --JupyterWidget.include_other_output=True")
+let g:ipy_celldef = '^##' " regex for cell start and end
+
+nmap <silent> <leader>jqt :RunQtConsole<Enter>
+let g:ipy_celldef = '^##' " regex for cell start and end
+nmap <silent> <leader>jk :IPython<Space>--existing<Space>--no-window<Enter>
+nmap <silent> <leader>jc <Plug>(IPy-RunCell)
+nmap <silent> <leader>ja <Plug>(IPy-RunAll)
 
 
 lua require'colorizer'.setup()
