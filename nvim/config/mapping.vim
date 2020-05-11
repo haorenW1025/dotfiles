@@ -6,12 +6,12 @@ nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> pd    <cmd>lua vim.lsp.buf.peek_definition()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> <leader>f <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> ]d :NextDiagnostic<CR>
 nnoremap <silent> [d :PrevDiagnostic<CR>
 nnoremap <silent> <leader>do :OpenDiagnostic<CR>
-nnoremap <leader>dl <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
-" nmap <silent> ]d <Plug>(ale_previous_wrap)
-" nmap <silent> ]d <Plug>(ale_next_wrap)
+nnoremap <leader>dl <cmd>lua require'diagnostic.util'.show_line_diagnostics()<CR>
 
 " fzf
 nmap ,f :Files<CR>
@@ -101,8 +101,8 @@ function! ClosingTab()
     endif
 endfunction
 
-nmap } gt
-nmap { gT
+nmap ]t gt
+nmap [t gT
 tmap } <c-a><CR>gt
 tmap { <c-a><CR>gT
 nmap <c-a>1 1gt

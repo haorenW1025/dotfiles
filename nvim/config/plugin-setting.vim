@@ -2,45 +2,25 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 luafile ~/.config/nvim/lua/callback.lua
-lua require'nvim_lsp'.clangd.setup{on_attach=require'on_attach'.on_attach}
 au Filetype c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
-" lua require'nvim_lsp'.pyls.setup{on_attach=require'on_attach'.on_attach}
 au Filetype python setl omnifunc=v:lua.vim.lsp.omnifunc
-lua require'nvim_lsp'.rust_analyzer.setup{on_attach=require'on_attach'.on_attach}
 au Filetype rust setl omnifunc=v:lua.vim.lsp.omnifunc
-
-lua << EOF
-local on_attach = function()
-    require'completion'.on_attach()
-    require'diagnostic'.on_attach()
-end
-
-require'nvim_lsp'.pyls.setup{on_attach=on_attach}
-EOF
-
-lua << EOF
-require'nvim_lsp'.sumneko_lua.setup{
-    on_attach= require'on_attach'.on_attach;
-    settings = {
-        Lua = {
-            completion = {
-                keywordSnippet = "Disable";
-            };
-            runtime = {
-                version = "LuaJIT";
-            };
-        };
-    };
-}
-EOF
 au Filetype lua setl omnifunc=v:lua.vim.lsp.omnifunc
-lua require'nvim_lsp'.vimls.setup{on_attach=require'on_attach'.on_attach}
 au Filetype vim setl omnifunc=v:lua.vim.lsp.omnifunc
 
 let g:completion_chain_complete_list = {
             \ 'default' : {
             \   'default': [
-            \       {'complete_items': ['lsp', 'snippet']},
+            \       {'complete_items': ['lsp', 'snippet', 'ts']},
+            \       {'mode': '<c-p>'},
+            \       {'mode': '<c-n>'}],
+            \   'comment': [],
+            \   'string' : [
+            \       {'complete_items': ['path']}]
+            \   },
+            \ 'cpp' : {
+            \   'default': [
+            \       {'complete_items': ['lsp', 'snippet', 'ts']},
             \       {'mode': '<c-p>'},
             \       {'mode': '<c-n>'}],
             \   'comment': [],
@@ -71,16 +51,16 @@ let g:LspDiagnosticsInformationSign = 'I'
 let g:LspDiagnosticsHintSign = 'H'
 
 " diagnostic-nvim
+let g:diagnostic_level = 'Warning'
 let g:diagnostic_enable_virtual_text = 0
 let g:diagnostic_virtual_text_prefix = ' '
-let g:diagnostic_trimmed_virtual_text = 30
-let g:space_before_virtual_text = 5
+let g:diagnostic_trimmed_virtual_text = 0
 let g:diagnostic_insert_delay = 1
 
 " completion-nvim
 let g:completion_auto_change_source = 1
-let g:completion_enable_snippet = 'UltiSnips'
-let g:completion_max_items = 10
+" let g:completion_enable_snippet = 'UltiSnips'
+" let g:completion_max_items = 10
 let g:completion_enable_auto_paren = 1
 let g:completion_timer_cycle = 200
 let g:completion_auto_change_source = 1
@@ -207,7 +187,7 @@ xmap ga <Plug>(EasyAlign)
 
 " FloatLf
 let g:floatLf_border = 0
-let g:floatLf_exec = 'vifm'
+let g:floatLf_exec = 'lf'
 
 let g:vim_markdown_conceal = 0
 

@@ -142,7 +142,14 @@ function M.activeLine()
   -- Component: FileType
   -- Component: row and col
   local line = api.nvim_call_function('line', {"."})
-  statusline = statusline.."%#Line# Ln "..line
+  local col = vim.fn.col('.')
+  while string.len(line) < 3 do
+    line = line..' '
+  end
+  while string.len(col) < 3 do
+    col = col..' '
+  end
+  statusline = statusline.."%#Line# ℓ "..line.." 𝚌 "..col
 
   return statusline
 end
@@ -178,8 +185,8 @@ local getTabLabel = function(n)
   return file_name
 end
 
-api.nvim_command('hi TabLineSel gui=Bold guibg=#BF616A guifg=#292929')
-api.nvim_command('hi TabLineSelSeparator gui=bold guifg=#BF616A')
+api.nvim_command('hi TabLineSel gui=Bold guibg=#81A1C1 guifg=#292929')
+api.nvim_command('hi TabLineSelSeparator gui=bold guifg=#81A1C1')
 api.nvim_command('hi TabLine guibg=#4d4d4d guifg=#c7c7c7 gui=None')
 api.nvim_command('hi TabLineSeparator guifg=#4d4d4d')
 api.nvim_command('hi TabLineFill guibg=None gui=None')
