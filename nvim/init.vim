@@ -23,7 +23,7 @@ call plug#begin('~/.vim/plugged')
     " syntax highlighting
     Plug 'sheerun/vim-polyglot'
 
-	Plug 'jiangmiao/auto-pairs'
+    Plug 'jiangmiao/auto-pairs'
 
 	" different color for parentheses
     Plug 'luochen1990/rainbow' 
@@ -64,17 +64,15 @@ call plug#begin('~/.vim/plugged')
     Plug 'mfussenegger/nvim-dap'
 
     " My Plugins
+    Plug 'hrsh7th/vim-vsnip-integ'
+    Plug 'hrsh7th/vim-vsnip'
     Plug 'haorenW1025/completion-nvim'
-    Plug 'archseer/snippets.nvim'
+    Plug 'ckipp01/nvim-metals'
+    " Plug 'archseer/snippets.nvim'
 	Plug 'haorenW1025/term-nvim'
     Plug 'haorenW1025/floatLf-nvim'
     Plug 'haorenW1025/diagnostic-nvim'
 call plug#end()
-" set runtimepath+=~/.vim/completion-nvim
 
 luafile ~/.config/nvim/init.lua
-
-for f in split(glob('~/.config/nvim/config/*.vim'), '\n')
-    exe 'source' f
-endfor
 

@@ -59,6 +59,11 @@ local current_mode = setmetatable({
     }
 )
 
+-- Obsession Color
+local obsession_fg = purple
+local obsession_gui = 'bold'
+api.nvim_command('hi Obsession guifg='..obsession_fg..' gui='..obsession_gui)
+
 -- Filename Color
 local file_bg = purple
 local file_fg = black_fg
@@ -134,6 +139,9 @@ function M.activeLine()
 
   -- Alignment to left
   statusline = statusline.."%="
+  local obsession_status = api.nvim_call_function('ObsessionStatus', {})
+  statusline = statusline.."%#Obsession#"..obsession_status..' '
+
   local filetype = api.nvim_buf_get_option(0, 'filetype')
   statusline = statusline.."%#Filetype# Filetype: "..filetype
   statusline = statusline..blank

@@ -13,7 +13,7 @@ function! SelfDefinedHighlight() abort
     hi NormalNC guifg=lightgrey
     hi Pmenu guibg=#404040 ctermbg=239
     hi Todo ctermfg=176 ctermbg=16 guifg=#00d6f2 guibg=None gui=bold
-    " hi LineNr guifg=#696969 guibg=None
+    hi LineNr guifg=#696969 guibg=None
     hi CursorColumn guibg=#495663
     hi Normal guibg=NONE ctermbg=None
     hi Floating guifg=#abb2bf guibg=#292929
