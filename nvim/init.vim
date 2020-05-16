@@ -61,13 +61,14 @@ call plug#begin('~/.vim/plugged')
     " tree-sitter
     Plug 'nvim-treesitter/nvim-treesitter'
     " Plug 'vigoux/completion-treesitter'
-    Plug 'mfussenegger/nvim-dap'
+    " Plug 'mfussenegger/nvim-dap'
+    Plug 'bfredl/nvim-ipy', { 'for': ['python'] }
 
-    " My Plugins
+
     Plug 'hrsh7th/vim-vsnip-integ'
     Plug 'hrsh7th/vim-vsnip'
+    " My Plugins
     Plug 'haorenW1025/completion-nvim'
-    Plug 'ckipp01/nvim-metals'
     " Plug 'archseer/snippets.nvim'
 	Plug 'haorenW1025/term-nvim'
     Plug 'haorenW1025/floatLf-nvim'
@@ -75,4 +76,3 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 luafile ~/.config/nvim/init.lua
-

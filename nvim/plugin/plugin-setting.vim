@@ -56,7 +56,6 @@ let g:diagnostic_virtual_text_prefix = ' '
 let g:diagnostic_trimmed_virtual_text = 0
 let g:diagnostic_insert_delay = 1
 
-set virtualedit=onemore
 " completion-nvim
 let g:completion_auto_change_source = 1
 let g:completion_enable_snippet = 'UltiSnips'
@@ -190,8 +189,6 @@ let g:editorconfig_blacklist = {
 " FloatLf
 let g:floatLf_border = 0
 let g:floatLf_exec = 'lf'
-
-let g:vim_markdown_conceal = 0
 
 " sneak
 let g:sneak#s_next = 1

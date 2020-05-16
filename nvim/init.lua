@@ -78,12 +78,12 @@ lsp.metals.setup{
   on_attach = require'on_attach'.on_attach;
 }
 
-local metals = require'metals'
+-- local metals = require'metals'
 require'nvim_lsp'.metals.setup{
     on_attach = require'on_attach'.on_attach;
-    callbacks = {
-        ["textDocument/hover"] = metals.hover_wrap;
-    };
+    -- callbacks = {
+        -- ["textDocument/hover"] = metals.hover_wrap;
+    -- };
 }
 
 
