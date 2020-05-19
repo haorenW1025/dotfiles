@@ -1,6 +1,5 @@
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
 luafile ~/.config/nvim/lua/callback.lua
 au Filetype c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
 au Filetype python setl omnifunc=v:lua.vim.lsp.omnifunc
@@ -45,10 +44,10 @@ let g:completion_chain_complete_list = {
 
 set completeopt=menuone,noinsert,noselect
 
-let g:LspDiagnosticsErrorSign = ' '
-let g:LspDiagnosticsWarningSign = '⚡'
-let g:LspDiagnosticsInformationSign = 'I'
-let g:LspDiagnosticsHintSign = 'H'
+call sign_define("LspDiagnosticsErrorSign", {"text" : " ", "texthl" : "LspDiagnosticsError"})
+call sign_define("LspDiagnosticsWarningSign", {"text" : "⚡", "texthl" : "LspDiagnosticsWarning"})
+call sign_define("LspDiagnosticsInformationSign", {"text" : "", "texthl" : "LspDiagnosticsInformation"})
+call sign_define("LspDiagnosticsHintSign", {"text" : "", "texthl" : "LspDiagnosticsWarning"})
 
 " diagnostic-nvim
 let g:diagnostic_level = 'Warning'
@@ -59,11 +58,13 @@ let g:diagnostic_insert_delay = 1
 
 " completion-nvim
 let g:completion_auto_change_source = 1
-" let g:completion_enable_snippet = 'UltiSnips'
+let g:completion_enable_snippet = 'UltiSnips'
 " let g:completion_max_items = 10
-let g:completion_enable_auto_paren = 1
+let g:completion_enable_auto_paren = 0
 let g:completion_timer_cycle = 200
 let g:completion_auto_change_source = 1
+" let g:completion_confirm_key_rhs = "\<Plug>AutoPairsReturn"
+
 imap <c-j> <cmd>lua require'source'.prevCompletion()<CR>
 imap <c-k> <cmd>lua require'source'.nextCompletion()<CR>
 
@@ -77,6 +78,8 @@ inoremap <silent><expr> <TAB>
   \ <SID>check_back_space() ? "\<TAB>" :
   \ completion#trigger_completion()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+inoremap <expr> <cr>    pumvisible() ? "\<Plug>(completion_confirm_completion)" : "\<cr>"
 
 " treesitter-nvim
 set foldexpr=completion_treesitter#foldexpr()
@@ -165,6 +168,7 @@ let g:UltiSnipsExpandTrigger="jl"
 let g:ultisnips_python_style="google"
 let g:UltiSnipsJumpForwardTrigger="jl"
 let g:UltiSnipsJumpBackwardTrigger="jh"
+imap <expr> <C-f>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 
 " rainbow
 let g:rainbow_active = 1
@@ -189,22 +193,10 @@ xmap ga <Plug>(EasyAlign)
 let g:floatLf_border = 0
 let g:floatLf_exec = 'lf'
 
-let g:vim_markdown_conceal = 0
-
 " sneak
 let g:sneak#s_next = 1
 highlight Sneak guifg=black guibg=#81A1C1 ctermfg=black ctermbg=red
 highlight SneakScope guifg=red guibg=green ctermfg=red ctermbg=yellow
-
-command! -nargs=0 RunQtConsole call jobstart("jupyter qtconsole --JupyterWidget.include_other_output=True")
-let g:ipy_celldef = '^##' " regex for cell start and end
-
-nmap <silent> <leader>jqt :RunQtConsole<Enter>
-let g:ipy_celldef = '^##' " regex for cell start and end
-nmap <silent> <leader>jk :IPython<Space>--existing<Space>--no-window<Enter>
-nmap <silent> <leader>jc <Plug>(IPy-RunCell)
-nmap <silent> <leader>ja <Plug>(IPy-RunAll)
-
 
 lua require'colorizer'.setup()
 

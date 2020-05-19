@@ -152,7 +152,7 @@ set wildmenu
 set ignorecase
 set cursorline
 set hlsearch
-set incsearch
+set noincsearch
 set so=5
 set bg=dark
 set relativenumber

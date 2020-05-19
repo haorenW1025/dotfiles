@@ -55,8 +55,7 @@ lsp.pyls.setup{
   settings = {
     pyls = {
       plugins = {
-        pylint = { enabled = false; },
-        pycodestyle = { enabled = true; },
+        pycodestyle = { enabled = false; },
       }
     }
   }
@@ -72,6 +71,23 @@ lsp.clangd.setup{
 
 lsp.rust_analyzer.setup{
   on_attach = require'on_attach'.on_attach;
+}
+
+lsp.metals.setup{
+  on_attach = require'on_attach'.on_attach;
+}
+
+-- local metals = require'metals'
+require'nvim_lsp'.metals.setup{
+    on_attach = require'on_attach'.on_attach;
+    -- callbacks = {
+        -- ["textDocument/hover"] = metals.hover_wrap;
+    -- };
+}
+
+
+lsp.tsserver.setup{
+  -- on_attach = require'on_attach'.on_attach;
 }
 
 

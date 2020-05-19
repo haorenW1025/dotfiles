@@ -8,6 +8,8 @@ nnoremap <silent> pd    <cmd>lua vim.lsp.buf.peek_definition()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <leader>f <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> ]d :NextDiagnostic<CR>
 nnoremap <silent> [d :PrevDiagnostic<CR>
 nnoremap <silent> <leader>do :OpenDiagnostic<CR>
@@ -30,34 +32,16 @@ nmap ,sl :Rg<UP><CR>
 
 
 " git
-nmap <Leader>bt :BlamerToggle<CR>
 nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 nmap <leader>ghp <Plug>(GitGutterPreviewHunk)
 nmap <leader>ghu <Plug>(GitGutterUndoHunk)
 nmap <leader>ghs <Plug>(GitGutterStageHunk)
 
-" tabular
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-nmap <Leader>a<bar> :Tabularize /<bar><CR>
-vmap <Leader>a<bar> :Tabularize /<bar><CR>
-
-
-" vista
-nmap <silent> <leader>v :Vista!!<CR>
-nmap <leader>sf :Vista finder<CR>
-
 nmap <leader>es :UltiSnipsEdit<CR>
 
-" Dispatch
 " pandoc
 autocmd Filetype markdown nnoremap  <leader>pdf <cmd>lua require'markdown'.convertFile()<CR>
-" autocmd Filetype markdown nnoremap  <leader>pdf :Dispatch pandoc -s -o %<.pdf % --pdf-engine=xelatex
-            " \ --template eisvogel --listings --toc --number-sections<CR>
-" autocmd Filetype markdown nnoremap  <leader>bmr :Dispatch pandoc -t beamer --pdf-engine=xelatex -o %<.pdf % <CR>
 
 " c, cpp
 autocmd Filetype cpp nnoremap <leader>mk :Dispatch make<CR>
