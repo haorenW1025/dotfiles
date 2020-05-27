@@ -19,39 +19,46 @@ treesitter.setup {
       scope_incremental = "grc"
     }
   },
-  node_movement = {
-    enable = true,
-    keymaps = {
-      move_up = "[N",
-      move_down = "]N",
-      move_left = "[n",
-      move_right = "]n",
-    }
-  },
   ensure_installed = {'c', 'cpp', 'lua', 'rust'}
 }
 
+local on_attach = function(client)
+  require'lsp_status'.on_attach(client)
+  require'diagnostic'.on_attach()
+  require'completion'.on_attach({
+      sorter = 'alphabet',
+      matcher = {'exact', 'fuzzy'}
+    })
+end
+
+
 -- lsp setup
 lsp.sumneko_lua.setup{
-  on_attach= require'on_attach'.on_attach;
+  on_attach= on_attach;
   settings = {
     Lua = {
       completion = {
         keywordSnippet = "Disable";
       };
-    runtime = {
+      runtime = {
         version = "LuaJIT";
-      };
-    };
+        };
+      diagnostics={
+        enable=true,
+        globals={
+          "vim", "Color", "c", "Group", "g", "s", "describe", "it", "before_each", "after_each"
+        },
+      },
+    },
   };
 }
 
 lsp.vimls.setup{
-  on_attach = require'on_attach'.on_attach;
+  on_attach = on_attach;
 }
 
 lsp.pyls.setup{
-  on_attach = require'on_attach'.on_attach;
+  on_attach = on_attach;
   settings = {
     pyls = {
       plugins = {
@@ -66,28 +73,47 @@ lsp.pyls.setup{
 -- }
 
 lsp.clangd.setup{
-  on_attach = require'on_attach'.on_attach;
+  on_attach = on_attach;
+  capabilities = {
+    textDocument = {
+      completion = {
+        completionItem = {
+          snippetSupport = true
+        }
+      }
+    }
+  },
+  init_options = {
+    usePlaceholders = true,
+    completeUnimported = true
+  }
 }
 
 lsp.rust_analyzer.setup{
-  on_attach = require'on_attach'.on_attach;
+  on_attach = on_attach;
 }
 
 lsp.metals.setup{
-  on_attach = require'on_attach'.on_attach;
+  on_attach = on_attach;
+}
+
+lsp.intelephense.setup{
+  -- cmd = {'/usr/bin/intelephense', '--stdio'}
+  on_attach = on_attach;
+  capabilities = {
+    textDocument = {
+      completion = {
+        completionItem = {
+          snippetSupport = true
+        }
+      }
+    }
+  },
+  init_options = {
+    usePlaceholders = true,
+    completeUnimported = true
+  }
 }
 
 -- local metals = require'metals'
-require'nvim_lsp'.metals.setup{
-    on_attach = require'on_attach'.on_attach;
-    -- callbacks = {
-        -- ["textDocument/hover"] = metals.hover_wrap;
-    -- };
-}
-
-
-lsp.tsserver.setup{
-  -- on_attach = require'on_attach'.on_attach;
-}
-
 

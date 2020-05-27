@@ -1,6 +1,5 @@
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-luafile ~/.config/nvim/lua/callback.lua
 au Filetype c,cpp setl omnifunc=v:lua.vim.lsp.omnifunc
 au Filetype python setl omnifunc=v:lua.vim.lsp.omnifunc
 au Filetype rust setl omnifunc=v:lua.vim.lsp.omnifunc
@@ -10,12 +9,11 @@ au Filetype vim setl omnifunc=v:lua.vim.lsp.omnifunc
 let g:completion_chain_complete_list = {
             \ 'default' : {
             \   'default': [
-            \       {'complete_items': ['lsp', 'snippet', 'ts']},
+            \       {'complete_items': ['lsp', 'snippet']},
             \       {'mode': '<c-p>'},
             \       {'mode': '<c-n>'}],
-            \   'comment': [],
             \   'string' : [
-            \       {'complete_items': ['path']}]
+            \       {'complete_items': ['path'], 'triggered_only': ['/']}]
             \   },
             \ 'cpp' : {
             \   'default': [
@@ -44,7 +42,7 @@ let g:completion_chain_complete_list = {
 
 set completeopt=menuone,noinsert,noselect
 
-call sign_define("LspDiagnosticsErrorSign", {"text" : " ", "texthl" : "LspDiagnosticsError"})
+call sign_define("LspDiagnosticsErrorSign", {"text" : ">>", "texthl" : "LspDiagnosticsError"})
 call sign_define("LspDiagnosticsWarningSign", {"text" : "⚡", "texthl" : "LspDiagnosticsWarning"})
 call sign_define("LspDiagnosticsInformationSign", {"text" : "", "texthl" : "LspDiagnosticsInformation"})
 call sign_define("LspDiagnosticsHintSign", {"text" : "", "texthl" : "LspDiagnosticsWarning"})
@@ -57,12 +55,18 @@ let g:diagnostic_trimmed_virtual_text = 0
 let g:diagnostic_insert_delay = 1
 
 " completion-nvim
+let g:completion_enable_auto_hover = 1
 let g:completion_auto_change_source = 1
 let g:completion_enable_snippet = 'UltiSnips'
+
 " let g:completion_max_items = 10
 let g:completion_enable_auto_paren = 0
-let g:completion_timer_cycle = 200
+let g:completion_timer_cycle = 80
 let g:completion_auto_change_source = 1
+let g:completion_confirm_key = ""
+
+imap <expr> <cr> pumvisible() ? complete_info()["selected"] != "-1" ?
+                                \ "\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>" : "\<CR>"
 " let g:completion_confirm_key_rhs = "\<Plug>AutoPairsReturn"
 
 imap <c-j> <cmd>lua require'source'.prevCompletion()<CR>
@@ -79,11 +83,12 @@ inoremap <silent><expr> <TAB>
   \ completion#trigger_completion()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-inoremap <expr> <cr>    pumvisible() ? "\<Plug>(completion_confirm_completion)" : "\<cr>"
 
 " treesitter-nvim
-set foldexpr=completion_treesitter#foldexpr()
 set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
+" autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()
 
 " firenvim 
 " let fc['.*'] = { 'cmdline' : 'firenvim' }

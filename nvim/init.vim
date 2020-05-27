@@ -20,7 +20,11 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'scrooloose/nerdcommenter'
 
-    Plug 'jiangmiao/auto-pairs'
+    " syntax highlighting
+    Plug 'sheerun/vim-polyglot'
+
+    Plug 'Raimondi/delimitMate'
+    " Plug 'jiangmiao/auto-pairs'
 
 	" different color for parentheses
     Plug 'luochen1990/rainbow' 
@@ -57,7 +61,6 @@ call plug#begin('~/.vim/plugged')
 
     " tree-sitter
     Plug 'nvim-treesitter/nvim-treesitter'
-    " Plug 'vigoux/completion-treesitter'
     " Plug 'mfussenegger/nvim-dap'
     Plug 'bfredl/nvim-ipy', { 'for': ['python'] }
 

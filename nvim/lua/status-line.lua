@@ -80,7 +80,7 @@ api.nvim_command('hi DirSeparator guifg='..dir_bg)
 
 -- FileType Color
 local filetype_bg = 'None'
-local filetype_fg = blue
+local filetype_fg = purple
 local filetype_gui = 'bold'
 api.nvim_command('hi Filetype guibg='..filetype_bg..' guifg='..filetype_fg..' gui='..filetype_gui)
 
@@ -89,6 +89,8 @@ local line_bg = 'None'
 local line_fg = white_fg
 local line_gui = 'bold'
 api.nvim_command('hi Line guibg='..line_bg..' guifg='..line_fg..' gui='..line_gui)
+
+
 
 -- Redraw different colors for different mode
 local RedrawColors = function(mode)
@@ -139,13 +141,15 @@ function M.activeLine()
 
   -- Alignment to left
   statusline = statusline.."%="
-  local obsession_status = api.nvim_call_function('ObsessionStatus', {})
-  statusline = statusline.."%#Obsession#"..obsession_status..' '
+
+  local lsp_function = vim.b.lsp_current_function
+  if lsp_function ~= nil then
+    statusline = statusline.."%#Function# "..lsp_function
+  end
 
   local filetype = api.nvim_buf_get_option(0, 'filetype')
-  statusline = statusline.."%#Filetype# Filetype: "..filetype
+  statusline = statusline.."%#Filetype#  Filetype: "..filetype
   statusline = statusline..blank
-
 
   -- Component: FileType
   -- Component: row and col
@@ -217,6 +221,8 @@ function M.TabLine()
     end
   end
   tabline = tabline.."%="
+  local obsession_status = api.nvim_call_function('ObsessionStatus', {})
+  tabline = tabline.."%#Obsession#"..obsession_status..' '
   if session.data ~= nil then
     tabline = tabline.."%#TabLineSeparator# "..left_separator
     tabline = tabline.."%#TabLine# session: "..session.data
