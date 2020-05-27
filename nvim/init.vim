@@ -20,9 +20,6 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'scrooloose/nerdcommenter'
 
-    " syntax highlighting
-    Plug 'sheerun/vim-polyglot'
-
     Plug 'jiangmiao/auto-pairs'
 
 	" different color for parentheses
@@ -64,9 +61,9 @@ call plug#begin('~/.vim/plugged')
     " Plug 'mfussenegger/nvim-dap'
     Plug 'bfredl/nvim-ipy', { 'for': ['python'] }
 
-
     Plug 'hrsh7th/vim-vsnip-integ'
     Plug 'hrsh7th/vim-vsnip'
+
     " My Plugins
     Plug 'haorenW1025/completion-nvim'
     " Plug 'archseer/snippets.nvim'

@@ -55,7 +55,6 @@ lsp.pyls.setup{
   settings = {
     pyls = {
       plugins = {
-        pylint = { enabled = false; },
         pycodestyle = { enabled = false; },
       }
     }

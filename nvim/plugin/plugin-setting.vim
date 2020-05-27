@@ -185,6 +185,9 @@ let g:rainbow_conf = {
 let g:editorconfig_blacklist = {
     \ 'filetype': ['git.*', 'fugitive'],
     \ 'pattern': ['\.un~$']}
+" easy align
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 
 " FloatLf
 let g:floatLf_border = 0
