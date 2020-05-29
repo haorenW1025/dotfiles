@@ -70,7 +70,7 @@ endfunction
 " lazygit
 nnoremap <silent> <leader>tg :call ToggleLazyGit()<CR>
 function! ToggleLazyGit()
-    call ToggleNoBorderTerm('tig status')
+    call ToggleNoBorderTerm('lazygit')
 endfunction
 
 nnoremap <silent> <leader>tc :call ToggleCalcurse()<CR>
